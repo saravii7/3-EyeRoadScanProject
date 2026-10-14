@@ -21,3 +21,9 @@ The data is not stored in this repository because of its size.
 
 ## Status
 Work in progress.
+
+## Model artifacts
+Baseline weights and config are in the GitHub Release `v1-baseline`.
+Download with one command:
+`python artifacts/download_weights.py`
+(Works when the repository is public.)
