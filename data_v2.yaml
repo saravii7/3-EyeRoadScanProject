@@ -1,0 +1,8 @@
+path: /kaggle/working/sample9000
+train: train/images
+val: val/images
+names:
+  0: D00
+  1: D10
+  2: D20
+  3: D40
