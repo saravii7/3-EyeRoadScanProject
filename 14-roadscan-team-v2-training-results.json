@@ -1,0 +1,38 @@
+{
+  "status": "complete",
+  "epochs_completed": 64,
+  "train_images": 8999,
+  "validation_images": 1977,
+  "model": "YOLO11s",
+  "imgsz": 640,
+  "detection": {
+    "metrics/precision(B)": 0.2978121059947873,
+    "metrics/recall(B)": 0.30414246734780614,
+    "metrics/mAP50(B)": 0.22709511612951033,
+    "metrics/mAP50-95(B)": 0.08732461846272412,
+    "fitness": 0.08732461846272412
+  },
+  "image_macro_f1": {
+    "fixed_0.5": 0.24447514883741717,
+    "validation_tuned_optimistic": 0.7229545142764884
+  },
+  "cpu_latency": {
+    "images": 20,
+    "warmup": 3,
+    "torch_threads": 2,
+    "median_seconds": 0.16377357999954256,
+    "p95_seconds": 0.16858919154983595,
+    "scope": "detector prediction only; not complete application latency"
+  },
+  "US_evaluated": false,
+  "local_evaluated": false,
+  "sample_sha256": "d88d9d98c1e9e81f21930b6f97fa49c6ceec218938834b9ace757a24baedaffc",
+  "baseline_comparison": "team v2 image assignments preserved; verify baseline implementation/threshold protocol before claiming controlled E1",
+  "pending_experiments": [
+    "E1 verified baseline comparison",
+    "E2 nano/small and 640/960",
+    "E3 augmentation ablation",
+    "E4 frozen-model US/local evaluation",
+    "E5 retrieval comparison owned by team"
+  ]
+}
