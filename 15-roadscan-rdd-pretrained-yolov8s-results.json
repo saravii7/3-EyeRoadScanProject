@@ -1,0 +1,47 @@
+{
+  "protocol": {
+    "model": "YOLOv8s RDD2022 seed0",
+    "source": "https://huggingface.co/SreekarAditya/yolo-rdd2022-benchmark",
+    "download": "https://huggingface.co/SreekarAditya/yolo-rdd2022-benchmark/resolve/main/yolo-rdd2022-benchmark/yolov8s_seed0_best.pt?download=true",
+    "sha256": "565aae6915e34e4f7f4c44dac0bdcf9fff21b83c4adc74cc97ca09cc31882ce8",
+    "license": "CC BY 4.0 as stated by publisher; attribute SreekarAditya and RDD2022",
+    "classes": [
+      "longitudinal_crack",
+      "transverse_crack",
+      "alligator_crack",
+      "pothole"
+    ],
+    "evaluation_images": 1977,
+    "evaluation_country": "China_MotorBike",
+    "evaluation_status": "diagnostic only; external pretraining overlap is not excluded",
+    "external_training_manifest_available": false,
+    "clean_generalization_claim_allowed": false,
+    "comparison_to_team": "descriptive only; different external training data and architecture",
+    "training_performed": false,
+    "threshold_tuning": false,
+    "local_test_used": false,
+    "US_test_used": false,
+    "device": "cuda:0",
+    "imgsz": 640,
+    "ultralytics": "8.4.177",
+    "torch": "2.11.0+cu128",
+    "python": "3.13.15"
+  },
+  "detection": {
+    "metrics/precision(B)": 0.9242092286525201,
+    "metrics/recall(B)": 0.9243685113882318,
+    "metrics/mAP50(B)": 0.9619632619436428,
+    "metrics/mAP50-95(B)": 0.6712533095450459,
+    "fitness": 0.6712533095450459
+  },
+  "image_macro_f1_fixed_0_5": 0.9450314593111095,
+  "cpu_latency": {
+    "images": 20,
+    "warmup": 3,
+    "threads": 2,
+    "median_seconds": 0.1942685149999761,
+    "p95_seconds": 0.2007219183999581
+  },
+  "fine_tuning_performed": false,
+  "independent_evaluation_pending": true
+}

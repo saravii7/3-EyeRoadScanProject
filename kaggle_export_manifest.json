@@ -1,0 +1,12 @@
+[
+  {
+    "notebook": "14-roadscan-team-v2-training",
+    "sha256": "ab422602d54091449bbe2ad18fe8a61d27ad9b3647fed59150896f12d3894398",
+    "cells": 6
+  },
+  {
+    "notebook": "15-roadscan-rdd-pretrained-yolov8s",
+    "sha256": "27f3b8decdf4a442995556de9195f80a2a63d4330bb3494187e41f4aa51a6919",
+    "cells": 4
+  }
+]
