@@ -1,0 +1,43 @@
+{
+  "status": "complete",
+  "epochs_completed": 17,
+  "train_images": 8999,
+  "validation_images": 1977,
+  "model": "YOLOv8s",
+  "run": 16,
+  "initial_checkpoint_sha256": "565aae6915e34e4f7f4c44dac0bdcf9fff21b83c4adc74cc97ca09cc31882ce8",
+  "external_training_overlap": "unknown; not excluded",
+  "clean_generalization_claim_allowed": false,
+  "comparison_to_run14": "different architecture and pretraining; pipeline comparison only",
+  "imgsz": 640,
+  "detection": {
+    "metrics/precision(B)": 0.749665355972831,
+    "metrics/recall(B)": 0.6998771963393245,
+    "metrics/mAP50(B)": 0.7937601819357739,
+    "metrics/mAP50-95(B)": 0.4467134595829971,
+    "fitness": 0.4467134595829971
+  },
+  "image_macro_f1": {
+    "fixed_0.5": 0.5736027105528807,
+    "validation_tuned_optimistic": 0.9153221600527851
+  },
+  "cpu_latency": {
+    "images": 20,
+    "warmup": 3,
+    "torch_threads": 2,
+    "median_seconds": 0.22178126800008613,
+    "p95_seconds": 0.22497208415020395,
+    "scope": "detector prediction only; not complete application latency"
+  },
+  "US_evaluated": false,
+  "local_evaluated": false,
+  "sample_sha256": "d88d9d98c1e9e81f21930b6f97fa49c6ceec218938834b9ace757a24baedaffc",
+  "baseline_comparison": "team v2 image assignments preserved; verify baseline implementation/threshold protocol before claiming controlled E1",
+  "pending_experiments": [
+    "E1 verified baseline comparison",
+    "E2 nano/small and 640/960",
+    "E3 augmentation ablation",
+    "E4 frozen-model US/local evaluation",
+    "E5 retrieval comparison owned by team"
+  ]
+}
