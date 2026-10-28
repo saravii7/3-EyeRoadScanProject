@@ -1,0 +1,40 @@
+{
+  "kaggle_versions": {
+    "20": 363195760,
+    "21": 363199933
+  },
+  "status": "complete and reviewed",
+  "original_download_sha256": {
+    "20": "8ac32dd7167b5b56fd80da52d3da4ee1ccb2f9356a2bde510c0c9cd46e1a6feb",
+    "21": "b3d6094e40801a120ecfc3d0f46754dd18a97a7b0a42c16e57222e9804e5cf20"
+  },
+  "review_note": "Run21 exported notebook retains original outputs and adds a post-run review. Raw CSV/PNG/JSON preserved; reviewed Czech AP/recall/F1 are N/A because no labels exist.",
+  "files": {
+    "20-roadscan-e3-augmentation.ipynb": "8ac32dd7167b5b56fd80da52d3da4ee1ccb2f9356a2bde510c0c9cd46e1a6feb",
+    "21-roadscan-country-error-analysis.ipynb": "0a6eaa69f8070d06d19e29c1c4d7a761be7fd2525a114b45d1a8fb8aab9ade32",
+    "COUNTRY_ERROR_ANALYSIS.md": "f462bcbee9cbe8d89e61e4812132d4ae6b8aeb33bf94a8129c408234ae6f4128",
+    "COUNTRY_ERROR_PROTOCOL.md": "376d894c50e4c4faecd3f2af01ddca3f9bcab24356d56973f64d52c92b2545df",
+    "China_MotorBike_error_gallery.png": "8015df436984a3c758523128bf8d3fa11e2331b6437fdde9966e32813ba27e0d",
+    "Czech_error_gallery.png": "2c5b1c59b963e29459a3da26656682b9ac37df6f9a7d63a3c2dbfb55865c9f49",
+    "E3_AUGMENTATION.md": "5a8643877dfeb920dbc3fc60c941099db9d05a9aafdd26f4637e186508e790be",
+    "E3_PROTOCOL.md": "ff64c743643f25e82b32fdfed33a9be582d4c273e649f8e548592d728381c38b",
+    "India_error_gallery.png": "e004bb97c440e17340598145af5ad7d46b1f23551e021e6db20fee9e573bc5eb",
+    "Japan_error_gallery.png": "59d72a316edfa3fe67fd3f12e6e7b50ff5e78de1349000fa51f4fba9b4089ac8",
+    "KAGGLE_EXPERIMENTS.md": "8d252d170d3c40cbd9f4e2a5fd8e95558fda58261024a276bdafd19f33306d78",
+    "MODEL_SELECTION.md": "84e8090a320b751bb2337b0ebe9396c35dc4c8f96c8e81e2eea28849e2106013",
+    "United_States_error_gallery.png": "e98c7e56aa6a52ee3cfae838e83a611efe17731da2dbeb4c007d943d93b7e525",
+    "country_cohorts.csv": "9bbda380c9ad35c41008f1ca5f8145e5601dcb2891f1c0187b92112dcb094a32",
+    "country_comparison.csv": "8ccd9a151f2ba58cf6be19873647ebf226ccd0720005ed6967c65064a0b7a2c2",
+    "country_comparison.png": "af91638f659a4151af406ae67fd85ac07869abd30c6a4fc628f13affda4ac2d5",
+    "country_comparison_raw.csv": "1c14d4ff5b2b2b3bbf3ae80bec5676654d8f8392761f56cf3d03aa26e3b05fdf",
+    "country_comparison_raw.png": "759ff102101aaa01b69946fd67533139a9802182c4e5c39d1b758c8e59670796",
+    "country_error_results.json": "7f44be0b6b0cab3ad3410d2f886383a4cca1b39a789f72a432b04f33ebc78703",
+    "country_error_reviewed.json": "8eae407006de0dd1cdd30343424e9b21409e77cd42103b557a8eff1f1f81bf37",
+    "country_per_class.csv": "d04da2926fcefe6db0ca3c52d183a6f44dcad991717b306b8245589bcc8a07fd",
+    "e3_augmentation_comparison.png": "61f50256689bf4920351f8e82b3a5ff1ce9c7a69c0301d1a408951bfdb89b47f",
+    "e3_comparison.csv": "9fe1af9d2fa3a1e845fb5ccb8b14ef9d2cc8265c86b133c7789c285964972aff",
+    "e3_per_class.csv": "69897f96d6061108c55e02372a1956ece23234e310344fa12ffd9639e9ec2312",
+    "e3_results.json": "2f965f515475a28f3ce25c1de56de8d00726e1d6b189152c4e8f468b855c4d3f",
+    "error_categories.csv": "fba9742dbe7eefc77e9f95b8707e06b3326185d347ecc6771828c58fe39d3ca1"
+  }
+}

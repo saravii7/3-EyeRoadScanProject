@@ -1,0 +1,6 @@
+country,cohort_role,images,mAP50,mAP50_95,box_macro_f1_supported_classes,supported_classes,micro_precision,micro_recall,micro_f1,TP,FP,FN,false_positives_per_100_images,pothole_recall,ground_truth_boxes,evaluation_status
+China_MotorBike,development reused,1977,0.9593002182315967,0.6578988230976404,0.8955620683655904,4,0.892905866302865,0.844516129032258,0.8680371352785146,3927,471,723,23.823975720789075,0.9659574468085106,4650,Evaluable on supported classes only
+United_States,country held out from team fine-tuning,4804,0.7643569651022853,0.4972681613922478,0.6818467731489589,4,0.8206395960446035,0.7085376930063578,0.760479625658023,7801,1705,3209,35.49125728559534,0.31851851851851853,11010,Evaluable on supported classes only
+Japan,image held out; country represented in fine-tuning,500,0.8227839445168597,0.5052830724738768,0.7116882951003933,2,0.8415300546448088,0.6430062630480167,0.7289940828402367,308,58,171,11.6,,479,Evaluable on supported classes only
+India,image held out; country represented in fine-tuning,500,0.6202704788588458,0.402821799551391,0.5881578947368421,2,0.575,0.5476190476190477,0.5609756097560976,23,17,19,3.4,,42,Evaluable on supported classes only
+Czech,annotation-empty diagnostic cohort from a represented country,500,,,,0,0.0,,,0,26,0,5.2,,0,No labeled damage boxes: AP/recall/F1 not evaluable
