@@ -1,6 +1,8 @@
-# Run 17 handoff: fine-tuned weights and plots
+# Run 17 handoff: adopted fine-tuned project model and plots
 
-Use **run17_best_finetuned.pt** for the team request for the trained run-17 checkpoint. Do not substitute **selected_candidate.pt**: run 17 retained the original published checkpoint after comparing diagnostic validation mAP50-95. The inference smoke test in run 18 verified that original selected candidate; it did not verify the run-17 fine-tuned checkpoint.
+**Current team decision (2026-10-28): use `run17_best_finetuned.pt` as the project model.** The original published checkpoint is retained only for reference. The historical automated mAP-based selection inside the saved Kaggle package remains unchanged; `selected_candidate.pt` is not the current team-adopted model. See [MODEL_SELECTION.md](MODEL_SELECTION.md).
+
+Use **run17_best_finetuned.pt** for the team request for the trained run-17 checkpoint. Do not substitute **selected_candidate.pt**: run 17 retained the original published checkpoint after comparing diagnostic validation mAP50-95. The historical run-18 Version 1 smoke test verified the original candidate. Version 2 checks the adopted fine-tuned checkpoint separately; its executed result is documented in MODEL_SELECTION.md.
 
 ## Saved Kaggle source
 

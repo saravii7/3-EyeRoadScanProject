@@ -1,14 +1,14 @@
 # Single-image road damage detection
 
-Load the chosen local YOLO checkpoint once. The callable accepts one image and returns all detected damage regions using D codes. It runs inference without training or changing weights. The class mapping is checked against checkpoint names; an incompatible model raises an error.
+The adopted project model is **run 17 fine-tuned**, `run17_best_finetuned.pt`. `selected_candidate.pt` in the old Kaggle package still contains the original checkpoint and must not be used as the project default. Load the local fine-tuned checkpoint once. The callable accepts one image and returns all detected damage regions using D codes. It runs inference without training or changing weights. The class mapping is checked against checkpoint names; an incompatible model raises an error.
 
 ```python
 from roadscan_detector import RoadDamageDetector
 
-# Kaggle run-17 saved output: run17_model_comparison/selected_candidate.pt
-# This selected file contains the ORIGINAL published checkpoint, not run-17 fine-tuned weights.
+# Adopted project checkpoint: run17_model_comparison/run17_best_finetuned.pt
+# Fine-tuned on the 8,999-image team sample; original published weights are a reference only.
 # Set the actual attached checkpoint path in your environment.
-detector = RoadDamageDetector(weights='/path/to/selected_candidate.pt', device='cpu')
+detector = RoadDamageDetector(weights='/path/to/run17_best_finetuned.pt', device='cpu')
 detect_damage = detector.detect_damage
 results = detect_damage('/path/to/image.jpg', confidence=0.25)
 print(results)
@@ -41,6 +41,12 @@ Actual run-17 model metrics are recorded separately in `17-roadscan-gentle-finet
 
 Published initialization: SreekarAditya / yolo-rdd2022-benchmark (publisher CC BY 4.0); dataset RDD2022, Arya et al. Retain attribution and applicable Ultralytics terms.
 
-## Verified with the actual checkpoint
+## Historical verification: original checkpoint (Version 1)
 
 On 2026-10-28, [Kaggle run 18 Version 1](https://www.kaggle.com/code/rimasabunasser/18-roadscan-inference-smoke?scriptVersionId=363140468) completed successfully in 57.8 seconds on CPU using the exact module SHA-256 `5e41fe3cbfc0b665e99f66a5f33c587b4396902b15d8151f57aed54b0d7cd103` and the run-17 selected original checkpoint. It processed 15 deterministic China development images and produced 41 detections. All four D codes, valid original-image pixel boxes and confidence values were verified. Local file paths, PIL RGB and OpenCV BGR input routes passed. No training or personal photos were used. See `18-roadscan-inference-smoke-results.json` and the executed notebook for actual examples. This verifies software integration, not model accuracy or generalization.
+
+## Current verification: adopted run-17 fine-tuned checkpoint
+
+[Kaggle run 18 Version 2](https://www.kaggle.com/code/rimasabunasser/18-roadscan-inference-smoke?scriptVersionId=363150764) passed in 57.1 seconds on CPU. It verifies the actual fine-tuned checkpoint SHA-256 `25b412ff18c05e2607f4bc61b872f39826e8d53ffdc7647654c1f419e355d15f` and the unchanged module. 15 development images produced 44 boxes; all four D codes, coordinates, confidence and path/PIL/BGR input routes passed. This is the current integration check. See `18-roadscan-inference-smoke-v2-run17-results.json` and its executed notebook. The earlier Version 1 files test the original reference only.
+
+**Results interpretation.** The actual checkpoint processed **15 development images** and returned **44 detections**. All four codes D00/D10/D20/D40 appeared with valid pixel boxes and confidence values. Local paths, PIL RGB and OpenCV BGR inputs worked. The blank-image check returned 0 detections. These are implementation checks, not independent accuracy estimates or proof of Saudi-road generalization. Full outputs are saved in `inference_smoke/inference_smoke_results.json`.

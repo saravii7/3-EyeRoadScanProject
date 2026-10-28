@@ -1,0 +1,79 @@
+{
+  "status": "passed",
+  "module_sha256": "5e41fe3cbfc0b665e99f66a5f33c587b4396902b15d8151f57aed54b0d7cd103",
+  "checkpoint_sha256": "25b412ff18c05e2607f4bc61b872f39826e8d53ffdc7647654c1f419e355d15f",
+  "checkpoint": "run17_best_finetuned.pt; team-adopted fine-tuned project model",
+  "device": "cpu",
+  "images": 15,
+  "detections": 44,
+  "codes_observed": [
+    "D00",
+    "D10",
+    "D20",
+    "D40"
+  ],
+  "counts": {
+    "D20": 10,
+    "D00": 15,
+    "D40": 6,
+    "D10": 13
+  },
+  "examples": {
+    "D20": {
+      "image": "China_MotorBike_000000.jpg",
+      "damage_code": "D20",
+      "bbox_xyxy": [
+        155.7138671875,
+        0.793896496295929,
+        512.0,
+        181.85850524902344
+      ],
+      "confidence": 0.8686223030090332
+    },
+    "D00": {
+      "image": "China_MotorBike_000000.jpg",
+      "damage_code": "D00",
+      "bbox_xyxy": [
+        123.2349624633789,
+        0.0,
+        151.06201171875,
+        48.17469787597656
+      ],
+      "confidence": 0.3332657516002655
+    },
+    "D40": {
+      "image": "China_MotorBike_000001.jpg",
+      "damage_code": "D40",
+      "bbox_xyxy": [
+        204.02664184570312,
+        212.4994659423828,
+        239.8946990966797,
+        294.887451171875
+      ],
+      "confidence": 0.9429743885993958
+    },
+    "D10": {
+      "image": "China_MotorBike_000005.jpg",
+      "damage_code": "D10",
+      "bbox_xyxy": [
+        69.47799682617188,
+        62.2396240234375,
+        210.73776245117188,
+        98.57804870605469
+      ],
+      "confidence": 0.7620264291763306
+    }
+  },
+  "input_routes_verified": [
+    "local_path",
+    "PIL_RGB",
+    "numpy_BGR"
+  ],
+  "scope": "software integration smoke test on development images; not an accuracy or generalization benchmark",
+  "no_training": true,
+  "personal_photos_used": false,
+  "kaggle_url": "https://www.kaggle.com/code/rimasabunasser/18-roadscan-inference-smoke?scriptVersionId=363150764",
+  "runtime_seconds": 57.1,
+  "kaggle_version": 2,
+  "export_scope": "Printed summary; full predictions and blank-image outputs in saved Kaggle JSON"
+}

@@ -1,0 +1,23 @@
+{
+  "model": "YOLOv8s",
+  "project_checkpoint": "run17_best_finetuned.pt",
+  "kaggle_relative_path": "run17_model_comparison/run17_best_finetuned.pt",
+  "sha256": "25b412ff18c05e2607f4bc61b872f39826e8d53ffdc7647654c1f419e355d15f",
+  "run": 17,
+  "source_version": 362779073,
+  "training_images": 8999,
+  "adoption_reason": "Team decision to use its fine-tuned model; not a claim of improved validation mAP over published initialization",
+  "reference_checkpoint_only": "original_published.pt",
+  "do_not_use_as_project_default": "selected_candidate.pt",
+  "class_mapping": {
+    "0": "D00",
+    "1": "D10",
+    "2": "D20",
+    "3": "D40"
+  },
+  "imgsz": 640,
+  "confidence": 0.25,
+  "confidence_status": "provisional; validate for application requirements",
+  "iou": 0.7,
+  "independent_local_generalization_evaluated": false
+}
