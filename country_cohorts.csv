@@ -1,0 +1,6 @@
+country,role,candidate_images,selected_images,cap
+China_MotorBike,development reused,1977,1977,1977
+United_States,country held out from team fine-tuning,4805,4804,4805
+Japan,image held out; country represented in fine-tuning,6506,500,500
+India,image held out; country represented in fine-tuning,4206,500,500
+Czech,image held out; country represented in fine-tuning,1330,500,500

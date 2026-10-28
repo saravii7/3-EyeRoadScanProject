@@ -23,3 +23,9 @@ Run 17 diagnostic validation mAP50-95 is 0.657899 versus the original 0.671253. 
 The model binaries remain in Kaggle. The team published the weights as [v2-yolo](https://github.com/saravii7/3-EyeRoadScanProject/releases/tag/v2-yolo). The original tag/source archive predates confidence freezing; use the current configuration and detector supplied with the threshold update.
 
 Attribution: published initialization SreekarAditya / yolo-rdd2022-benchmark, publisher CC BY 4.0; RDD2022, Arya et al.; team sample Sara. Preserve applicable Ultralytics terms.
+
+## Frozen-country evaluation outcome (run 21)
+
+The adopted checkpoint and confidence 0.46 remain unchanged. US was excluded from our run-17 fine-tuning, but external pretraining overlap is unknown. On 4,804 US images, mAP50 is 0.764357, mAP50-95 is 0.497268, and pothole recall is only **43/135 = 31.85%** at the frozen threshold. This is an unresolved failure case, not validated local-road readiness. Do not silently tune on these now-inspected US test results. See [COUNTRY_ERROR_ANALYSIS.md](COUNTRY_ERROR_ANALYSIS.md) for reviewed cohort limits, per-class results and error examples. Independent labeled local evaluation remains pending.
+
+Run 20 completed the E3 augmentation study. Retain the current recipe; no new checkpoint is adopted from that single-seed seven-epoch experiment.

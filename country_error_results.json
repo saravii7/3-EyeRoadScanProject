@@ -1,0 +1,583 @@
+{
+  "status": "complete",
+  "run": 21,
+  "protocol": {
+    "run": 21,
+    "checkpoint": "run17_best_finetuned.pt",
+    "sha256": "25b412ff18c05e2607f4bc61b872f39826e8d53ffdc7647654c1f419e355d15f",
+    "confidence": 0.46,
+    "imgsz": 640,
+    "nms_iou": 0.7,
+    "max_det": 300,
+    "matching_iou": 0.5,
+    "known_country_max_images": 500,
+    "selection": "ascending SHA256 of filename plus seed42; no outcome-based sampling",
+    "local_images_used": false,
+    "training_performed": false,
+    "threshold_retuned": false,
+    "US_role": "country held out from our fine-tuning; external pretraining exposure unknown",
+    "China_role": "development data reused; threshold optimized here",
+    "known_country_role": "images outside team fine-tuning sample, countries represented in fine-tuning",
+    "uncertainty": "single checkpoint; no verified route separation; near-duplicates unresolved"
+  },
+  "cohorts": [
+    {
+      "country": "China_MotorBike",
+      "role": "development reused",
+      "candidate_images": 1977,
+      "selected_images": 1977,
+      "cap": 1977
+    },
+    {
+      "country": "United_States",
+      "role": "country held out from team fine-tuning",
+      "candidate_images": 4805,
+      "selected_images": 4804,
+      "cap": 4805
+    },
+    {
+      "country": "Japan",
+      "role": "image held out; country represented in fine-tuning",
+      "candidate_images": 6506,
+      "selected_images": 500,
+      "cap": 500
+    },
+    {
+      "country": "India",
+      "role": "image held out; country represented in fine-tuning",
+      "candidate_images": 4206,
+      "selected_images": 500,
+      "cap": 500
+    },
+    {
+      "country": "Czech",
+      "role": "image held out; country represented in fine-tuning",
+      "candidate_images": 1330,
+      "selected_images": 500,
+      "cap": 500
+    }
+  ],
+  "results": [
+    {
+      "country": "China_MotorBike",
+      "cohort_role": "development reused",
+      "images": 1977,
+      "mAP50": 0.9593002182315967,
+      "mAP50_95": 0.6578988230976404,
+      "box_macro_f1_supported_classes": 0.8955620683655904,
+      "supported_classes": 4,
+      "micro_precision": 0.892905866302865,
+      "micro_recall": 0.844516129032258,
+      "micro_f1": 0.8680371352785146,
+      "TP": 3927,
+      "FP": 471,
+      "FN": 723,
+      "false_positives_per_100_images": 23.823975720789075,
+      "pothole_recall": 0.9659574468085106
+    },
+    {
+      "country": "United_States",
+      "cohort_role": "country held out from team fine-tuning",
+      "images": 4804,
+      "mAP50": 0.7643569651022853,
+      "mAP50_95": 0.4972681613922478,
+      "box_macro_f1_supported_classes": 0.6818467731489589,
+      "supported_classes": 4,
+      "micro_precision": 0.8206395960446035,
+      "micro_recall": 0.7085376930063578,
+      "micro_f1": 0.760479625658023,
+      "TP": 7801,
+      "FP": 1705,
+      "FN": 3209,
+      "false_positives_per_100_images": 35.49125728559534,
+      "pothole_recall": 0.31851851851851853
+    },
+    {
+      "country": "Japan",
+      "cohort_role": "image held out; country represented in fine-tuning",
+      "images": 500,
+      "mAP50": 0.8227839445168597,
+      "mAP50_95": 0.5052830724738768,
+      "box_macro_f1_supported_classes": 0.7116882951003933,
+      "supported_classes": 2,
+      "micro_precision": 0.8415300546448088,
+      "micro_recall": 0.6430062630480167,
+      "micro_f1": 0.7289940828402367,
+      "TP": 308,
+      "FP": 58,
+      "FN": 171,
+      "false_positives_per_100_images": 11.6,
+      "pothole_recall": null
+    },
+    {
+      "country": "India",
+      "cohort_role": "image held out; country represented in fine-tuning",
+      "images": 500,
+      "mAP50": 0.6202704788588458,
+      "mAP50_95": 0.402821799551391,
+      "box_macro_f1_supported_classes": 0.5881578947368421,
+      "supported_classes": 2,
+      "micro_precision": 0.575,
+      "micro_recall": 0.5476190476190477,
+      "micro_f1": 0.5609756097560976,
+      "TP": 23,
+      "FP": 17,
+      "FN": 19,
+      "false_positives_per_100_images": 3.4,
+      "pothole_recall": null
+    },
+    {
+      "country": "Czech",
+      "cohort_role": "image held out; country represented in fine-tuning",
+      "images": 500,
+      "mAP50": 0.0,
+      "mAP50_95": 0.0,
+      "box_macro_f1_supported_classes": null,
+      "supported_classes": 0,
+      "micro_precision": 0.0,
+      "micro_recall": null,
+      "micro_f1": 0.0,
+      "TP": 0,
+      "FP": 26,
+      "FN": 0,
+      "false_positives_per_100_images": 5.2,
+      "pothole_recall": null
+    }
+  ],
+  "per_class": [
+    {
+      "country": "China_MotorBike",
+      "damage_code": "D00",
+      "support": 2678,
+      "TP": 2215,
+      "FP": 270,
+      "FN": 463,
+      "precision": 0.8913480885311871,
+      "recall": 0.827109783420463,
+      "f1": 0.8580282781328685,
+      "AP50": 0.9402791398650616,
+      "AP50_95": 0.6621916218142883
+    },
+    {
+      "country": "China_MotorBike",
+      "damage_code": "D10",
+      "support": 1096,
+      "TP": 869,
+      "FP": 140,
+      "FN": 227,
+      "precision": 0.8612487611496531,
+      "recall": 0.7928832116788321,
+      "f1": 0.8256532066508313,
+      "AP50": 0.9293843526620709,
+      "AP50_95": 0.6039653695482564
+    },
+    {
+      "country": "China_MotorBike",
+      "damage_code": "D20",
+      "support": 641,
+      "TP": 616,
+      "FP": 47,
+      "FN": 25,
+      "precision": 0.9291101055806938,
+      "recall": 0.9609984399375975,
+      "f1": 0.9447852760736196,
+      "AP50": 0.9812681717968847,
+      "AP50_95": 0.7338157062331498
+    },
+    {
+      "country": "China_MotorBike",
+      "damage_code": "D40",
+      "support": 235,
+      "TP": 227,
+      "FP": 14,
+      "FN": 8,
+      "precision": 0.941908713692946,
+      "recall": 0.9659574468085106,
+      "f1": 0.9537815126050421,
+      "AP50": 0.9862692086023698,
+      "AP50_95": 0.6316225947948669
+    },
+    {
+      "country": "United_States",
+      "damage_code": "D00",
+      "support": 6747,
+      "TP": 5053,
+      "FP": 1113,
+      "FN": 1694,
+      "precision": 0.8194939993512812,
+      "recall": 0.7489254483474137,
+      "f1": 0.7826221637109889,
+      "AP50": 0.8677223574750036,
+      "AP50_95": 0.5834257871760828
+    },
+    {
+      "country": "United_States",
+      "damage_code": "D10",
+      "support": 3294,
+      "TP": 2139,
+      "FP": 520,
+      "FN": 1155,
+      "precision": 0.8044377585558481,
+      "recall": 0.6493624772313297,
+      "f1": 0.7186292625566941,
+      "AP50": 0.7993518768187619,
+      "AP50_95": 0.45851235632571025
+    },
+    {
+      "country": "United_States",
+      "damage_code": "D20",
+      "support": 834,
+      "TP": 566,
+      "FP": 59,
+      "FN": 268,
+      "precision": 0.9056,
+      "recall": 0.6786570743405276,
+      "f1": 0.7758738862234407,
+      "AP50": 0.854022799352751,
+      "AP50_95": 0.6058190215254359
+    },
+    {
+      "country": "United_States",
+      "damage_code": "D40",
+      "support": 135,
+      "TP": 43,
+      "FP": 13,
+      "FN": 92,
+      "precision": 0.7678571428571429,
+      "recall": 0.31851851851851853,
+      "f1": 0.450261780104712,
+      "AP50": 0.536330826762625,
+      "AP50_95": 0.3413154805417624
+    },
+    {
+      "country": "Japan",
+      "damage_code": "D00",
+      "support": 186,
+      "TP": 87,
+      "FP": 23,
+      "FN": 99,
+      "precision": 0.7909090909090909,
+      "recall": 0.46774193548387094,
+      "f1": 0.5878378378378378,
+      "AP50": 0.7383898504899326,
+      "AP50_95": 0.41881475118725736
+    },
+    {
+      "country": "Japan",
+      "damage_code": "D10",
+      "support": 0,
+      "TP": 0,
+      "FP": 17,
+      "FN": 0,
+      "precision": 0.0,
+      "recall": null,
+      "f1": null,
+      "AP50": null,
+      "AP50_95": null
+    },
+    {
+      "country": "Japan",
+      "damage_code": "D20",
+      "support": 293,
+      "TP": 221,
+      "FP": 15,
+      "FN": 72,
+      "precision": 0.9364406779661016,
+      "recall": 0.7542662116040956,
+      "f1": 0.8355387523629489,
+      "AP50": 0.9071780385437868,
+      "AP50_95": 0.5917513937604965
+    },
+    {
+      "country": "Japan",
+      "damage_code": "D40",
+      "support": 0,
+      "TP": 0,
+      "FP": 3,
+      "FN": 0,
+      "precision": 0.0,
+      "recall": null,
+      "f1": null,
+      "AP50": null,
+      "AP50_95": null
+    },
+    {
+      "country": "India",
+      "damage_code": "D00",
+      "support": 21,
+      "TP": 10,
+      "FP": 7,
+      "FN": 11,
+      "precision": 0.5882352941176471,
+      "recall": 0.47619047619047616,
+      "f1": 0.5263157894736842,
+      "AP50": 0.5518295800801362,
+      "AP50_95": 0.337440802544462
+    },
+    {
+      "country": "India",
+      "damage_code": "D10",
+      "support": 0,
+      "TP": 0,
+      "FP": 1,
+      "FN": 0,
+      "precision": 0.0,
+      "recall": null,
+      "f1": null,
+      "AP50": null,
+      "AP50_95": null
+    },
+    {
+      "country": "India",
+      "damage_code": "D20",
+      "support": 21,
+      "TP": 13,
+      "FP": 6,
+      "FN": 8,
+      "precision": 0.6842105263157895,
+      "recall": 0.6190476190476191,
+      "f1": 0.65,
+      "AP50": 0.6887113776375555,
+      "AP50_95": 0.4682027965583201
+    },
+    {
+      "country": "India",
+      "damage_code": "D40",
+      "support": 0,
+      "TP": 0,
+      "FP": 3,
+      "FN": 0,
+      "precision": 0.0,
+      "recall": null,
+      "f1": null,
+      "AP50": null,
+      "AP50_95": null
+    },
+    {
+      "country": "Czech",
+      "damage_code": "D00",
+      "support": 0,
+      "TP": 0,
+      "FP": 21,
+      "FN": 0,
+      "precision": 0.0,
+      "recall": null,
+      "f1": null,
+      "AP50": null,
+      "AP50_95": null
+    },
+    {
+      "country": "Czech",
+      "damage_code": "D10",
+      "support": 0,
+      "TP": 0,
+      "FP": 3,
+      "FN": 0,
+      "precision": 0.0,
+      "recall": null,
+      "f1": null,
+      "AP50": null,
+      "AP50_95": null
+    },
+    {
+      "country": "Czech",
+      "damage_code": "D20",
+      "support": 0,
+      "TP": 0,
+      "FP": 2,
+      "FN": 0,
+      "precision": 0.0,
+      "recall": null,
+      "f1": null,
+      "AP50": null,
+      "AP50_95": null
+    },
+    {
+      "country": "Czech",
+      "damage_code": "D40",
+      "support": 0,
+      "TP": 0,
+      "FP": 0,
+      "FN": 0,
+      "precision": 0.0,
+      "recall": null,
+      "f1": null,
+      "AP50": null,
+      "AP50_95": null
+    }
+  ],
+  "error_categories": [
+    {
+      "country": "China_MotorBike",
+      "error": "FN",
+      "category": "localization_candidate",
+      "boxes": 141
+    },
+    {
+      "country": "China_MotorBike",
+      "error": "FN",
+      "category": "no_matching_detection_above_threshold",
+      "boxes": 560
+    },
+    {
+      "country": "China_MotorBike",
+      "error": "FN",
+      "category": "wrong_class_overlap",
+      "boxes": 22
+    },
+    {
+      "country": "China_MotorBike",
+      "error": "FP",
+      "category": "background_or_annotation_review",
+      "boxes": 149
+    },
+    {
+      "country": "China_MotorBike",
+      "error": "FP",
+      "category": "duplicate",
+      "boxes": 127
+    },
+    {
+      "country": "China_MotorBike",
+      "error": "FP",
+      "category": "localization_candidate",
+      "boxes": 170
+    },
+    {
+      "country": "China_MotorBike",
+      "error": "FP",
+      "category": "wrong_class_overlap",
+      "boxes": 25
+    },
+    {
+      "country": "Czech",
+      "error": "FP",
+      "category": "background_or_annotation_review",
+      "boxes": 26
+    },
+    {
+      "country": "India",
+      "error": "FN",
+      "category": "localization_candidate",
+      "boxes": 3
+    },
+    {
+      "country": "India",
+      "error": "FN",
+      "category": "no_matching_detection_above_threshold",
+      "boxes": 16
+    },
+    {
+      "country": "India",
+      "error": "FP",
+      "category": "background_or_annotation_review",
+      "boxes": 15
+    },
+    {
+      "country": "India",
+      "error": "FP",
+      "category": "localization_candidate",
+      "boxes": 2
+    },
+    {
+      "country": "Japan",
+      "error": "FN",
+      "category": "localization_candidate",
+      "boxes": 14
+    },
+    {
+      "country": "Japan",
+      "error": "FN",
+      "category": "no_matching_detection_above_threshold",
+      "boxes": 147
+    },
+    {
+      "country": "Japan",
+      "error": "FN",
+      "category": "wrong_class_overlap",
+      "boxes": 10
+    },
+    {
+      "country": "Japan",
+      "error": "FP",
+      "category": "background_or_annotation_review",
+      "boxes": 34
+    },
+    {
+      "country": "Japan",
+      "error": "FP",
+      "category": "localization_candidate",
+      "boxes": 15
+    },
+    {
+      "country": "Japan",
+      "error": "FP",
+      "category": "wrong_class_overlap",
+      "boxes": 9
+    },
+    {
+      "country": "United_States",
+      "error": "FN",
+      "category": "localization_candidate",
+      "boxes": 494
+    },
+    {
+      "country": "United_States",
+      "error": "FN",
+      "category": "no_matching_detection_above_threshold",
+      "boxes": 2618
+    },
+    {
+      "country": "United_States",
+      "error": "FN",
+      "category": "wrong_class_overlap",
+      "boxes": 97
+    },
+    {
+      "country": "United_States",
+      "error": "FP",
+      "category": "background_or_annotation_review",
+      "boxes": 922
+    },
+    {
+      "country": "United_States",
+      "error": "FP",
+      "category": "duplicate",
+      "boxes": 110
+    },
+    {
+      "country": "United_States",
+      "error": "FP",
+      "category": "localization_candidate",
+      "boxes": 564
+    },
+    {
+      "country": "United_States",
+      "error": "FP",
+      "category": "wrong_class_overlap",
+      "boxes": 109
+    }
+  ],
+  "interpretation": [
+    "US mAP50-95 differs from China by -16.06 percentage points. China was used for development and threshold selection; US was not part of our fine-tuning. This descriptive gap can reflect domain, class mix and label differences; it is not a pure causal country effect.",
+    "China_MotorBike: D00 has the largest missed-box count (463 of 2678 labels); recall 82.71%. Counts depend on class support, so also inspect per-class recall.",
+    "Czech: D00 has the largest missed-box count (0 of 0 labels); recall nan%. Counts depend on class support, so also inspect per-class recall.",
+    "India: D00 has the largest missed-box count (11 of 21 labels); recall 47.62%. Counts depend on class support, so also inspect per-class recall.",
+    "Japan: D00 has the largest missed-box count (99 of 186 labels); recall 46.77%. Counts depend on class support, so also inspect per-class recall.",
+    "United_States: D00 has the largest missed-box count (1694 of 6747 labels); recall 74.89%. Counts depend on class support, so also inspect per-class recall.",
+    "China_MotorBike: the largest geometric error category is FN / no_matching_detection_above_threshold (560 boxes). Review the gallery and original labels before assigning a visual cause.",
+    "United_States: the largest geometric error category is FN / no_matching_detection_above_threshold (2618 boxes). Review the gallery and original labels before assigning a visual cause.",
+    "Japan: the largest geometric error category is FN / no_matching_detection_above_threshold (147 boxes). Review the gallery and original labels before assigning a visual cause.",
+    "India: the largest geometric error category is FN / no_matching_detection_above_threshold (16 boxes). Review the gallery and original labels before assigning a visual cause.",
+    "Czech: the largest geometric error category is FP / background_or_annotation_review (26 boxes). Review the gallery and original labels before assigning a visual cause.",
+    "1784/4122 missed boxes cover less than 1% of their image. This is an error-size description, not proof that small size caused each miss."
+  ],
+  "small_missed_boxes": 1784,
+  "total_missed_boxes": 4122,
+  "exclusions": 1,
+  "local_images_used": false,
+  "training_performed": false,
+  "threshold_retuned": false,
+  "US_evaluated": true,
+  "adopted_model_changed": false
+}

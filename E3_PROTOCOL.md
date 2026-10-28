@@ -1,6 +1,6 @@
 # E3: controlled augmentation ablation (run 20)
 
-Status: launched on Kaggle; results are pending. This file does not claim experiment completion.
+Status: completed successfully. Executed results, tables, charts and interpretation are archived; see E3_AUGMENTATION.md.
 
 Saved run: https://www.kaggle.com/code/rimasabunasser/20-roadscan-e3-augmentation?scriptVersionId=363195760
 

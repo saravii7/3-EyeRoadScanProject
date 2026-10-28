@@ -1,6 +1,6 @@
 # Run 21: frozen-model country comparison and error analysis
 
-Status: launched; results pending. Do not mark the analysis complete until the notebook emits COUNTRY_ERROR_ANALYSIS_COMPLETE.
+Status: completed successfully. Use COUNTRY_ERROR_ANALYSIS.md and country_error_reviewed.json for the post-run interpretation; original raw outputs are retained.
 
 Saved Kaggle version: https://www.kaggle.com/code/rimasabunasser/21-roadscan-country-error-analysis?scriptVersionId=363199933
 
