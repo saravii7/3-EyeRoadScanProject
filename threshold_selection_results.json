@@ -1,0 +1,231 @@
+{
+  "status": "complete",
+  "model_checkpoint": "run17_best_finetuned.pt",
+  "checkpoint_sha256": "25b412ff18c05e2607f4bc61b872f39826e8d53ffdc7647654c1f419e355d15f",
+  "confidence": 0.46,
+  "config": {
+    "model": "YOLOv8s",
+    "project_checkpoint": "run17_best_finetuned.pt",
+    "kaggle_relative_path": "run17_model_comparison/run17_best_finetuned.pt",
+    "sha256": "25b412ff18c05e2607f4bc61b872f39826e8d53ffdc7647654c1f419e355d15f",
+    "run": 17,
+    "source_version": 362779073,
+    "class_mapping": {
+      "0": "D00",
+      "1": "D10",
+      "2": "D20",
+      "3": "D40"
+    },
+    "imgsz": 640,
+    "confidence": 0.46,
+    "confidence_status": "frozen on China development validation before independent local test",
+    "iou": 0.7,
+    "max_det": 300,
+    "matching_iou_for_selection": 0.5,
+    "selection_policy": {
+      "objective": "maximize unweighted mean of four box-level F1 scores",
+      "pothole_recall_floor": 0.9,
+      "matching_iou": 0.5,
+      "nms_iou": 0.7,
+      "max_det": 300,
+      "imgsz": 640,
+      "grid": "0.001 plus 0.01..0.95, step 0.01",
+      "ties": "higher pothole recall, then higher confidence",
+      "fallback": "if recall floor impossible: maximize pothole recall, then macro-F1, then higher confidence; explicitly record unmet floor"
+    },
+    "validation_images": 1977,
+    "pothole_recall_floor_met": true,
+    "independent_local_generalization_evaluated": false,
+    "original_checkpoint_role": "reference only"
+  },
+  "selection_policy": {
+    "objective": "maximize unweighted mean of four box-level F1 scores",
+    "pothole_recall_floor": 0.9,
+    "matching_iou": 0.5,
+    "nms_iou": 0.7,
+    "max_det": 300,
+    "imgsz": 640,
+    "grid": "0.001 plus 0.01..0.95, step 0.01",
+    "ties": "higher pothole recall, then higher confidence",
+    "fallback": "if recall floor impossible: maximize pothole recall, then macro-F1, then higher confidence; explicitly record unmet floor"
+  },
+  "chosen": {
+    "confidence": 0.46,
+    "macro_precision": 0.9059039172386201,
+    "macro_recall": 0.8867372204613508,
+    "macro_f1": 0.8955620683655904,
+    "micro_precision": 0.892905866302865,
+    "micro_recall": 0.844516129032258,
+    "micro_f1": 0.8680371352785146,
+    "pothole_precision": 0.941908713692946,
+    "pothole_recall": 0.9659574468085106,
+    "pothole_f1": 0.9537815126050421,
+    "false_positives": 471,
+    "false_negatives": 723,
+    "false_positives_per_100_images": 23.823975720789075,
+    "per_class": [
+      {
+        "damage_code": "D00",
+        "TP": 2215,
+        "FP": 270,
+        "FN": 463,
+        "precision": 0.8913480885311871,
+        "recall": 0.827109783420463,
+        "f1": 0.8580282781328685,
+        "support": 2678
+      },
+      {
+        "damage_code": "D10",
+        "TP": 869,
+        "FP": 140,
+        "FN": 227,
+        "precision": 0.8612487611496531,
+        "recall": 0.7928832116788321,
+        "f1": 0.8256532066508313,
+        "support": 1096
+      },
+      {
+        "damage_code": "D20",
+        "TP": 616,
+        "FP": 47,
+        "FN": 25,
+        "precision": 0.9291101055806938,
+        "recall": 0.9609984399375975,
+        "f1": 0.9447852760736196,
+        "support": 641
+      },
+      {
+        "damage_code": "D40",
+        "TP": 227,
+        "FP": 14,
+        "FN": 8,
+        "precision": 0.941908713692946,
+        "recall": 0.9659574468085106,
+        "f1": 0.9537815126050421,
+        "support": 235
+      }
+    ]
+  },
+  "previous_0_25": {
+    "confidence": 0.25,
+    "macro_precision": 0.795483051262463,
+    "macro_recall": 0.9457947359516504,
+    "macro_f1": 0.8626608246552654,
+    "micro_precision": 0.752972027972028,
+    "micro_recall": 0.926236559139785,
+    "micro_f1": 0.8306653809064609,
+    "pothole_precision": 0.8769230769230769,
+    "pothole_recall": 0.9702127659574468,
+    "pothole_f1": 0.9212121212121213,
+    "false_positives": 1413,
+    "false_negatives": 343,
+    "false_positives_per_100_images": 71.47192716236722,
+    "per_class": [
+      {
+        "damage_code": "D00",
+        "TP": 2437,
+        "FP": 813,
+        "FN": 241,
+        "precision": 0.7498461538461538,
+        "recall": 0.9100074682598954,
+        "f1": 0.8221997300944669,
+        "support": 2678
+      },
+      {
+        "damage_code": "D10",
+        "TP": 1017,
+        "FP": 479,
+        "FN": 79,
+        "precision": 0.6798128342245989,
+        "recall": 0.9279197080291971,
+        "f1": 0.7847222222222222,
+        "support": 1096
+      },
+      {
+        "damage_code": "D20",
+        "TP": 625,
+        "FP": 89,
+        "FN": 16,
+        "precision": 0.8753501400560224,
+        "recall": 0.9750390015600624,
+        "f1": 0.922509225092251,
+        "support": 641
+      },
+      {
+        "damage_code": "D40",
+        "TP": 228,
+        "FP": 32,
+        "FN": 7,
+        "precision": 0.8769230769230769,
+        "recall": 0.9702127659574468,
+        "f1": 0.9212121212121213,
+        "support": 235
+      }
+    ]
+  },
+  "unconstrained_best": {
+    "confidence": 0.46,
+    "macro_precision": 0.9059039172386201,
+    "macro_recall": 0.8867372204613508,
+    "macro_f1": 0.8955620683655904,
+    "micro_precision": 0.892905866302865,
+    "micro_recall": 0.844516129032258,
+    "micro_f1": 0.8680371352785146,
+    "pothole_precision": 0.941908713692946,
+    "pothole_recall": 0.9659574468085106,
+    "pothole_f1": 0.9537815126050421,
+    "false_positives": 471,
+    "false_negatives": 723,
+    "false_positives_per_100_images": 23.823975720789075,
+    "per_class": [
+      {
+        "damage_code": "D00",
+        "TP": 2215,
+        "FP": 270,
+        "FN": 463,
+        "precision": 0.8913480885311871,
+        "recall": 0.827109783420463,
+        "f1": 0.8580282781328685,
+        "support": 2678
+      },
+      {
+        "damage_code": "D10",
+        "TP": 869,
+        "FP": 140,
+        "FN": 227,
+        "precision": 0.8612487611496531,
+        "recall": 0.7928832116788321,
+        "f1": 0.8256532066508313,
+        "support": 1096
+      },
+      {
+        "damage_code": "D20",
+        "TP": 616,
+        "FP": 47,
+        "FN": 25,
+        "precision": 0.9291101055806938,
+        "recall": 0.9609984399375975,
+        "f1": 0.9447852760736196,
+        "support": 641
+      },
+      {
+        "damage_code": "D40",
+        "TP": 227,
+        "FP": 14,
+        "FN": 8,
+        "precision": 0.941908713692946,
+        "recall": 0.9659574468085106,
+        "f1": 0.9537815126050421,
+        "support": 235
+      }
+    ]
+  },
+  "recall_floor_met": true,
+  "module_sha256": "eeb8d1326075613d95d53128eb33416a44ac2c8960040e001d1de67ac290566b",
+  "frozen_default_real_inference_passed": true,
+  "scope": "development-only operating-point selection; external pretraining overlap unknown; not independent local accuracy",
+  "local_images_used": false,
+  "US_images_used": false,
+  "training_performed": false,
+  "kaggle_url": "https://www.kaggle.com/code/rimasabunasser/19-roadscan-confidence-selection?scriptVersionId=363182180"
+}

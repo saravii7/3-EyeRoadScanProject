@@ -16,8 +16,27 @@
     "3": "D40"
   },
   "imgsz": 640,
-  "confidence": 0.25,
-  "confidence_status": "provisional; validate for application requirements",
+  "confidence": 0.46,
+  "confidence_status": "frozen on China development validation before independent local test",
   "iou": 0.7,
-  "independent_local_generalization_evaluated": false
+  "independent_local_generalization_evaluated": false,
+  "max_det": 300,
+  "matching_iou_for_selection": 0.5,
+  "selection_policy": {
+    "objective": "maximize unweighted mean of four box-level F1 scores",
+    "pothole_recall_floor": 0.9,
+    "matching_iou": 0.5,
+    "nms_iou": 0.7,
+    "max_det": 300,
+    "imgsz": 640,
+    "grid": "0.001 plus 0.01..0.95, step 0.01",
+    "ties": "higher pothole recall, then higher confidence",
+    "fallback": "if recall floor impossible: maximize pothole recall, then macro-F1, then higher confidence; explicitly record unmet floor"
+  },
+  "validation_images": 1977,
+  "pothole_recall_floor_met": true,
+  "original_checkpoint_role": "reference only",
+  "threshold_source": "https://www.kaggle.com/code/rimasabunasser/19-roadscan-confidence-selection?scriptVersionId=363182180",
+  "module_sha256": "eeb8d1326075613d95d53128eb33416a44ac2c8960040e001d1de67ac290566b",
+  "release": "v2-yolo"
 }
