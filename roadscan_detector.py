@@ -2,6 +2,8 @@
 from pathlib import Path
 import math
 
+DEFAULT_CONFIDENCE = 0.46
+
 _NAME_TO_CODE = {
     'd00': 'D00', 'longitudinal_crack': 'D00',
     'd10': 'D10', 'transverse_crack': 'D10',
@@ -38,10 +40,10 @@ class RoadDamageDetector:
         if len(self._codes) != 4 or set(self._codes.values()) != {'D00', 'D10', 'D20', 'D40'}:
             raise ValueError('Checkpoint must contain each of the four RDD2022 damage classes exactly once.')
 
-    def detect_damage(self, image, *, confidence=0.25, iou=0.7):
+    def detect_damage(self, image, *, confidence=DEFAULT_CONFIDENCE, iou=0.7):
         """Return every retained damage as damage_code, bbox_xyxy, confidence.
 
-        confidence=0.25 is provisional, not a validated deployment threshold.
+        The default confidence was frozen on China development data before local testing.
         Invalid/unreadable images raise an exception, rather than returning [].
         """
         for name, value in [('confidence', confidence), ('iou', iou)]:

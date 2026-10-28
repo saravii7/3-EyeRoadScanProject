@@ -18,8 +18,8 @@ The exact detector module remained unchanged. Version 1 checks of the original r
 
 ## Engineering interpretation
 
-Run 17 diagnostic validation mAP50-95 is 0.657899 versus the original 0.671253. Adoption is a documented team choice to use its fine-tuned model, not evidence that fine-tuning improved that metric. No additional training or final local testing occurred in this verification. External pretraining overlap remains unknown; independent local-road evaluation is still pending. Confidence 0.25 remains provisional.
+Run 17 diagnostic validation mAP50-95 is 0.657899 versus the original 0.671253. Adoption is a documented team choice to use its fine-tuned model, not evidence that fine-tuning improved that metric. No additional training or final local testing occurred in this verification. External pretraining overlap remains unknown; independent local-road evaluation is still pending. Confidence 0.46 is now frozen on China development validation; see [THRESHOLD_SELECTION.md](THRESHOLD_SELECTION.md).
 
-The model binaries remain in Kaggle. Publication of the requested `v2-yolo` release is still pending binary transfer; this adoption update does not claim to publish weights.
+The model binaries remain in Kaggle. The team published the weights as [v2-yolo](https://github.com/saravii7/3-EyeRoadScanProject/releases/tag/v2-yolo). The original tag/source archive predates confidence freezing; use the current configuration and detector supplied with the threshold update.
 
 Attribution: published initialization SreekarAditya / yolo-rdd2022-benchmark, publisher CC BY 4.0; RDD2022, Arya et al.; team sample Sara. Preserve applicable Ultralytics terms.

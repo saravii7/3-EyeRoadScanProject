@@ -7,7 +7,7 @@ import unittest
 from unittest.mock import patch, Mock
 import numpy as np
 from PIL import Image
-from roadscan_detector import RoadDamageDetector
+from roadscan_detector import RoadDamageDetector, DEFAULT_CONFIDENCE
 
 class Tensor:
     def __init__(self, data): self.data = data
@@ -37,6 +37,13 @@ class DetectorTests(unittest.TestCase):
         json.dumps(found,allow_nan=False)
         self.detector.detect_damage(self.image)
         self.yolo.assert_called_once()
+    def test_frozen_default_matches_configuration_and_prediction(self):
+        config=json.loads(Path(__file__).with_name('model_config.json').read_text())
+        self.assertEqual(DEFAULT_CONFIDENCE, config['confidence'])
+        self.assertIn('frozen', config['confidence_status'])
+        self.boxes([],[],[])
+        self.detector.detect_damage(self.image)
+        self.assertEqual(self.model.predict.call_args.kwargs['conf'], config['confidence'])
     def test_empty_detections(self):
         self.boxes([],[],[]);self.assertEqual(self.detector.detect_damage(self.image),[])
     def test_d_codes(self):

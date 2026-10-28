@@ -10,7 +10,7 @@ from roadscan_detector import RoadDamageDetector
 # Set the actual attached checkpoint path in your environment.
 detector = RoadDamageDetector(weights='/path/to/run17_best_finetuned.pt', device='cpu')
 detect_damage = detector.detect_damage
-results = detect_damage('/path/to/image.jpg', confidence=0.25)
+results = detect_damage('/path/to/image.jpg', confidence=0.46)
 print(results)
 ```
 
@@ -31,7 +31,7 @@ Illustrative schema only, not a measured prediction:
 
 PIL images and local image paths are accepted. OpenCV numpy input must be H x W x 3 in **BGR** order. PIL input is converted to RGB. Video, folders, URLs and batches are not accepted by this single-image interface. For a Streamlit upload, use `Image.open(uploaded_file)` and pass that PIL image.
 
-Install the same inference dependencies as run 17: `ultralytics==8.4.177` (with PyTorch), Pillow and numpy. Use device `0` only where CUDA is available. Confidence 0.25 is provisional; choose the operational threshold on validation before deployment. Predictions are not evidence of independently measured Saudi-road accuracy.
+Install the same inference dependencies as run 17: `ultralytics==8.4.177` (with PyTorch), Pillow and numpy. Use device `0` only where CUDA is available. Confidence 0.46 is frozen on China development validation before the local test; see THRESHOLD_SELECTION.md. Historical checks below used 0.25. Predictions are not evidence of independently measured Saudi-road accuracy.
 
 ## Verification
 
@@ -50,3 +50,7 @@ On 2026-10-28, [Kaggle run 18 Version 1](https://www.kaggle.com/code/rimasabunas
 [Kaggle run 18 Version 2](https://www.kaggle.com/code/rimasabunasser/18-roadscan-inference-smoke?scriptVersionId=363150764) passed in 57.1 seconds on CPU. It verifies the actual fine-tuned checkpoint SHA-256 `25b412ff18c05e2607f4bc61b872f39826e8d53ffdc7647654c1f419e355d15f` and the unchanged module. 15 development images produced 44 boxes; all four D codes, coordinates, confidence and path/PIL/BGR input routes passed. This is the current integration check. See `18-roadscan-inference-smoke-v2-run17-results.json` and its executed notebook. The earlier Version 1 files test the original reference only.
 
 **Results interpretation.** The actual checkpoint processed **15 development images** and returned **44 detections**. All four codes D00/D10/D20/D40 appeared with valid pixel boxes and confidence values. Local paths, PIL RGB and OpenCV BGR inputs worked. The blank-image check returned 0 detections. These are implementation checks, not independent accuracy estimates or proof of Saudi-road generalization. Full outputs are saved in `inference_smoke/inference_smoke_results.json`.
+
+## Current frozen operating point
+
+Use confidence **0.46** with the adopted run-17 fine-tuned checkpoint. `detect_damage(image)` now uses this value by default; `model_config.json` records it. Override old application calls that explicitly pass 0.25. [Selection evidence](THRESHOLD_SELECTION.md). Historical run-18 tests above document the earlier 0.25 operating point. The updated default was verified on the actual checkpoint in experiment 19.
