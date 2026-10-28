@@ -10,6 +10,8 @@
 
 - [16: RDD2022 YOLOv8s fine-tuning, Version 1](https://www.kaggle.com/code/rimasabunasser/16-roadscan-rdd-finetuning?scriptVersionId=362759525)
 
+- [17: gentle RDD2022 YOLOv8s fine-tuning, Version 1](https://www.kaggle.com/code/rimasabunasser/17-roadscan-gentle-finetuning?scriptVersionId=362779073)
+
 The exported notebooks retain their original English explanations, executed outputs and result interpretations. Data and model binaries remain on Kaggle or the original model host.
 
 
@@ -19,6 +21,8 @@ The exported notebooks retain their original English explanations, executed outp
 | 15 | Externally trained YOLOv8s RDD2022 checkpoint; no additional training | 0.961963 | 0.671253 | 0.945031 at fixed 0.5 |
 | 16 | Published RDD2022 YOLOv8s fine-tuned on the same 8,999 team images using run-14 explicit hyperparameters | 0.793760 | 0.446713 | 0.573603 at 0.5; 0.915322 after validation tuning |
 
+
+| 17 | Original RDD2022 YOLOv8s; gentle recipe on the same 8,999 team images; lr0/warmup_bias_lr 0.0001, patience 5 | 0.959300 | 0.657899 | 0.962431 at 0.5; 0.980070 after validation tuning |
 
 **These rows are not a controlled model comparison.** Run 14 trains on Japan/India/Czech and uses 1,977 China MotorBike images for development. Run 15 evaluates the same 1,977 images, but overlap with its external pretraining images has not been excluded. Its high scores do not establish unseen-country or Saudi-road generalization. Neither run evaluates local images; these remain reserved for the final frozen-model test. Run 14 stopped after 64 epochs; its best checkpoint was at epoch 49.
 
@@ -58,3 +62,9 @@ Run 16 completed successfully in 39m 16s (17 epochs; best checkpoint at epoch 2,
 Run 16 improves on run 14 but regresses against the original published checkpoint in run 15: mAP50 0.793760 vs 0.961963 and mAP50-95 0.446713 vs 0.671253. Keep the original checkpoint as a candidate; fine-tuning did not improve this diagnostic set. See [RUN16_COMPARISON.md](RUN16_COMPARISON.md) and [run-16 JSON](16-roadscan-rdd-finetuning-results.json). Validation-tuned image F1 is optimistic, not independent accuracy.
 
 The saved run-16 Kaggle output contains both best weights in `release_v2_yolo/` and `v2_yolo_release_assets.zip`: `run14_yolo11s_best.pt`, `run16_yolov8s_rdd_best.pt`, JSON results and SHA-256 hashes. The intended GitHub release is `v2-yolo`; binary asset publication is pending transfer and must be verified separately. Confusion matrices and F1-confidence curves were confirmed in the completed output.
+
+## Run 17 outcome
+
+Run 17 completed successfully in 17m 43s (7 epochs; best epoch 2). It restarted from the original published checkpoint and preserved the frozen run-14 split. The gentle recipe raised mAP50-95 from run 16's 0.446713 to 0.657899, but did not exceed the original 0.671253 (-1.34 percentage points). The selected candidate is explicitly the original published checkpoint, not a training improvement. Image Macro-F1 at 0.5 is 0.962431; validation-tuned F1 is optimistic. No independent local generalization claim is supported because external pretraining overlap is unknown. See [RUN17_COMPARISON.md](RUN17_COMPARISON.md) and [run-17 JSON](17-roadscan-gentle-finetuning-results.json). Binary weights remain in the saved Kaggle output `run17_model_comparison/` and `run17_model_comparison.zip`.
+
+To reproduce run 17, attach run 14 Version 1 outputs (361531048), enable GPU and Internet, and run the exported notebook. It verifies original checkpoint SHA-256, measures the unmodified checkpoint before training and keeps both original and fine-tuned weights.
