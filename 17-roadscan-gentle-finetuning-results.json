@@ -1,0 +1,190 @@
+{
+  "status": "complete",
+  "training_budget_reached": false,
+  "learning_rate": 0.0001,
+  "warmup_bias_learning_rate": 0.0001,
+  "patience": 5,
+  "epochs_completed": 7,
+  "train_images": 8999,
+  "validation_images": 1977,
+  "model": "YOLOv8s",
+  "run": 17,
+  "initial_checkpoint_sha256": "565aae6915e34e4f7f4c44dac0bdcf9fff21b83c4adc74cc97ca09cc31882ce8",
+  "external_training_overlap": "unknown; not excluded",
+  "clean_generalization_claim_allowed": false,
+  "comparison_to_run14": "different architecture and pretraining; pipeline comparison only",
+  "imgsz": 640,
+  "detection": {
+    "metrics/precision(B)": 0.9173665652792682,
+    "metrics/recall(B)": 0.9255760963761883,
+    "metrics/mAP50(B)": 0.9593002182315967,
+    "metrics/mAP50-95(B)": 0.6578988230976404,
+    "fitness": 0.6578988230976404
+  },
+  "image_macro_f1": {
+    "fixed_0.5": 0.9624306483073979,
+    "validation_tuned_optimistic": 0.9800700040210236
+  },
+  "cpu_latency": {
+    "images": 20,
+    "warmup": 3,
+    "torch_threads": 2,
+    "median_seconds": 0.19073608749999948,
+    "p95_seconds": 0.1948626607500273,
+    "scope": "detector prediction only; not complete application latency"
+  },
+  "US_evaluated": false,
+  "local_evaluated": false,
+  "sample_sha256": "d88d9d98c1e9e81f21930b6f97fa49c6ceec218938834b9ace757a24baedaffc",
+  "baseline_comparison": "team v2 image assignments preserved; verify baseline implementation/threshold protocol before claiming controlled E1",
+  "pending_experiments": [
+    "E1 verified baseline comparison",
+    "E2 nano/small and 640/960",
+    "E3 augmentation ablation",
+    "E4 frozen-model US/local evaluation",
+    "E5 retrieval comparison owned by team"
+  ],
+  "selection": {
+    "criterion": "China diagnostic validation mAP50-95; keep original on tie or regression",
+    "original_detection": {
+      "metrics/precision(B)": 0.9242092286525201,
+      "metrics/recall(B)": 0.9243685113882318,
+      "metrics/mAP50(B)": 0.9619632619436428,
+      "metrics/mAP50-95(B)": 0.6712533095450459,
+      "fitness": 0.6712533095450459
+    },
+    "fine_tuned_detection": {
+      "metrics/precision(B)": 0.9173665652792682,
+      "metrics/recall(B)": 0.9255760963761883,
+      "metrics/mAP50(B)": 0.9593002182315967,
+      "metrics/mAP50-95(B)": 0.6578988230976404,
+      "fitness": 0.6578988230976404
+    },
+    "delta_mAP50_95": -0.013354486447405556,
+    "improved_on_this_validation": false,
+    "selected_source": "original_published_checkpoint",
+    "selected_sha256": "565aae6915e34e4f7f4c44dac0bdcf9fff21b83c4adc74cc97ca09cc31882ce8",
+    "generalization_claim_allowed": false,
+    "external_training_overlap": "unknown; not excluded"
+  },
+  "export_provenance": {
+    "source": "executed Kaggle notebook outputs; selection reconstructed from final completion marker, selection code and verified original checkpoint metrics",
+    "kaggle_version_id": 362779073,
+    "kaggle_url": "https://www.kaggle.com/code/rimasabunasser/17-roadscan-gentle-finetuning?scriptVersionId=362779073",
+    "runtime_seconds": 1063.1,
+    "best_epoch": 2,
+    "export_date": "2026-10-28"
+  },
+  "per_class_detection_displayed": [
+    {
+      "cls": "D00",
+      "AP50": "0.940279",
+      "AP50_95": "0.662192"
+    },
+    {
+      "cls": "D10",
+      "AP50": "0.929384",
+      "AP50_95": "0.603965"
+    },
+    {
+      "cls": "D20",
+      "AP50": "0.981268",
+      "AP50_95": "0.733816"
+    },
+    {
+      "cls": "D40",
+      "AP50": "0.986269",
+      "AP50_95": "0.631623"
+    }
+  ],
+  "per_class_image_metrics_displayed": [
+    {
+      "cls": "D00",
+      "mode": "fixed_0.5",
+      "threshold": "0.50",
+      "precision": "0.996995",
+      "recall": "0.935166",
+      "f1": "0.965091",
+      "support": "1419",
+      "always_positive_f1": "0.835689",
+      "auroc": "0.997893"
+    },
+    {
+      "cls": "D10",
+      "mode": "fixed_0.5",
+      "threshold": "0.50",
+      "precision": "0.987823",
+      "recall": "0.879404",
+      "f1": "0.930466",
+      "support": "738",
+      "always_positive_f1": "0.543646",
+      "auroc": "0.996199"
+    },
+    {
+      "cls": "D20",
+      "mode": "fixed_0.5",
+      "threshold": "0.50",
+      "precision": "0.957576",
+      "recall": "0.975309",
+      "f1": "0.966361",
+      "support": "486",
+      "always_positive_f1": "0.394641",
+      "auroc": "0.998258"
+    },
+    {
+      "cls": "D40",
+      "mode": "fixed_0.5",
+      "threshold": "0.50",
+      "precision": "0.987805",
+      "recall": "0.987805",
+      "f1": "0.987805",
+      "support": "164",
+      "always_positive_f1": "0.153199",
+      "auroc": "0.999657"
+    },
+    {
+      "cls": "D00",
+      "mode": "validation_tuned_optimistic",
+      "threshold": "0.30",
+      "precision": "0.990839",
+      "recall": "0.990839",
+      "f1": "0.990839",
+      "support": "1419",
+      "always_positive_f1": "0.835689",
+      "auroc": "0.997893"
+    },
+    {
+      "cls": "D10",
+      "mode": "validation_tuned_optimistic",
+      "threshold": "0.35",
+      "precision": "0.972973",
+      "recall": "0.975610",
+      "f1": "0.974290",
+      "support": "738",
+      "always_positive_f1": "0.543646",
+      "auroc": "0.996199"
+    },
+    {
+      "cls": "D20",
+      "mode": "validation_tuned_optimistic",
+      "threshold": "0.55",
+      "precision": "0.959514",
+      "recall": "0.975309",
+      "f1": "0.967347",
+      "support": "486",
+      "always_positive_f1": "0.394641",
+      "auroc": "0.998258"
+    },
+    {
+      "cls": "D40",
+      "mode": "validation_tuned_optimistic",
+      "threshold": "0.50",
+      "precision": "0.987805",
+      "recall": "0.987805",
+      "f1": "0.987805",
+      "support": "164",
+      "always_positive_f1": "0.153199",
+      "auroc": "0.999657"
+    }
+  ]
+}
