@@ -6,7 +6,7 @@ AIEP bootcamp capstone (Olo Academy), Track A: RoadScan.
 ## Team
 - Sara-albahesh (saravii7)
 - rimas-al-abunasser
-- fajr-alshahrani
+- fajer-alshahrani
 
 ## Data
 Dataset: RDD2022 (Road Damage Dataset 2022)
