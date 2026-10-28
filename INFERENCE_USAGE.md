@@ -40,3 +40,7 @@ Install the same inference dependencies as run 17: `ultralytics==8.4.177` (with 
 Actual run-17 model metrics are recorded separately in `17-roadscan-gentle-finetuning-results.json`. The existing executed training notebook is preserved. This module can be imported from that notebook or the application.
 
 Published initialization: SreekarAditya / yolo-rdd2022-benchmark (publisher CC BY 4.0); dataset RDD2022, Arya et al. Retain attribution and applicable Ultralytics terms.
+
+## Verified with the actual checkpoint
+
+On 2026-10-28, [Kaggle run 18 Version 1](https://www.kaggle.com/code/rimasabunasser/18-roadscan-inference-smoke?scriptVersionId=363140468) completed successfully in 57.8 seconds on CPU using the exact module SHA-256 `5e41fe3cbfc0b665e99f66a5f33c587b4396902b15d8151f57aed54b0d7cd103` and the run-17 selected original checkpoint. It processed 15 deterministic China development images and produced 41 detections. All four D codes, valid original-image pixel boxes and confidence values were verified. Local file paths, PIL RGB and OpenCV BGR input routes passed. No training or personal photos were used. See `18-roadscan-inference-smoke-results.json` and the executed notebook for actual examples. This verifies software integration, not model accuracy or generalization.
