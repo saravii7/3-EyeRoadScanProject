@@ -1,7 +1,2 @@
-ultralytics==8.4.177
-numpy
-pandas
-Pillow
-PyYAML
-scikit-learn
-matplotlib
+# Compatibility entry point for older setup instructions.
+-r requirements.txt
