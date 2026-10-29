@@ -38,5 +38,7 @@
   "original_checkpoint_role": "reference only",
   "threshold_source": "https://www.kaggle.com/code/rimasabunasser/19-roadscan-confidence-selection?scriptVersionId=363182180",
   "module_sha256": "eeb8d1326075613d95d53128eb33416a44ac2c8960040e001d1de67ac290566b",
-  "release": "v2-yolo"
+  "release": "v2-yolo",
+  "module_path": "src/roadscan_detector.py",
+  "repository_inference_guide": "docs/INFERENCE_USAGE.md"
 }
