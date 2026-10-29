@@ -1,6 +1,8 @@
+> Historical handoff record. The later publication is complete: weights are in [v2-yolo](https://github.com/saravii7/3-EyeRoadScanProject/releases/tag/v2-yolo). Use the current [model decision](../MODEL_SELECTION.md) and [inference guide](../INFERENCE_USAGE.md); earlier transfer status below records that session only.
+
 # Run 17 handoff: adopted fine-tuned project model and plots
 
-**Current team decision (2026-10-28): use `run17_best_finetuned.pt` as the project model.** The original published checkpoint is retained only for reference. The historical automated mAP-based selection inside the saved Kaggle package remains unchanged; `selected_candidate.pt` is not the current team-adopted model. See [MODEL_SELECTION.md](MODEL_SELECTION.md).
+**Current team decision (2026-10-28): use `run17_best_finetuned.pt` as the project model.** The original published checkpoint is retained only for reference. The historical automated mAP-based selection inside the saved Kaggle package remains unchanged; `selected_candidate.pt` is not the current team-adopted model. See [MODEL_SELECTION.md](../MODEL_SELECTION.md).
 
 Use **run17_best_finetuned.pt** for the team request for the trained run-17 checkpoint. Do not substitute **selected_candidate.pt**: run 17 retained the original published checkpoint after comparing diagnostic validation mAP50-95. The historical run-18 Version 1 smoke test verified the original candidate. Version 2 checks the adopted fine-tuned checkpoint separately; its executed result is documented in MODEL_SELECTION.md.
 
@@ -19,9 +21,9 @@ Verified from the rendered saved `SHA256.json`: fine-tuned run-17 SHA-256 is `25
 
 | File in this repository | Original saved Kaggle path |
 | --- | --- |
-| [run17_confusion_matrix.png](run17_confusion_matrix.png) | `evaluation_run17/china_development/confusion_matrix.png` |
-| [run17_F1_curve.png](run17_F1_curve.png) | `evaluation_run17/china_development/BoxF1_curve.png` |
-| [run17_results.png](run17_results.png) | `artifacts_run17/results.png` |
+| [run17_confusion_matrix.png](../../results/run17/run17_confusion_matrix.png) | `evaluation_run17/china_development/confusion_matrix.png` |
+| [run17_F1_curve.png](../../results/run17/run17_F1_curve.png) | `evaluation_run17/china_development/BoxF1_curve.png` |
+| [run17_results.png](../../results/run17/run17_results.png) | `artifacts_run17/results.png` |
 
 The F1 image is the actual **BoxF1_curve.png**, copied unchanged under the requested F1 naming convention; it is the bounding-box confidence curve, not image-level Macro-F1. The confusion matrix and F1 curve come from final evaluation of run-17 best fine-tuned weights. `results.png` contains the training history from the same run. These are original exported PNG bytes, not recreated plots.
 
