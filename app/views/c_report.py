@@ -1,0 +1,142 @@
+"""Citizen: report road damage. Real team model, location, duplicate check, then submit."""
+import streamlit as st
+
+from i18n import lang, ref, t
+from notify import SANDBOX_NUMBER, mask, normalise_phone, notify, subscribe
+from location import location_section
+from pipeline import analyse, crops, open_matches, save_new
+from reports import crop_path, link_duplicate, thumb_path
+from utils import PHOTO_TYPES, chip, team_model
+
+ar = lang() == "ar"
+st.title("📸 " + t("p_report"))
+st.caption("صوّر الضرر من مكان آمن. نموذج فريق 3-Eye يحلل الصورة مباشرة." if ar else
+           "Photograph the damage from a safe place. The 3-Eye team model analyses it directly.")
+
+model, conf = team_model()
+if model is None:
+    st.stop()
+
+uploaded = st.file_uploader("صورة الضرر" if ar else "Damage photo", type=PHOTO_TYPES)
+if not uploaded:
+    st.stop()
+
+with st.spinner("جارٍ تحليل الصورة..." if ar else "Analysing the photo..."):
+    A = analyse(uploaded, model, conf)
+if A is None:
+    st.stop()
+
+key = f"{uploaded.name}-{uploaded.size}"
+done = st.session_state.setdefault("citizen_done", {})
+
+left, right = st.columns([3, 2])
+left.image(A["annotated"], width="stretch",
+           caption="نتيجة التحليل (الوجوه واللوحات مغبّشة)" if ar else "Result (faces and plates blurred)")
+with right:
+    st.markdown(f"### {t('priority')}: **{A['score']:.0f} / 100**")
+    st.markdown(chip(t(A["label"]), A["color"]), unsafe_allow_html=True)
+    if A["dets"]:
+        st.markdown("**" + ("الأضرار المكتشفة" if ar else "Damage found") + "**")
+        for d in sorted(A["dets"], key=lambda d: -d["conf"]):
+            st.markdown(f"- {d['cls']} · {t(d['cls'])} · "
+                        f"{'الثقة' if ar else 'confidence'} {d['conf']:.2f}")
+    else:
+        st.info("لم يكتشف النموذج ضرراً واضحاً. يمكنك إرسال البلاغ للمراجعة اليدوية." if ar else
+                "The model found no clear damage. You can still send it for manual review.")
+
+st.divider()
+location = location_section(uploaded)
+lat, lon = location if location else (None, None)
+
+if key in done:
+    kind, rid = done[key]
+    if kind == "added":
+        st.success((f"تم استلام بلاغك برقم **{ref(rid)}**. تابعه من صفحة «بلاغاتي»." if ar else
+                    f"Report received: **{ref(rid)}**. Track it in My reports."))
+    else:
+        st.success((f"شكراً! هذا الضرر مبلّغ عنه مسبقاً برقم **{ref(rid)}**، وأضفنا بلاغك إليه "
+                    "لرفع أهميته." if ar else
+                    f"Thanks! This damage is already reported as **{ref(rid)}**; your report was "
+                    "added to it."))
+    sent = st.session_state.get("wa_result", {}).get(key)
+    if sent:
+        ok, info, phone = sent
+        if ok:
+            st.info((f"📲 أرسلنا تأكيداً على واتساب إلى {mask(phone)}." if ar else
+                     f"📲 WhatsApp confirmation sent to {mask(phone)}."))
+        else:
+            st.warning(("تعذّر إرسال رسالة واتساب: " if ar else "WhatsApp message not sent: ") + info)
+    st.page_link("views/c_mine.py", label=t("p_mine"), icon="🧾")
+    st.stop()
+
+matches, _ = open_matches(A["image"], A["dets"], lat, lon)
+desc = st.text_area("وصف إضافي (اختياري)" if ar else "Extra details (optional)",
+                    placeholder="مثال: الحفرة في المسار الأيمن قرب الإشارة" if ar else
+                    "e.g. pothole in the right lane near the signal")
+wa_on = st.checkbox("📲 أرسل لي تحديثات البلاغ على واتساب" if ar else
+                    "📲 Send me updates on WhatsApp")
+phone = None
+if wa_on:
+    raw = st.text_input("رقم الجوال" if ar else "Mobile number", placeholder="05XXXXXXXX")
+    phone = normalise_phone(raw)
+    if raw and not phone:
+        st.error("أدخل رقم جوال سعودي صحيح يبدأ بـ 05." if ar else
+                 "Enter a valid Saudi mobile starting with 05.")
+    st.caption((f"نسخة تجريبية (Twilio Sandbox): أرسل أولاً كود الانضمام إلى {SANDBOX_NUMBER} "
+                "على واتساب. رقمك يُستخدم للتحديثات فقط ويُعرض مخفياً للبلدية." if ar else
+                f"Demo (Twilio Sandbox): first send the join code to {SANDBOX_NUMBER} on "
+                "WhatsApp. Your number is used only for updates and shown masked."))
+consent = st.checkbox("أوافق على إرسال الصورة (بعد التغبيش) والموقع إلى البلدية." if ar else
+                      "I agree to send the (blurred) photo and location to the municipality.")
+
+blocked = not consent or (wa_on and not phone)
+
+
+def _whatsapp(rid, kind):
+    if phone:
+        subscribe(rid, phone)
+        ok, info = notify(rid, kind, only=phone)[0]
+        st.session_state.setdefault("wa_result", {})[key] = (ok, info, phone)
+
+
+def _submit():
+    rid = save_new(uploaded, A, location, "citizen", desc)
+    done[key] = ("added", rid)
+    st.session_state.setdefault("my_reports", []).append(rid)
+    _whatsapp(rid, "received")
+
+
+def _link(rid):
+    link_duplicate(rid)
+    done[key] = ("linked", rid)
+    st.session_state.setdefault("my_reports", []).append(rid)
+    _whatsapp(rid, "linked")
+
+
+if matches:
+    m = matches[0]
+    where = (f"، على بعد {m['distance_m']:.0f} م" if ar else f", {m['distance_m']:.0f} m away") \
+        if m["distance_m"] is not None else ""
+    st.warning((f"يبدو أن هذا الضرر مبلّغ عنه مسبقاً: **{ref(m['id'])}** "
+                f"(تشابه {m['similarity']:.2f}{where})." if ar else
+                f"This damage may already be reported: **{ref(m['id'])}** "
+                f"(similarity {m['similarity']:.2f}{where})."))
+    e1, e2 = st.columns(2)
+    new_crop = next((c for cls, c in crops(A["shown"], A["dets"])
+                     if cls == m["cls"]), None)
+    if new_crop is not None:
+        e1.image(new_crop, caption="صورتك" if ar else "Your photo", width="stretch")
+    old = crop_path(m["id"], m["cls"]) or thumb_path(m["id"])
+    if old:
+        e2.image(str(old), caption=ref(m["id"]), width="stretch")
+    b1, b2 = st.columns(2)
+    b1.button("نفس الضرر: أضف بلاغي إليه" if ar else "Same damage: add my report to it",
+              on_click=_link, args=(m["id"],), type="primary", disabled=blocked)
+    b2.button("ضرر مختلف: أرسل بلاغاً جديداً" if ar else "Different damage: send a new report",
+              on_click=_submit, disabled=blocked)
+else:
+    st.button("إرسال البلاغ" if ar else "Send report", on_click=_submit, type="primary",
+              disabled=blocked)
+if not consent:
+    st.caption("فعّل الموافقة لإرسال البلاغ." if ar else "Tick the consent box to send.")
+st.caption(t("ai_note"))

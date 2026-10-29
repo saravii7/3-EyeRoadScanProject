@@ -7,3 +7,8 @@ data/reports/
 *.onnx
 *.engine
 .DS_Store
+
+# app: the adopted run17 weights ship with the demo app
+!app/models/run17_best_finetuned.pt
+.env
+.env.txt
