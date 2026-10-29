@@ -33,7 +33,7 @@ MODEL_NAME = "facebook/dinov2-small"
 DIM = 384
 MARGIN = 0.10             # extra context around each box (10 %)
 RADIUS_M = 30             # search radius for reports that have GPS
-THRESHOLD = 0.85          # cosine similarity, with GPS    (placeholder, tune on val pairs)
+THRESHOLD = 0.80          # cosine similarity, with GPS    (placeholder, tune on val pairs)
 THRESHOLD_NO_GPS = 0.90   # stricter when we cannot use distance (placeholder)
 DATA_DIR = Path("data/reports")
 
