@@ -27,7 +27,7 @@ Policy declared before evaluation: maximize unweighted mean box F1 across D00/D1
 
 Predictions were collected once above confidence 0.001 with fixed NMS. For each image, descending-confidence predictions were matched greedily to the best remaining same-class ground-truth box at IoU >=0.5. A label is matched once; duplicate/wrong-class detections are false positives and unmatched labels are false negatives. Synthetic cases checked duplicates, class mismatch, backgrounds and IoU before the full run. This documented operating-point evaluator is not the official mAP evaluator and is not image-level presence F1. Threshold selection does not improve or change saved run-17 mAP values.
 
-The default in `roadscan_detector.py` and the configuration agree. Actual CPU inference on the adopted checkpoint verified that default-confidence and explicit-confidence outputs are identical. Do not keep passing `confidence=0.25` from an old application call: use the frozen configuration or the new default.
+The default in `../../src/roadscan_detector.py` and the configuration agree. Actual CPU inference on the adopted checkpoint verified that default-confidence and explicit-confidence outputs are identical. Do not keep passing `confidence=0.25` from an old application call: use the frozen configuration or the new default.
 
 No weights were retrained, and no local or US test images were opened. These scores were tuned on the same development set and are optimistic; external pretraining overlap is unknown. Freeze the checkpoint, preprocessing, resolution, NMS and confidence before final independent local evaluation. If the final test exposes a failure, report it; do not tune on those same test images and present the result as untouched testing.
 
