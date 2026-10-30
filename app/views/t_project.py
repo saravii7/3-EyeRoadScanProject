@@ -7,7 +7,7 @@ from utils import CLASS_INFO, metric_card
 st.markdown(
     """
     <div class="hero">
-      <h1>🛣️ RoadScan 3-Eye</h1>
+      <h1><span dir="ltr">🛣️ RoadScan 3-Eye</span></h1>
       <p>AI road damage detection for municipal maintenance teams.
          Upload a street photo, find the damage, and know what to fix first.</p>
     </div>

@@ -83,7 +83,7 @@ def _ref(rid):
 
 def message_text(rid, kind, report=None):
     r = report or load_extra().get(int(rid), {})
-    head = "👁️ 3-Eye | "
+    head = "\u2066👁️ 3-Eye\u2069 | "  # isolate keeps "3-Eye" in order in RTL
     ref = _ref(rid)
     names = {"D00": "شق طولي", "D10": "شق عرضي", "D20": "تشقق تمساحي", "D40": "حفرة"}
     damage = "، ".join(names.get(c, c) for c in r.get("classes", [])) or "ضرر في الطريق"

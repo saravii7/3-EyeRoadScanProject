@@ -59,7 +59,7 @@ with st.expander("🧪 رسالة تجربة" if ar else "🧪 Test message"):
     raw = st.text_input("رقم الجوال" if ar else "Mobile", placeholder="05XXXXXXXX")
     phone = normalise_phone(raw)
     if st.button("إرسال" if ar else "Send", disabled=not phone):
-        sent, info = send_text(phone, "👁️ 3-Eye | رسالة تجربة من نظام بلاغات الطرق.")
+        sent, info = send_text(phone, "\u2066👁️ 3-Eye\u2069 | رسالة تجربة من نظام بلاغات الطرق.")
         (st.success if sent else st.error)(info if not sent else ("تم الإرسال ✅" if ar else "Sent ✅"))
     st.caption((f"قبل العرض: كل جوال يرسل join <الكود> إلى {SANDBOX_NUMBER} مرة واحدة، ثم أي "
                 "رسالة خلال آخر 24 ساعة. اسم المرسل يظهر «Twilio Sandbox» لأنها بيئة تجريبية." if ar
