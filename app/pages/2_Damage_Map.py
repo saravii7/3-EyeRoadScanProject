@@ -38,6 +38,8 @@ def scan(file_bytes, name, conf, _model):
     gps = get_gps(image)  # read GPS before convert(), which drops EXIF
     if gps is None:
         return None
+    from PIL import ImageOps
+    image = ImageOps.exif_transpose(image)  # phone photos are stored sideways
     rgb = image.convert("RGB")
     _, df, dets = detect(_model, rgb, conf)
     score = round(priority_score(dets, rgb.width, rgb.height), 1)
