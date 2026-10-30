@@ -9,7 +9,7 @@ ar = lang() == "ar"
 st.markdown(
     f"""
     <div class="hero">
-      <h1>👁️ 3-Eye</h1>
+      <h1><span dir="ltr">👁️ 3-Eye</span></h1>
       <p>{"طرق أذكى، تنقّل أكثر أماناً. صوّر الضرر، ونحن نحدّد نوعه وأولويته ونرسله لفريق البلدية."
           if ar else "Smarter roads, safer journeys. Photograph the damage; we detect it, score "
           "its priority and send it to the municipal team."}</p>
@@ -39,7 +39,7 @@ st.subheader("كيف يعمل؟" if ar else "How it works")
 s1, s2, s3 = st.columns(3)
 s1.info(("**١. صوّر**\n\nصورة واضحة للضرر من الرصيف، والموقع مفعّل في الكاميرا." if ar else
          "**1. Photograph**\n\nA clear photo from the pavement, with location on."))
-s2.warning(("**٢. التحليل**\n\nنموذجنا يحدد نوع الضرر (D00, D10, D20, D40) ويحسب الأولوية من 0 إلى 100، "
+s2.warning(("**٢. التحليل**\n\nنموذجنا يحدد نوع الضرر من 4 أنواع: D00 و D10 و D20 و D40، ويحسب الأولوية من 0 إلى 100، "
             "ويتأكد إن البلاغ مو مكرر." if ar else
             "**2. Analysis**\n\nOur model finds the damage type (D00-D40), scores priority 0-100 "
             "and checks for duplicates."))

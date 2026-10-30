@@ -41,7 +41,7 @@ try:
     nav = st.navigation(pages, expanded=True)
 except TypeError:  # older Streamlit
     nav = st.navigation(pages)
-st.sidebar.markdown(f"### 👁️ 3-Eye\n{t('app_tag')}")
+st.sidebar.markdown(f"### <span dir=\"ltr\">👁️ 3-Eye</span>\n{t('app_tag')}", unsafe_allow_html=True)
 language_switch()
 technical = nav.url_path in {p.url_path for p in pages[t("sec_tech")]}
 apply_style(rtl=(lang() == "ar" and not technical))
