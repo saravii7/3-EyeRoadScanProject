@@ -2,7 +2,6 @@
 import streamlit as st
 
 from i18n import lang, ref, t
-from notify import mask, normalise_phone, notify, subscribe
 from location import location_section
 from pipeline import analyse, crops, open_matches, save_new
 from reports import crop_path, link_duplicate, thumb_path
@@ -58,14 +57,6 @@ if key in done:
                     "لرفع أهميته." if ar else
                     f"Thanks! This damage is already reported as **{ref(rid)}**; your report was "
                     "added to it."))
-    sent = st.session_state.get("wa_result", {}).get(key)
-    if sent:
-        ok, info, phone = sent
-        if ok:
-            st.info((f"📲 أرسلنا تأكيداً على واتساب إلى {mask(phone)}." if ar else
-                     f"📲 WhatsApp confirmation sent to {mask(phone)}."))
-        else:
-            st.warning(("تعذّر إرسال رسالة واتساب: " if ar else "WhatsApp message not sent: ") + info)
     st.page_link("views/c_mine.py", label=t("p_mine"), icon="🧾")
     st.stop()
 
@@ -73,44 +64,22 @@ matches, _ = open_matches(A["image"], A["dets"], lat, lon)
 desc = st.text_area("وصف إضافي (اختياري)" if ar else "Extra details (optional)",
                     placeholder="مثال: الحفرة في المسار الأيمن قرب الإشارة" if ar else
                     "e.g. pothole in the right lane near the signal")
-wa_on = st.checkbox("📲 أرسل لي تحديثات البلاغ على واتساب" if ar else
-                    "📲 Send me updates on WhatsApp")
-phone = None
-if wa_on:
-    raw = st.text_input("رقم الجوال" if ar else "Mobile number", placeholder="05XXXXXXXX")
-    phone = normalise_phone(raw)
-    if raw and not phone:
-        st.error("أدخل رقم جوال سعودي صحيح يبدأ بـ 05." if ar else
-                 "Enter a valid Saudi mobile starting with 05.")
-    st.caption(("نسخة تجريبية عبر واتساب Meta الرسمي: تصل الرسائل للأرقام المسجّلة في التجربة "
-                "فقط. رقمك يُستخدم للتحديثات فقط ويُعرض مخفياً للبلدية." if ar else
-                "Demo through Meta's official WhatsApp API: messages reach the registered test "
-                "numbers only. Your number is used only for updates and shown masked."))
 consent = st.checkbox("أوافق على إرسال الصورة (بعد التغبيش) والموقع إلى البلدية." if ar else
                       "I agree to send the (blurred) photo and location to the municipality.")
 
-blocked = not consent or (wa_on and not phone)
-
-
-def _whatsapp(rid, kind):
-    if phone:
-        subscribe(rid, phone)
-        ok, info = notify(rid, kind, only=phone)[0]
-        st.session_state.setdefault("wa_result", {})[key] = (ok, info, phone)
+blocked = not consent
 
 
 def _submit():
     rid = save_new(uploaded, A, location, "citizen", desc)
     done[key] = ("added", rid)
     st.session_state.setdefault("my_reports", []).append(rid)
-    _whatsapp(rid, "received")
 
 
 def _link(rid):
     link_duplicate(rid)
     done[key] = ("linked", rid)
     st.session_state.setdefault("my_reports", []).append(rid)
-    _whatsapp(rid, "linked")
 
 
 if matches:

@@ -19,7 +19,6 @@ TEXT = {
     "p_maint": ("الصيانة", "Maintenance"),
     "p_analytics": ("التحليلات", "Analytics"),
     "p_health": ("صحة النظام", "System health"),
-    "p_outbox": ("إشعارات واتساب", "WhatsApp notifications"),
     # statuses
     "st_new": ("جديد", "New"),
     "st_review": ("قيد المراجعة", "Under review"),
