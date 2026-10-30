@@ -3,8 +3,7 @@ import pandas as pd
 import streamlit as st
 
 from i18n import lang, t
-from notify import (SANDBOX_NUMBER, configured, load_outbox, normalise_phone, send_text,
-                    twilio_installed)
+from notify import configured, load_outbox, normalise_phone, send_text
 from utils import metric_card
 
 ar = lang() == "ar"
@@ -14,27 +13,14 @@ st.caption("رسائل واتساب التلقائية للمواطنين: عن�
            "of work and repair.")
 
 if configured():
-    st.success(("🟢 Twilio متصل (WhatsApp Sandbox). الرسائل تُرسل فعلياً." if ar else
-                "🟢 Twilio connected (WhatsApp Sandbox). Messages are really sent."))
-elif not twilio_installed():
-    st.warning(("🔴 مكتبة twilio غير مثبتة على هذا الجهاز." if ar else
-                "🔴 The twilio library is not installed."))
-    if st.button("⬇️ ثبّت مكتبة twilio الآن" if ar else "⬇️ Install twilio now", type="primary"):
-        import importlib
-        import subprocess
-        import sys
-        with st.spinner("جارٍ التثبيت... (دقيقة تقريباً)" if ar else "Installing..."):
-            res = subprocess.run([sys.executable, "-m", "pip", "install", "twilio"],
-                                 capture_output=True, text=True)
-        importlib.invalidate_caches()
-        if res.returncode == 0:
-            st.rerun()
-        st.error(("فشل التثبيت:" if ar else "Install failed:") + "\n\n" +
-                 (res.stderr or res.stdout)[-600:])
+    st.success(("🟢 واتساب متصل (Meta WhatsApp Cloud API · رقم تجريبي). الرسائل تُرسل فعلياً." if ar
+                else "🟢 WhatsApp connected (Meta WhatsApp Cloud API, test number). "
+                "Messages are really sent."))
 else:
-    st.warning(("🔴 ملف .env غير موجود أو ناقص بجانب Home.py. الرسائل تُسجَّل هنا فقط "
-                "(not_sent)." if ar else
-                "🔴 .env is missing or incomplete next to Home.py. Messages are only logged."))
+    st.warning(("🔴 واتساب غير مُعد بعد: أضف WHATSAPP_TOKEN و WHATSAPP_PHONE_NUMBER_ID في ملف "
+                ".env بجانب Home.py. حتى ذلك الحين تُسجَّل الرسائل هنا فقط (not_sent)." if ar else
+                "🔴 WhatsApp is not set up yet: add WHATSAPP_TOKEN and WHATSAPP_PHONE_NUMBER_ID "
+                "to .env next to Home.py. Until then messages are only logged here."))
 
 box = load_outbox()
 ok = sum(e.get("status") not in ("failed", "not_sent") for e in box)
@@ -61,7 +47,8 @@ with st.expander("🧪 رسالة تجربة" if ar else "🧪 Test message"):
     if st.button("إرسال" if ar else "Send", disabled=not phone):
         sent, info = send_text(phone, "\u2066👁️ 3-Eye\u2069 | رسالة تجربة من نظام بلاغات الطرق.")
         (st.success if sent else st.error)(info if not sent else ("تم الإرسال ✅" if ar else "Sent ✅"))
-    st.caption((f"قبل العرض: كل جوال يرسل join <الكود> إلى {SANDBOX_NUMBER} مرة واحدة، ثم أي "
-                "رسالة خلال آخر 24 ساعة. اسم المرسل يظهر «Twilio Sandbox» لأنها بيئة تجريبية." if ar
-                else f"Before the demo: each phone sends join <code> to {SANDBOX_NUMBER} once, "
-                "then any message within the last 24 h. Sender shows 'Twilio Sandbox' (demo)."))
+    st.caption(("قبل العرض: أضف أرقام الفريق (حتى 5) في لوحة Meta، وليرسل كل جوال أي رسالة "
+                "للرقم التجريبي خلال آخر 24 ساعة، وانسخ مفتاح دخول جديداً إلى .env في يوم العرض."
+                if ar else "Before the demo: add the team's numbers (up to 5) in the Meta app, "
+                "send any message from each phone to the test number within 24 h, and paste a "
+                "fresh access token into .env on demo day."))

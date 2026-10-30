@@ -2,7 +2,7 @@
 import streamlit as st
 
 from i18n import lang, ref, t
-from notify import SANDBOX_NUMBER, mask, normalise_phone, notify, subscribe
+from notify import mask, normalise_phone, notify, subscribe
 from location import location_section
 from pipeline import analyse, crops, open_matches, save_new
 from reports import crop_path, link_duplicate, thumb_path
@@ -82,10 +82,10 @@ if wa_on:
     if raw and not phone:
         st.error("أدخل رقم جوال سعودي صحيح يبدأ بـ 05." if ar else
                  "Enter a valid Saudi mobile starting with 05.")
-    st.caption((f"نسخة تجريبية (Twilio Sandbox): أرسل أولاً كود الانضمام إلى {SANDBOX_NUMBER} "
-                "على واتساب. رقمك يُستخدم للتحديثات فقط ويُعرض مخفياً للبلدية." if ar else
-                f"Demo (Twilio Sandbox): first send the join code to {SANDBOX_NUMBER} on "
-                "WhatsApp. Your number is used only for updates and shown masked."))
+    st.caption(("نسخة تجريبية عبر واتساب Meta الرسمي: تصل الرسائل للأرقام المسجّلة في التجربة "
+                "فقط. رقمك يُستخدم للتحديثات فقط ويُعرض مخفياً للبلدية." if ar else
+                "Demo through Meta's official WhatsApp API: messages reach the registered test "
+                "numbers only. Your number is used only for updates and shown masked."))
 consent = st.checkbox("أوافق على إرسال الصورة (بعد التغبيش) والموقع إلى البلدية." if ar else
                       "I agree to send the (blurred) photo and location to the municipality.")
 
