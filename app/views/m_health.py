@@ -74,12 +74,10 @@ except Exception as e:  # noqa: BLE001
     row("Saudi border check", False, str(e))
 
 try:
-    from notify import configured, twilio_installed
-    row("WhatsApp (Twilio Sandbox)", configured(),
-        "متصل" if configured() else "twilio غير مثبتة" if not twilio_installed()
-        else "ملف .env ناقص")
+    from notify import configured
+    row("WhatsApp (Meta Cloud API)", configured(), "متصل" if configured() else "ملف .env ناقص")
 except Exception as e:  # noqa: BLE001
-    row("WhatsApp (Twilio Sandbox)", False, str(e))
+    row("WhatsApp (Meta Cloud API)", False, str(e))
 
 st.caption(f"Python {platform.python_version()} · {platform.system()}")
 st.caption("العنوان المقروء يحتاج إنترنت (OpenStreetMap)؛ بدونه تظهر الإحداثيات فقط." if ar else

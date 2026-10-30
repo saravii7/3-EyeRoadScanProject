@@ -1,15 +1,16 @@
-"""WhatsApp notifications for citizens (Twilio WhatsApp Sandbox, for the demo).
+"""WhatsApp notifications for citizens through Meta's official WhatsApp Cloud API.
 
-Secrets live ONLY in a local `.env` file next to Home.py (never on GitHub):
-    TWILIO_ACCOUNT_SID=AC...
-    TWILIO_AUTH_TOKEN=...
-    TWILIO_WHATSAPP_FROM=whatsapp:+14155238886
+For the demo we use Meta's free TEST phone number. Secrets live ONLY in a local `.env`
+file next to Home.py (never on GitHub), or in Streamlit Cloud "Secrets":
+    WHATSAPP_TOKEN=...              (access token from the Meta app's WhatsApp > API Setup)
+    WHATSAPP_PHONE_NUMBER_ID=...    (the test number's "Phone number ID")
 
-Sandbox limits (Twilio): each phone must first send "join <code>" to the sandbox number;
-free text is allowed only within 24 h of that phone's last message; the sender name is
-"Twilio Sandbox". A real service would register its own WhatsApp sender.
+Test-number limits (Meta): messages reach only the recipient numbers added in the app
+(up to 5); free text is allowed only within 24 h of that phone's last message to the test
+number; the temporary token expires after about 24 h. A real municipality would register
+its own verified WhatsApp number.
 
-If Twilio is not configured, the app still works: messages are written to the outbox
+If WhatsApp is not configured, the app still works: messages are written to the outbox
 with status "not_sent" so the municipality can see what would have been sent.
 """
 import json
@@ -22,6 +23,7 @@ from reports import REPORTS_DIR, _write_extra, load_extra
 
 APP_DIR = Path(__file__).resolve().parent
 OUTBOX = REPORTS_DIR / "outbox.json"
+API_VERSION = "v21.0"
 
 # Read the secrets file by hand (works even if Notepad saved it as ".env.txt").
 for name in (".env", ".env.txt"):
@@ -33,30 +35,32 @@ for name in (".env", ".env.txt"):
                 os.environ.setdefault(k.strip(), v.strip().strip('"').strip("'"))
         break
 
-SID = os.getenv("TWILIO_ACCOUNT_SID", "").strip()
-TOKEN = os.getenv("TWILIO_AUTH_TOKEN", "").strip()
-FROM = os.getenv("TWILIO_WHATSAPP_FROM", "whatsapp:+14155238886").strip()
-SANDBOX_NUMBER = "+1 415 523 8886"
 
-ERRORS = {  # Twilio error code -> short Arabic explanation
-    63016: "خارج نافذة الـ24 ساعة: يجب أن يرسل صاحب الرقم أي رسالة للساندبوكس أولاً.",
-    63015: "الرقم غير منضم للساندبوكس: يرسل join <الكود> إلى " + SANDBOX_NUMBER,
-    63007: "رقم المرسل غير صحيح في ملف .env.",
-    21211: "رقم الجوال غير صحيح.",
-    20003: "بيانات Twilio غير صحيحة (SID أو Token).",
+def _secret(key):
+    v = os.getenv(key, "").strip()
+    if not v:
+        try:  # Streamlit Cloud: Settings > Secrets
+            import streamlit as st
+            v = str(st.secrets.get(key, "")).strip()
+        except Exception:
+            v = ""
+    return v
+
+
+TOKEN = _secret("WHATSAPP_TOKEN")
+PHONE_ID = _secret("WHATSAPP_PHONE_NUMBER_ID")
+
+ERRORS = {  # Meta error code -> short Arabic explanation
+    131047: "مرت أكثر من 24 ساعة: يرسل صاحب الرقم أي رسالة للرقم التجريبي أولاً.",
+    131030: "الرقم غير مضاف في قائمة المستلمين (لوحة Meta ← WhatsApp ← API Setup ← To).",
+    190: "مفتاح الدخول (Token) منتهي أو غير صحيح: انسخ مفتاحاً جديداً إلى ملف .env.",
+    100: "رقم الهاتف التجريبي (Phone number ID) غير صحيح في ملف .env.",
+    131026: "الرسالة لم تصل: تأكد أن الرقم عليه واتساب.",
 }
 
 
-def twilio_installed():
-    try:
-        import twilio  # noqa: F401
-        return True
-    except ImportError:
-        return False
-
-
 def configured():
-    return bool(SID.startswith("AC") and TOKEN and twilio_installed())
+    return bool(TOKEN and PHONE_ID)
 
 
 def normalise_phone(text):
@@ -126,66 +130,35 @@ def _log(entry):
     OUTBOX.write_text(json.dumps(box, ensure_ascii=False, indent=1), encoding="utf-8")
 
 
-CONTENT_FILE = REPORTS_DIR / "content_sid.json"
-
-
-def _text_template():
-    """A plain-text Content template '{{1}}' (created once, then reused). Lets the app send
-    its own wording when the account requires a ContentSid. Within the 24-hour window a
-    plain text template needs no WhatsApp approval."""
-    if CONTENT_FILE.exists():
-        sid = json.loads(CONTENT_FILE.read_text(encoding="utf-8")).get("sid")
-        if sid:
-            return sid
-    import requests
-    auth = (SID, TOKEN)
-    url = "https://content.twilio.com/v1/Content"
-    sid = None
-    page = requests.get(url, auth=auth, params={"PageSize": 200}, timeout=20).json()
-    for c in page.get("contents", []):
-        if c.get("friendly_name") == "roadscan_text":
-            sid = c["sid"]
-    if not sid:
-        r = requests.post(url, auth=auth, timeout=20, json={
-            "friendly_name": "roadscan_text", "language": "ar",
-            "variables": {"1": "3-Eye"},
-            "types": {"twilio/text": {"body": "{{1}}"}}})
-        r.raise_for_status()
-        sid = r.json()["sid"]
-    CONTENT_FILE.parent.mkdir(parents=True, exist_ok=True)
-    CONTENT_FILE.write_text(json.dumps({"sid": sid}), encoding="utf-8")
-    return sid
-
-
 def send_text(phone, body, rid=None, kind="test"):
     """Send one WhatsApp message. Never raises: returns (ok, info) and logs to the outbox."""
     entry = {"time": time.strftime("%Y-%m-%d %H:%M:%S"), "report": rid, "kind": kind,
              "to": mask(phone), "body": body}
     if not configured():
-        entry.update(status="not_sent", info="Twilio غير مُعد (.env أو مكتبة twilio)")
+        entry.update(status="not_sent", info="واتساب غير مُعد (ملف .env)")
         _log(entry)
         return False, entry["info"]
     try:
-        from twilio.rest import Client
-        client = Client(SID, TOKEN)
-        try:
-            msg = client.messages.create(from_=FROM, to=f"whatsapp:{phone}", body=body)
-        except Exception as e:  # some new accounts only accept Content templates
-            if "contentsid" not in str(getattr(e, "msg", e)).lower():
-                raise
-            msg = client.messages.create(from_=FROM, to=f"whatsapp:{phone}",
-                                         content_sid=_text_template(),
-                                         content_variables=json.dumps({"1": body},
-                                                                      ensure_ascii=False))
-        entry.update(status=msg.status or "queued", info=msg.sid)
-        _log(entry)
-        return True, msg.sid
-    except Exception as e:  # network, auth, sandbox rules ...
-        code = getattr(e, "code", None)
+        import requests
+        r = requests.post(
+            f"https://graph.facebook.com/{API_VERSION}/{PHONE_ID}/messages",
+            headers={"Authorization": f"Bearer {TOKEN}"}, timeout=20,
+            json={"messaging_product": "whatsapp", "to": phone.lstrip("+"), "type": "text",
+                  "text": {"preview_url": False, "body": body}})
+        data = r.json()
+        if r.ok and data.get("messages"):
+            mid = data["messages"][0].get("id", "")
+            entry.update(status="sent", info=mid)
+            _log(entry)
+            return True, mid
+        err = data.get("error", {})
+        code = err.get("code")
         entry.update(status="failed", code=code,
-                     info=ERRORS.get(code, str(getattr(e, "msg", e))[:200]))
-        _log(entry)
-        return False, entry["info"]
+                     info=ERRORS.get(code, str(err.get("message", r.text))[:200]))
+    except Exception as e:  # network problems
+        entry.update(status="failed", info=str(e)[:200])
+    _log(entry)
+    return False, entry["info"]
 
 
 def subscribe(rid, phone):
@@ -214,7 +187,7 @@ def notify(rid, kind, only=None):
     results = []
     for i, p in enumerate(phones):
         if i:
-            time.sleep(1)  # sandbox: about one message per second at most
+            time.sleep(1)  # be gentle with the API: one message per second
         results.append(send_text(p, body, rid, kind))
     return results
 
