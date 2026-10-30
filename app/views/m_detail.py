@@ -95,14 +95,6 @@ with st.form(f"actions_{rid}"):
             update_report(rid, event="note")
         st.rerun()
 
-subs = r.get("subscribers", [])
-if subs:
-    from notify import mask
-    st.caption(("📲 مشتركون في تحديثات واتساب: " if ar else "📲 WhatsApp updates to: ") +
-               "، ".join(mask(p) for p in subs) +
-               (" · تُرسل رسالة تلقائياً عند تغيير الحالة أو الموعد." if ar else
-                " · sent automatically when the status or date changes."))
-
 n1, n2 = st.columns(2)
 with n1:
     st.subheader("السجل" if ar else "Timeline")
