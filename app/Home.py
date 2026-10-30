@@ -22,7 +22,6 @@ pages = {
         st.Page("views/m_detail.py", title=t("p_detail"), icon="🔎"),
         st.Page("views/m_map.py", title=t("p_map"), icon="🗺️"),
         st.Page("views/m_maint.py", title=t("p_maint"), icon="🛠️"),
-        st.Page("views/m_outbox.py", title=t("p_outbox"), icon="📲"),
         st.Page("views/m_analytics.py", title=t("p_analytics"), icon="📈"),
         st.Page("views/m_health.py", title=t("p_health"), icon="🩺"),
     ],

@@ -204,12 +204,6 @@ def update_report(report_id, actor="البلدية", event=None, **fields):
         r.setdefault("history", []).append({"time": time.strftime("%Y-%m-%d %H:%M"),
                                             "by": actor, "event": event})
     _write_extra(extra)
-    if event:
-        try:
-            from notify import on_event  # WhatsApp updates to citizens who opted in
-            on_event(rid, event)
-        except Exception:
-            pass  # a notification problem must never block the municipality's work
 
 
 def add_note(report_id, text, actor="البلدية"):
