@@ -4,7 +4,13 @@ from pathlib import Path
 
 import pandas as pd
 import streamlit as st
-from PIL import Image, ExifTags
+from PIL import Image, ExifTags, ImageOps
+
+try:  # iPhone HEIC photos
+    import pillow_heif
+    pillow_heif.register_heif_opener()
+except ImportError:
+    pass
 
 from priority import CLASS_WEIGHT, priority_score  # the team's formula (copied from the repo)
 
@@ -305,7 +311,7 @@ def find_similar_duplicates(points, radius_m=30, threshold=None):
     return sorted(pairs, key=lambda p: -p["Similarity"])
 
 
-PHOTO_TYPES = ["jpg", "jpeg", "png", "dng"]
+PHOTO_TYPES = ["jpg", "jpeg", "png", "dng", "heic", "heif"]
 
 
 def open_photo(file):
@@ -315,7 +321,9 @@ def open_photo(file):
         file.seek(0)
         img = Image.open(file)
         img.load()
-        return img
+        # Phones store photos sideways plus an "orientation" tag; turn them upright so the
+        # model, the boxes and the saved thumbnails see the road the right way up.
+        return ImageOps.exif_transpose(img)
     except Exception:
         st.error(f"Can't open **{file.name}**. Please upload a JPG or PNG photo "
                  "(export RAW/HEIC photos as JPG first, keeping the location).")

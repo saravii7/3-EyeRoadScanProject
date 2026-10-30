@@ -16,3 +16,4 @@ requests
 faiss-cpu
 transformers
 twilio
+pillow-heif
