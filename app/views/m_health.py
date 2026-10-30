@@ -73,12 +73,6 @@ try:
 except Exception as e:  # noqa: BLE001
     row("Saudi border check", False, str(e))
 
-try:
-    from notify import configured
-    row("WhatsApp (Meta Cloud API)", configured(), "متصل" if configured() else "ملف .env ناقص")
-except Exception as e:  # noqa: BLE001
-    row("WhatsApp (Meta Cloud API)", False, str(e))
-
 st.caption(f"Python {platform.python_version()} · {platform.system()}")
 st.caption("العنوان المقروء يحتاج إنترنت (OpenStreetMap)؛ بدونه تظهر الإحداثيات فقط." if ar else
            "Readable addresses need internet (OpenStreetMap); offline, coordinates are shown.")
