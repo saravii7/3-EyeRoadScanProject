@@ -33,8 +33,10 @@ st.markdown(
     "under-serve them; municipalities should add planned patrols.\n"
     "- When a photo has no GPS, the location comes from the device or a map click; RDD2022 "
     "photos have no GPS, so any GPS used with them is simulated.\n"
-    "- Duplicate thresholds (0.85 with GPS, 0.90 without) are provisional until tuned on "
-    "validation photo pairs.\n"
+    "- The duplicate threshold (0.80 within 30 m) was tuned on a small set of our own photo "
+    "pairs (E5); the no-GPS threshold (0.90) is still provisional.\n"
+    "- In the United States the model misses most potholes at the frozen threshold (31.9% "
+    "recall), so reports are reviewed by a person before any decision.\n"
     "- Saved open reports live in the `data/reports` folder; on a cloud host they can be reset "
     "when the app restarts.\n"
     "- The app supports decisions; a person still inspects the road before repair.")

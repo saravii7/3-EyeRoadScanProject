@@ -7,7 +7,8 @@ from utils import ACCENT, apply_style, metric_card
 
 st.title("📊 Model Results")
 st.caption("Validation = China_MotorBike (1,977 images), a country the models never trained on. "
-           "Final test on United States + local photos is still pending (experiment E4).")
+           "United States (4,804 images) was evaluated once with the frozen model and threshold "
+           "(E4, run 21); local photos are the final independent test.")
 
 LAYOUT = dict(paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
               font_color="#17233B", legend=dict(orientation="h", y=-0.2))
@@ -81,10 +82,62 @@ st.dataframe(pd.DataFrame({
     "Question": ["Baseline classifier vs detector", "Model size / resolution vs CPU speed",
                  "Which augmentations help", "Cross-country and local generalisation",
                  "Duplicate embeddings: pHash vs ResNet vs DINOv2"],
-    "Status": ["Baseline v1/v2 and detector runs done; controlled comparison to finish",
-               "Pending", "Pending", "Pending: United States + local photos, run once",
-               "Duplicate finder built (DINOv2); comparison on team pairs pending"],
+    "Status": ["Baseline v1/v2 and detector runs done",
+               "Pending",
+               "Done (run 20): keep the current recipe; all-on was best",
+               "Done for countries (run 21); local photos pending",
+               "Done (notebook 05): threshold 0.80 within 30 m"],
 }), hide_index=True, width="stretch")
+
+# ---- E4: countries (run 21) ----
+st.subheader("E4 · Same frozen model in other countries (run 21)")
+st.dataframe(pd.DataFrame({
+    "Country": ["China_MotorBike (development)", "United States (test, run once)", "Japan*",
+                "India*"],
+    "Images": [1977, 4804, 500, 500],
+    "mAP50": ["95.9%", "76.4%", "82.3%", "62.0%"],
+    "mAP50-95": ["65.8%", "49.7%", "50.5%", "40.3%"],
+    "Micro-F1 @0.46": ["86.8%", "76.1%", "72.9%", "56.1%"],
+    "Pothole recall": ["96.6%", "31.9%", "n/a", "n/a"],
+}), hide_index=True, width="stretch")
+st.warning("Honest finding: in the United States the model finds only 43 of 135 potholes "
+           "(31.9%) at the frozen threshold, against 96.6% on China. China was used for "
+           "development, so its numbers are optimistic. We did not re-tune on the US set. "
+           "Most misses are small boxes (1,784 of 4,122 missed boxes cover under 1% of the image).")
+st.caption("* Japan and India rows use the leftover images outside our training sample, which "
+           "contain few labels (India 42 boxes), so they are diagnostics, not country scores. "
+           "Czech leftovers have no labels at all.")
+
+# ---- E3: augmentation (run 20) ----
+st.subheader("E3 · Augmentation ablation (run 20)")
+st.dataframe(pd.DataFrame({
+    "Arm": ["All on (control)", "No mosaic", "No HSV colour", "No horizontal flip"],
+    "mAP50": ["95.86%", "95.61%", "95.89%", "95.70%"],
+    "mAP50-95": ["65.30%", "64.59%", "65.25%", "65.05%"],
+    "Change (pp)": ["0.00", "-0.72", "-0.05", "-0.25"],
+}), hide_index=True, width="stretch")
+st.caption("Seven epochs, one seed: a development observation, not a final ranking. Decision: "
+           "keep the current recipe. The app still uses the run-17 checkpoint at 0.46.")
+
+# ---- E5: duplicates (notebook 05) ----
+st.subheader("E5 · Duplicate finder on our own photo pairs (notebook 05)")
+d1, d2, d3 = st.columns(3)
+with d1:
+    metric_card("Caught (GPS, 30 m)", "8 / 9")
+with d2:
+    metric_card("False links (GPS)", "0 / 24", "#43A878")
+with d3:
+    metric_card("Recall@1 (test)", "9 / 9")
+st.dataframe(pd.DataFrame({
+    "Method (no GPS)": ["DINOv2 (used)", "ResNet-18", "pHash"],
+    "AUC tuning": [0.79, 0.81, 0.74], "AUC test": [0.79, 0.81, 0.66],
+    "Recall@1 test": ["8/9", "7/9", "6/9"], "Recall@5 test": ["9/9", "9/9", "9/9"],
+}), hide_index=True, width="stretch")
+st.caption("Threshold 0.80 was chosen on tuning pairs (10 same / 36 different) and measured once "
+           "on separate test pairs (9 same / 24 different). Without GPS the same threshold gives "
+           "12/24 false links, so the location radius does most of the filtering. The sample is "
+           "small, so these numbers are encouraging, not final. The no-GPS threshold (0.90) is "
+           "still provisional.")
 
 # ---- Detector (run 14) ----
 st.subheader("Our first detector: YOLO11s from COCO (run 14)")
