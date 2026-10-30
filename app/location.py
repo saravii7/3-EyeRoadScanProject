@@ -24,6 +24,13 @@ def in_saudi(lat, lon):
     return SAUDI.contains(Point(lon, lat))  # shapely order: lon first, then lat
 
 
+try:  # lets Image.open read GPS from iPhone HEIC photos
+    import pillow_heif
+    pillow_heif.register_heif_opener()
+except ImportError:
+    pass
+
+
 def read_gps(file):
     """(lat, lon) from the photo's EXIF, or None."""
     file.seek(0)  # the page already read the file once
