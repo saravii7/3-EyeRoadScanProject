@@ -10,7 +10,7 @@ from utils import PHOTO_TYPES, chip, team_model
 
 ar = lang() == "ar"
 st.title("📸 " + t("p_report"))
-st.caption("صوّر الضرر من مكان آمن. نموذج فريق 3-Eye يحلل الصورة مباشرة." if ar else
+st.caption("صوّر الضرر من مكان آمن. نموذج فريق \u20663-Eye\u2069 يحلل الصورة مباشرة." if ar else
            "Photograph the damage from a safe place. The 3-Eye team model analyses it directly.")
 
 model, conf = team_model()
