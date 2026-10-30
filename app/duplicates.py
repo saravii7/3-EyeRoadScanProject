@@ -20,8 +20,8 @@ Usage (Streamlit page, after `location = location_section(uploaded)`):
 `dets`: list of {"cls": "D40", "x":..., "y":..., "w":..., "h":..., "conf":...}
 (pixels, x/y = top-left corner), same format as utils.detect().
 
-THRESHOLD and THRESHOLD_NO_GPS are PLACEHOLDERS. They must be tuned on separate
-validation pairs (real photos with GPS) and measured on different test pairs.
+THRESHOLD (0.80) and RADIUS_M (30) were tuned in E5.
+THRESHOLD_NO_GPS is still an untuned PLACEHOLDER.
 """
 import json
 import math
@@ -33,7 +33,7 @@ MODEL_NAME = "facebook/dinov2-small"
 DIM = 384
 MARGIN = 0.10             # extra context around each box (10 %)
 RADIUS_M = 30             # search radius for reports that have GPS
-THRESHOLD = 0.85          # cosine similarity, with GPS    (placeholder, tune on val pairs)
+THRESHOLD = 0.80          # cosine similarity, with GPS    (tuned in E5)
 THRESHOLD_NO_GPS = 0.90   # stricter when we cannot use distance (placeholder)
 DATA_DIR = Path("data/reports")
 
