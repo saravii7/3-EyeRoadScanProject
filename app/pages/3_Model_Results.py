@@ -136,8 +136,9 @@ st.dataframe(pd.DataFrame({
 st.caption("Threshold 0.80 was chosen on tuning pairs (10 same / 36 different) and measured once "
            "on separate test pairs (9 same / 24 different). Without GPS the same threshold gives "
            "12/24 false links, so the location radius does most of the filtering. The sample is "
-           "small, so these numbers are encouraging, not final. The no-GPS threshold (0.90) is "
-           "still provisional.")
+           "small, so these numbers are encouraging, not final. Without GPS we use "
+           "a stricter 0.92, chosen on the tuning pairs: on the test pairs it caught 4/9 repeats "
+           "with 0/24 false links.")
 
 # ---- Detector (run 14) ----
 st.subheader("Our first detector: YOLO11s from COCO (run 14)")

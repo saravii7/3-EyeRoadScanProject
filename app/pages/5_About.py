@@ -34,7 +34,7 @@ st.markdown(
     "- When a photo has no GPS, the location comes from the device or a map click; RDD2022 "
     "photos have no GPS, so any GPS used with them is simulated.\n"
     "- The duplicate threshold (0.80 within 30 m) was tuned on a small set of our own photo "
-    "pairs (E5); the no-GPS threshold (0.90) is still provisional.\n"
+    "pairs (E5); without GPS the stricter 0.92 catches fewer repeats (4 of 9) but made no false links.\n"
     "- In the United States the model misses most potholes at the frozen threshold (31.9% "
     "recall), so reports are reviewed by a person before any decision.\n"
     "- Saved open reports live in the `data/reports` folder; on a cloud host they can be reset "
