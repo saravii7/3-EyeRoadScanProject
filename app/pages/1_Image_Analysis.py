@@ -165,7 +165,7 @@ else:
         st.success("New report: no similar open report nearby.")
         st.button("Add to open reports", on_click=_queue_add, type="primary")
     st.caption("Duplicate rule: same class, within 30 m and similarity ≥ 0.80 (tuned in E5 on our "
-               "photo pairs); without GPS 0.90 (provisional).")
+               "photo pairs); without GPS 0.92 (also tuned in E5).")
 
 # --- Original vs detected ---
 st.subheader("🖼️ Original vs detected")
