@@ -121,5 +121,5 @@ with right:
     else:
         st.write("None found.")
     st.markdown('<p class="note">Likely duplicate = within the chosen radius, same damage class, '
-                "and DINOv2 crop similarity above the team threshold (provisional until tuned on "
-                "validation pairs).</p>", unsafe_allow_html=True)
+                "and DINOv2 crop similarity above the team threshold (0.80, tuned in E5 on "
+                "our photo pairs).</p>", unsafe_allow_html=True)
