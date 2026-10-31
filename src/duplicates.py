@@ -21,7 +21,7 @@ Usage (Streamlit page, after `location = location_section(uploaded)`):
 (pixels, x/y = top-left corner), same format as utils.detect().
 
 THRESHOLD (0.80) and RADIUS_M (30) were tuned in E5.
-THRESHOLD_NO_GPS is still an untuned PLACEHOLDER.
+THRESHOLD_NO_GPS (0.92) was chosen on the tuning pairs only and measured once on the test pairs (E5).
 """
 import json
 import math
@@ -34,7 +34,7 @@ DIM = 384
 MARGIN = 0.10             # extra context around each box (10 %)
 RADIUS_M = 30             # search radius for reports that have GPS
 THRESHOLD = 0.80          # cosine similarity, with GPS    (tuned in E5)
-THRESHOLD_NO_GPS = 0.90   # stricter when we cannot use distance (placeholder)
+THRESHOLD_NO_GPS = 0.92   # stricter when we cannot use distance (tuned in E5).
 DATA_DIR = Path("data/reports")
 
 try:  # cache the model across Streamlit reruns; plain functools cache elsewhere
