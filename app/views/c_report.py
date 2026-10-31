@@ -16,6 +16,10 @@ model, conf = team_model()
 if model is None:
     st.stop()
 
+st.info(("📷 **نصيحة لنتيجة أدق:** نرجو منك تصوير الضرر عن قُرب، وأن يكون في منتصف الصورة "
+         "وظاهراً بالكامل، مع إضاءة واضحة قدر الإمكان. شاكرين لك حرصك وتعاونك 🌷") if ar else
+        ("📷 **For a more accurate result:** please photograph the damage up close, centred and "
+         "fully in frame, in good light if possible. Thank you for your help 🌷"))
 uploaded = st.file_uploader("صورة الضرر" if ar else "Damage photo", type=PHOTO_TYPES)
 if not uploaded:
     st.stop()
