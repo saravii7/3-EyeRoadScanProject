@@ -36,7 +36,7 @@ with k2:
 with k3:
     metric_card(t("reported_times"), r.get("times_reported", 1), "#8E7BD1")
 with k4:
-    metric_card(t("team"), r.get("team") or "—", "#111827")
+    metric_card(t("team"), r.get("team") or "—", "#F4F6F5")
 
 left, right = st.columns([3, 2])
 with left:
