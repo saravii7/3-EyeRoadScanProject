@@ -1,0 +1,50 @@
+[
+  {
+    "run": 22,
+    "source_url": "https://www.kaggle.com/code/rimasabunasser/22-roadscan-local-test",
+    "download_sha256": "561f34d6bb2b7c780a1d3aefee621bec6e2cc92d3c0f92a6ce58980d81ac5e17",
+    "published_sha256": "7cd8bdd2566ec4886c07a3f6ee0c58d7f50d6a145658b67f7341f92afaa9f4e2",
+    "tables": 7,
+    "omitted_image_outputs": 7
+  },
+  {
+    "run": 23,
+    "source_url": "https://www.kaggle.com/code/rimasabunasser/23-roadscan-yolo-attention-comparison",
+    "download_sha256": "9e189852ac3f18ad04b4c7bf789c28dc7b1484131df4a88d61d962eec25f11c4",
+    "published_sha256": "391faa24e95d95cfe4d219e3b660a83a0bb33fa2ed6d7bf80b6f057ca280798a",
+    "tables": 3,
+    "omitted_image_outputs": 0
+  },
+  {
+    "run": 24,
+    "source_url": "https://www.kaggle.com/code/rimasabunasser/24-roadscan-run17-finetune960-comparison",
+    "download_sha256": "8b1b5a8c0e58b3af41db75d530910ba00c74ae2630aab93d179215e3af03e163",
+    "published_sha256": "050c7e083c4cb5202ffce55daba0ecd80f81d9b7e4c1775e04be336e4d48870c",
+    "tables": 2,
+    "omitted_image_outputs": 0
+  },
+  {
+    "run": 25,
+    "source_url": "https://www.kaggle.com/code/rimasabunasser/25-roadscan-yolo11m960-training-comparison",
+    "download_sha256": "0dea24f26e0945b9369daf866928f0baec49a0df0d677428e817f7c0c367642f",
+    "published_sha256": "0ef1f3819cfb637e2663853bcefc54bf8284ee0b12c984545d26018cbac58afe",
+    "tables": 1,
+    "omitted_image_outputs": 0
+  },
+  {
+    "run": 26,
+    "source_url": "https://www.kaggle.com/code/rimasabunasser/26-roadscan-run17-us-tiling-input-error",
+    "download_sha256": "a88561453c2e0a5a89c01ed13a8db6ff5b95539f087df718feff527b1966866c",
+    "published_sha256": "84a3c07805f63967e1c5f59ed4a4b6142774f253783527de1087d5b34c09fec6",
+    "tables": 0,
+    "omitted_image_outputs": 0
+  },
+  {
+    "run": 27,
+    "source_url": "https://www.kaggle.com/code/rimasabunasser/27-roadscan-run23-local-evaluation",
+    "download_sha256": "b5d77346f1da9517fb0487b537ada9d1cbfc4afe6f61486296b9e4de913ed1e9",
+    "published_sha256": "4a98602a9cce774ef529bdc4e30d64635582dfba2ac0e00fa8e18ff23d991f96",
+    "tables": 4,
+    "omitted_image_outputs": 0
+  }
+]

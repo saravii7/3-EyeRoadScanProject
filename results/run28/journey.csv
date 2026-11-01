@@ -1,0 +1,26 @@
+run,work,status,interpretation
+3,YOLOv8n / 600-image pilot,Executed,China AP50 .0617 / AP5095 .0213; 30 epochs
+4,Nano/Small and no-Mosaic pilot,Partial / OOM,Old split; 3 arms before CUDA OOM; not the final E2 grid
+5,YOLO v2 / evaluation recovery,Executed + quick saves,Multiple saved versions are not independent trainings
+6,YOLO26s 768 and 960 continuation,Executed,Old eligible data/splits; architecture and data changed
+7,Resolution audit preparation,Cancelled + Quick save,No successful new training claimed
+8,Resolution evaluation,Executed; Quick export,640/768/960 on saved checkpoints
+9,Data diagnosis,Executed; Quick export,"Backgrounds, class counts, country shift; no training"
+10,Freezing pilot,Executed; Quick export,Head/last3/all layers; 4-epoch short study
+11,Sampling / fixed crop,Executed; Quick export,Random/balanced/unchanged and exploratory crop
+12,Rescoring / matching audit,Diagnostic,Merged/pooled/relaxed-IoU criteria are not official AP gains
+13,Regularized recipe,Executed; Quick export,Worse validation; not adopted
+14,Team-v2 YOLO11s,Executed,"8999 train; 1977 China development; 64 epochs, best49"
+15,Published RDD YOLOv8s,Executed after failed versions,No team training; unknown external pretraining overlap
+16,RDD fine-tuning,Executed,17 epochs; best2; conventional recipe regressed
+17,Gentle fine-tuning,ADOPTED,"7 epochs; best2; team contribution, not better than published original"
+18,D-code inference helper,Executed twice,15 RDD smoke images; original then fine-tuned17; not local accuracy
+19,Confidence freeze,Executed,"0.46 selected on China development, not local"
+20,E3 augmentation,Executed,"4 arms ×7 epochs, one seed, final-epoch primary metric"
+21,Country / error audit,Executed + reviewed,8281 images; limited support and upstream-overlap caveats
+22,Run14/17 local evaluation,Executed,"190 images,333 boxes,56 healthy; inspected/reused cohort"
+23,Native attention/model comparison,Executed,"COCO11s vs v8s;1.5h each;45 vs47 epochs, not isolated attention"
+24,Run17 960 fine-tune,Executed,10 epochs; new960 did not beat reference17@640
+25,YOLO11m 960,Executed,39 epochs; about6h training; old internal run24 names
+26,Run17 USA tiling,Failed before scoring,Missing RDD input / StopIteration; no tiling result
+27,Run23 local evaluation,Executed,Predeclared .001/.46; no local training/tuning; no replacement
