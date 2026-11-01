@@ -52,7 +52,7 @@ TEXT = {
 
 STATUSES = ["new", "review", "scheduled", "in_progress", "repaired", "rejected"]
 OPEN_STATUSES = ["new", "review", "scheduled", "in_progress"]
-STATUS_COLOR = {"new": "#19B8A6", "review": "#8E7BD1", "scheduled": "#E7A83F",
+STATUS_COLOR = {"new": "#1EC7B6", "review": "#8E7BD1", "scheduled": "#F3B548",
                 "in_progress": "#3B82F6", "repaired": "#43A878", "rejected": "#758199"}
 TEAMS = ["فريق الصيانة 1 · أبها", "فريق الصيانة 2 · خميس مشيط", "فريق الطوارئ"]
 

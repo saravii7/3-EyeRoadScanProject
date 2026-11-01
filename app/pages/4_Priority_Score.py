@@ -42,10 +42,10 @@ df = pd.DataFrame(rows)
 fig = go.Figure()
 fig.add_bar(name="Team formula", x=df["Example"], y=df["Team formula"], marker_color="#6C7A96")
 fig.add_bar(name="Your weights", x=df["Example"], y=df["Your weights"], marker_color=ACCENT)
-fig.add_hline(y=70, line_dash="dot", line_color="#E74C3C", annotation_text="Urgent")
-fig.add_hline(y=40, line_dash="dot", line_color="#F1C40F", annotation_text="Schedule")
+fig.add_hline(y=70, line_dash="dot", line_color="#D95B55", annotation_text="Urgent")
+fig.add_hline(y=40, line_dash="dot", line_color="#F3B548", annotation_text="Schedule")
 fig.update_layout(barmode="group", yaxis_range=[0, 105], paper_bgcolor="rgba(0,0,0,0)",
-                  plot_bgcolor="rgba(0,0,0,0)", font_color="#17233B",
+                  plot_bgcolor="rgba(0,0,0,0)", font_color="#111827",
                   legend=dict(orientation="h", y=-0.15))
 st.plotly_chart(fig, width="stretch")
 st.dataframe(df, width="stretch", hide_index=True)

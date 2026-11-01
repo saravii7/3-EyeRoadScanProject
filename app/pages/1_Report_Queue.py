@@ -27,9 +27,9 @@ c1, c2, c3, c4 = st.columns(4)
 with c1:
     metric_card("Open reports", len(q))
 with c2:
-    metric_card("Urgent", int((q["decision"] == "Urgent").sum()), "#E74C3C")
+    metric_card("Urgent", int((q["decision"] == "Urgent").sum()), "#D95B55")
 with c3:
-    metric_card("Schedule", int((q["decision"] == "Schedule").sum()), "#F1C40F")
+    metric_card("Schedule", int((q["decision"] == "Schedule").sum()), "#F3B548")
 with c4:
     metric_card("Repeat reports", int((q["times_reported"] - 1).clip(lower=0).sum()), "#4FC3F7")
 

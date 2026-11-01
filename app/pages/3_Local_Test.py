@@ -93,15 +93,15 @@ fig = go.Figure(go.Heatmap(z=cm.values, x=[f"pred {c}" for c in labels_cm],
                                                                           [1, ACCENT]],
                            text=cm.values, texttemplate="%{text}", showscale=False))
 fig.update_layout(height=420, paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
-                  font_color="#17233B", yaxis_autorange="reversed")
+                  font_color="#111827", yaxis_autorange="reversed")
 st.plotly_chart(fig, width="stretch")
 
 st.subheader("Error analysis")
 e1, e2, e3 = st.columns(3)
 with e1:
-    metric_card("Missed damage (FN)", cat.get("missed", 0), "#E74C3C")
+    metric_card("Missed damage (FN)", cat.get("missed", 0), "#D95B55")
 with e2:
-    metric_card("False alarms (FP)", cat.get("false_alarm", 0), "#F1C40F")
+    metric_card("False alarms (FP)", cat.get("false_alarm", 0), "#F3B548")
 with e3:
     metric_card("Wrong class", cat.get("wrong_class", 0), "#4FC3F7")
 
