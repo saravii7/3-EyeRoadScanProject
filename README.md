@@ -27,13 +27,14 @@
 |---|---|---|---|
 | 4 damage types: long crack, wide crack, alligator cracking, pothole | every report gets a 0 to 100 priority score | repeated reports of the same damage | faces and licence plates are blurred before anything is shown or saved |
 
-| Headline number | Value | Where |
-|---|---|---|
-| Duplicates caught with GPS (held-out test pairs) | **8 of 9**, 0 false alarms in 24 | [E5](#duplicate-finder-e5) |
-| Duplicate-finder accuracy with GPS (test pairs) | **32 / 33** | [E5](#duplicate-finder-e5) |
-| Detector on China development validation (mAP50-95) | **65.79 %** | [Evaluation status](#evaluation-status) |
-| Detector on 4,804 US images (mAP50-95) | **49.73 %** | [Evaluation status](#evaluation-status) |
-| Real damage found on our first local phone-photo test | **17 %** (it misses most) | [Detector on our own photos](#detector-on-our-own-photos) |
+| Part of the system | Result so far | Status | Details |
+|---|---|---|---|
+| **Damage detector** (YOLOv8s run17) | mAP50-95 **65.79 %** on China development validation; **49.73 %** on 4,804 US images; US pothole recall **31.85 %** (43/135) | Adopted and frozen; not yet shown ready for Saudi roads | [Evaluation status](#evaluation-status) |
+| **Detector on our own phone photos** | Found **17 %** of real damage; **50 %** of drawn boxes were correct | First check done; written report pending | [Detector on our own photos](#detector-on-our-own-photos) |
+| **Priority score** | Formula and Urgent / Schedule / Monitor bands in the app | Draft v1; weights and bands are proposals, not yet validated | [Priority score](#priority-score) |
+| **Duplicate finder** (DINOv2 + FAISS) | With GPS: **8 of 9** duplicates caught, 0 false alarms in 24 (accuracy 32/33) on held-out pairs | E5 done on a small set | [Duplicate finder (E5)](#duplicate-finder-e5) |
+| **Baseline classifier** (E1) | Not compared with the detector yet | Pending a coordinated, comparable evaluation | [Evaluation status](#evaluation-status) |
+| **App** | Arabic-first Streamlit app for citizens and the municipality | [Live](https://3eye-roadscan.streamlit.app) | [Try it](#try-it) |
 
 ## Contents
 
@@ -239,14 +240,17 @@ The causes above are our hypotheses from the numbers; we did not verify each one
 
 ## Evaluation status
 
-| Study | Status |
-| --- | --- |
-| E3: Mosaic / HSV / horizontal-flip ablation | Completed and documented; single seed, seven epochs per arm |
-| Frozen country/error study | Completed; independent local part of E4 still pending |
-| E2: detector size or input resolution | Pending |
-| E1: baseline vs detector | Requires coordinated comparable evaluation; not claimed complete |
-| E5: duplicate methods | Completed on a small set (10 tuning and 9 test pairs); see [Results](#duplicate-finder-e5) |
-| Independent labeled local road test | First run done (see above); full written report pending |
+The five experiments the Brief requires for Track A, one row each, whoever ran them:
+
+| # | Question (from the Brief) | What we did | Result so far | Status |
+| --- | --- | --- | --- | --- |
+| **E1** | Baseline classifier vs detector: what does localisation add? | ResNet-18 baseline classifier built (`notebooks/baseline/`, releases `v1-baseline`, `v2-baseline`) | No comparable baseline-vs-detector table yet | **Pending**: needs one coordinated evaluation on the same images |
+| **E2** | Detector size or input resolution (nano vs small, 640 vs 960): accuracy vs CPU speed? | Not run as a size or resolution study. Runs 14 (YOLO11s) and 17 (YOLOv8s) differ in more than size, so they do not answer it | n/a | **Pending** |
+| **E3** | Which augmentations help? | Mosaic / HSV / horizontal-flip ablation, run 20 | Removing mosaic costs 0.72 pp mAP50-95, flip 0.25 pp, HSV 0.05 pp (single seed, 7 epochs per arm); recipe kept. See [report](docs/reports/E3_AUGMENTATION.md) | **Done**, with stated limits |
+| **E4** | Cross-country generalisation: how badly does domain shift hurt, and which damage types suffer? | Trained on Japan, India and Czech samples; evaluated on China (development) and 4,804 US images. [Reviewed report](docs/reports/COUNTRY_ERROR_ANALYSIS.md) | mAP50-95 **65.79 %** on China vs **49.73 %** on US; US pothole recall **31.85 %** (43/135). On our own phone photos: **17 %** of real damage found, **50 %** of boxes correct (first run, [see below](#detector-on-our-own-photos)) | **Country part done.** Local part: first run only, full written report pending |
+| **E5** | Duplicate-finder embeddings: perceptual hash vs ResNet vs DINOv2 | 10 tuning pairs, 9 held-out test pairs | AUC (tuning / test): pHash 0.74 / 0.66, ResNet-18 0.81 / 0.81, DINOv2 0.79 / 0.79. pHash weakest, ResNet-18 and DINOv2 similar. With GPS: 8 of 9 duplicates caught, 0 false alarms in 24. See [Results](#duplicate-finder-e5) | **Done** on a small set |
+
+Not an experiment but required: the [priority formula](#priority-score) is a draft and its sensitivity check is still to do.
 
 China development mAP50-95 is **65.79%**, versus **49.73%** on 4,804 US images. US pothole recall at the frozen operating point is **43/135 = 31.85%**, an unresolved failure. These results do not establish local Saudi-road readiness. External pretraining overlap is unknown. Japan/India selected complements have limited class support; the Czech complement has no annotated damage boxes, so its AP/recall/F1 are **N/A**. See the reviewed report rather than treating raw evaluator zero placeholders as zero detection ability.
 
