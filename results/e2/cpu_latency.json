@@ -1,0 +1,5 @@
+{"model": "run17_best_finetuned.pt", "sha256_prefix": "25b412ff18c05e26", "device": "CPU, 2 torch threads", "conf": 0.46, "iou": 0.7, "max_det": 300,
+ "images": 15, "repeats": 2, "warmup": 3,
+ "imgsz_640": {"median_s": 0.163, "p95_s": 0.270},
+ "imgsz_960": {"median_s": 0.305, "p95_s": 0.420},
+ "note": "Speed only; accuracy at 640 vs 960 is in results/run28/run24_table_02.csv. Same machine for both sizes."}
