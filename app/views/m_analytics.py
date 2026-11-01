@@ -57,7 +57,7 @@ with c:
     cls = df["classes"].str.split(", ").explode().value_counts().reset_index()
     cls.columns = ["code", "n"]
     cls["label"] = cls["code"].map(lambda x: f"{x} · {t(x)}")
-    fig = px.bar(cls, x="label", y="n", color_discrete_sequence=["#082B36"])
+    fig = px.bar(cls, x="label", y="n", color_discrete_sequence=["#A6BBC0"])
     fig.update_layout(height=300, xaxis_title="", yaxis_title="", **PLOT)
     st.plotly_chart(fig, width="stretch")
 with d:
