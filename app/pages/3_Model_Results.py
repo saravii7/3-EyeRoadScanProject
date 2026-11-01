@@ -11,7 +11,7 @@ st.caption("Validation = China_MotorBike (1,977 images), a country the models ne
            "(E4, run 21); local photos are the final independent test.")
 
 LAYOUT = dict(paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
-              font_color="#17233B", legend=dict(orientation="h", y=-0.2))
+              font_color="#111827", legend=dict(orientation="h", y=-0.2))
 
 # ---- Detector runs 14-17 ----
 st.subheader("Detector runs (validation: China_MotorBike)")

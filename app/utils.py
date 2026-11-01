@@ -16,7 +16,7 @@ from priority import CLASS_WEIGHT, priority_score  # the team's formula (copied 
 
 APP_DIR = Path(__file__).parent
 MODELS_DIR = APP_DIR / "models"
-ACCENT = "#19B8A6"
+ACCENT = "#1EC7B6"
 
 # RDD2022 classes used in our project
 CLASS_INFO = {
@@ -34,14 +34,14 @@ CLASS_ALIASES = {
 
 # Priority bands (0-100, higher = fix first). Thresholds are a UI proposal, not from the report.
 BANDS = [
-    (70, "Urgent", "Repair this week", "#E74C3C"),
-    (40, "Schedule", "Add to maintenance plan", "#F1C40F"),
-    (0, "Monitor", "Re-check later", "#2ECC71"),
+    (70, "Urgent", "Repair this week", "#D95B55"),
+    (40, "Schedule", "Add to maintenance plan", "#F3B548"),
+    (0, "Monitor", "Re-check later", "#43A878"),
 ]
 
 
 # ---------- Styling ----------
-NAVY, INK, MUTED, LINE, SOFT = "#0D1B33", "#17233B", "#758199", "#E6EBF2", "#F5F7FB"
+NAVY, INK, MUTED, LINE, SOFT = "#082B36", "#111827", "#758199", "#E6EBF2", "#F5F7FB"
 PLOT = dict(paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)", font_color=INK)
 
 
@@ -65,17 +65,21 @@ def apply_style(rtl=None):
         .block-container {{padding-top: 2rem;}}
         [data-testid="stSidebar"] {{background: {NAVY};}}
         [data-testid="stSidebar"] * {{color: #E9EEF7;}}
-        [data-testid="stSidebar"] [data-testid="stSidebarNavSeparator"] {{border-color: #24365A;}}
+        [data-testid="stSidebar"] [data-testid="stSidebarNavSeparator"] {{border-color: #14404D;}}
         [data-testid="stSidebar"] input, [data-testid="stSidebar"] [data-baseweb="select"] * {{color: {INK};}}
-        [data-testid="stSidebar"] button {{background: transparent; border: 1px solid #3A4E73;}}
+        [data-testid="stSidebar"] button {{background: transparent; border: 1px solid #2A5966;}}
         [data-testid="stSidebar"] button:hover {{border-color: {ACCENT};}}
         .hero {{
             padding: 2rem 2.2rem; border-radius: 22px; color: white;
-            background: linear-gradient(135deg, {NAVY} 0%, #162947 55%, {ACCENT} 160%);
+            background: linear-gradient(135deg, {NAVY} 0%, #0E3B48 55%, {ACCENT} 160%);
             margin-bottom: 1.5rem; box-shadow: 0 16px 44px rgba(19,36,65,.12);
         }}
         .hero h1 {{margin: 0; font-size: 2.4rem; color: white;}}
-        .hero p {{color: #C9D3E6; font-size: 1.1rem; margin-top: .4rem;}}
+        .hero-brand {{display: flex; align-items: center; gap: 2rem; flex-wrap: wrap;}}
+        .hero-brand img {{width: 210px; max-width: 45%; border-radius: 18px;}}
+        .hero-brand p {{flex: 1; min-width: 220px; font-size: 1.25rem; color: #F4F6F5;}}
+        [data-testid="stSidebarHeader"] img, [data-testid="stLogo"] {{height: 3.2rem;}}
+        .hero p {{color: #A6BBC0; font-size: 1.1rem; margin-top: .4rem;}}
         .card {{
             background: white; border: 1px solid {LINE}; border-radius: 16px;
             padding: 1.1rem 1.2rem; text-align: center; height: 100%;
@@ -93,6 +97,13 @@ def apply_style(rtl=None):
         """,
         unsafe_allow_html=True,
     )
+
+
+def brand_logo_uri():
+    """The 3-Eye vertical logo as a data URI (works on Streamlit Cloud too)."""
+    import base64
+    p = APP_DIR / "assets" / "brand" / "logo_vertical.png"
+    return "data:image/png;base64," + base64.b64encode(p.read_bytes()).decode()
 
 
 def chip(text, color):

@@ -16,10 +16,10 @@ if df.empty:
     st.stop()
 
 open_ = df[df["status"].isin(OPEN_STATUSES)]
-cards = [("إجمالي البلاغات" if ar else "Total reports", len(df), "#17233B"),
-         ("تحتاج مراجعة" if ar else "Need review", int((df["status"] == "new").sum()), "#19B8A6"),
-         ("عاجلة مفتوحة" if ar else "Open urgent", int((open_["decision"] == "Urgent").sum()), "#DE6D64"),
-         ("مجدولة" if ar else "Scheduled", int((df["status"] == "scheduled").sum()), "#E7A83F"),
+cards = [("إجمالي البلاغات" if ar else "Total reports", len(df), "#111827"),
+         ("تحتاج مراجعة" if ar else "Need review", int((df["status"] == "new").sum()), "#1EC7B6"),
+         ("عاجلة مفتوحة" if ar else "Open urgent", int((open_["decision"] == "Urgent").sum()), "#D95B55"),
+         ("مجدولة" if ar else "Scheduled", int((df["status"] == "scheduled").sum()), "#F3B548"),
          ("قيد التنفيذ" if ar else "In progress", int((df["status"] == "in_progress").sum()), "#3B82F6"),
          ("تم الإصلاح" if ar else "Repaired", int((df["status"] == "repaired").sum()), "#43A878"),
          ("بلاغات مكررة مربوطة" if ar else "Linked repeats",
@@ -37,7 +37,7 @@ with a:
     st.subheader("توزيع الأولوية" if ar else "Priority distribution")
     d = open_.assign(decision=open_["decision"].map(lambda x: t(x or "Monitor")))
     fig = px.histogram(d, x="priority", nbins=10, range_x=[0, 100],
-                       color_discrete_sequence=["#19B8A6"])
+                       color_discrete_sequence=["#1EC7B6"])
     fig.update_layout(height=280, bargap=.1, **PLOT)
     st.plotly_chart(fig, width="stretch")
 with b:
@@ -45,7 +45,7 @@ with b:
     cls = df["classes"].str.split(", ").explode().value_counts().reset_index()
     cls.columns = ["code", "n"]
     cls["label"] = cls["code"].map(lambda c: f"{c} · {t(c)}")
-    fig = px.bar(cls, x="n", y="label", orientation="h", color_discrete_sequence=["#0D1B33"])
+    fig = px.bar(cls, x="n", y="label", orientation="h", color_discrete_sequence=["#082B36"])
     fig.update_layout(height=280, yaxis_title="", xaxis_title="", **PLOT)
     st.plotly_chart(fig, width="stretch")
 

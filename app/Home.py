@@ -6,9 +6,13 @@ The technical section shows the full pipeline, evaluation and results for the pa
 import streamlit as st
 
 from i18n import lang, language_switch, t
+from pathlib import Path
+
 from utils import apply_style
 
-st.set_page_config(page_title="3-Eye · RoadScan", page_icon="👁️", layout="wide")
+BRAND = Path(__file__).resolve().parent / "assets" / "brand"
+st.set_page_config(page_title="3-Eye · Road Intelligence", page_icon=str(BRAND / "icon.png"),
+                   layout="wide")
 
 pages = {
     t("sec_citizen"): [
@@ -40,7 +44,8 @@ try:
     nav = st.navigation(pages, expanded=True)
 except TypeError:  # older Streamlit
     nav = st.navigation(pages)
-st.sidebar.markdown(f"### <span dir=\"ltr\">👁️ 3-Eye</span>\n{t('app_tag')}", unsafe_allow_html=True)
+st.logo(str(BRAND / "logo_horizontal.png"), size="large", icon_image=str(BRAND / "icon.png"))
+st.sidebar.caption(t("app_tag"))
 language_switch()
 technical = nav.url_path in {p.url_path for p in pages[t("sec_tech")]}
 apply_style(rtl=(lang() == "ar" and not technical))
