@@ -1,3 +1,5 @@
+> **YOLO closeout (2026-11-01):** [Executed Python journey: runs03–27,18 charts](notebooks/yolo/28-roadscan-yolo-journey-summary.ipynb) · [Results, runtimes and source tables](results/run28/README.md) · [Closeout report](docs/reports/YOLO_CLOSEOUT.md). Run17 fine-tuned remains adopted at confidence0.46 /640. Local190-image results are inspected/reused diagnostic evidence, not a fresh independent holdout; low local recall remains unresolved.
+
 <p align="center">
   <img src="assets/banner.png" alt="3-Eye RoadScan banner" width="100%">
 </p>
