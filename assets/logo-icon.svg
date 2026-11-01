@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="3-Eye icon">
+<rect width="512" height="512" rx="112" fill="#082B36"/>
+<path d="M64 256 C118 181 185 142 256 142 C327 142 394 181 448 256 C394 331 327 370 256 370 C185 370 118 331 64 256Z" fill="none" stroke="#F4F6F5" stroke-width="24"/>
+<path d="M256 154 L203 331 C221 340 239 345 256 345 C273 345 291 340 309 331Z" fill="#1EC7B6"/>
+<path d="M256 164 L256 323" stroke="#082B36" stroke-width="12" stroke-dasharray="18 14"/>
+<ellipse cx="256" cy="329" rx="31" ry="14" fill="#F3B548" stroke="#082B36" stroke-width="9"/>
+<circle cx="256" cy="329" r="6" fill="#F4F6F5"/>
+</svg>
