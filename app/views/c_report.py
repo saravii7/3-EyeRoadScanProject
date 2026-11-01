@@ -12,16 +12,41 @@ st.title("📸 " + t("p_report"))
 st.caption("صوّر الضرر من مكان آمن. نموذج فريق \u20663-Eye\u2069 يحلل الصورة مباشرة." if ar else
            "Photograph the damage from a safe place. The 3-Eye team model analyses it directly.")
 
-model, conf = team_model()
-if model is None:
-    st.stop()
-
 st.info(("📷 **نصيحة لنتيجة أدق:** نرجو منك تصوير الضرر عن قُرب، وأن يكون في منتصف الصورة "
          "وظاهراً بالكامل، مع إضاءة واضحة قدر الإمكان. شاكرين لك حرصك وتعاونك 🌷") if ar else
         ("📷 **For a more accurate result:** please photograph the damage up close, centred and "
          "fully in frame, in good light if possible. Thank you for your help 🌷"))
+steps_box = st.empty()  # usage steps: shown until the citizen chooses a photo
 uploaded = st.file_uploader("صورة الضرر" if ar else "Damage photo", type=PHOTO_TYPES)
 if not uploaded:
+    steps = ([("📷", "صوّر الضرر", "من مكان آمن، عن قُرب وفي منتصف الصورة، والموقع مفعّل في الكاميرا."),
+              ("⬆️", "ارفع الصورة", "اضغط زر «Upload» تحت واختر الصورة. يحلّلها نموذجنا خلال ثوانٍ."),
+              ("📍", "أكّد الموقع", "يُقرأ من الصورة أو من جهازك، أو اختره على الخريطة داخل المملكة."),
+              ("✅", "أرسل وتابع", "وافق وأرسل، وتابع حالة بلاغك برقمه من صفحة «بلاغاتي».")]
+             if ar else
+             [("📷", "Take the photo", "From a safe place, close up and centred, with location on."),
+              ("⬆️", "Upload it", "Press “Upload” below. Our model analyses it in seconds."),
+              ("📍", "Confirm location", "Read from the photo or your device, or pick it on the map."),
+              ("✅", "Send and track", "Agree and send, then follow your report in “My reports”.")])
+    cards = "".join(
+        f'<div style="flex:1;min-width:180px;background:#0E3440;border:1px solid #1B4A57;'
+        f'border-radius:16px;padding:1rem 1.1rem">'
+        f'<div style="display:flex;align-items:center;gap:.6rem;margin-bottom:.4rem">'
+        f'<span style="background:#1EC7B6;color:#082B36;font-weight:700;border-radius:50%;'
+        f'width:30px;height:30px;display:inline-flex;align-items:center;justify-content:center">'
+        f'{i}</span><span style="font-size:1.4rem">{icon}</span>'
+        f'<b style="color:#F4F6F5">{title}</b></div>'
+        f'<div style="color:#A6BBC0;font-size:.92rem">{text}</div></div>'
+        for i, (icon, title, text) in enumerate(steps, 1))
+    steps_box.markdown(
+        f'<div style="margin:.4rem 0 1rem"><div style="color:#F4F6F5;font-weight:700;'
+        f'font-size:1.15rem;margin-bottom:.6rem">{"خطوات رفع البلاغ" if ar else "How to report"}'
+        f'</div><div style="display:flex;gap:.8rem;flex-wrap:wrap">{cards}</div></div>',
+        unsafe_allow_html=True)
+    st.stop()
+
+model, conf = team_model()  # loaded only once a photo is chosen, so the page opens fast
+if model is None:
     st.stop()
 
 with st.spinner("جارٍ تحليل الصورة..." if ar else "Analysing the photo..."):
