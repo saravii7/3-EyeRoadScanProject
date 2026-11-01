@@ -310,7 +310,7 @@ detections = detector.detect_damage('road.jpg')   # damage_code, bbox_xyxy, conf
 |---|---|
 | `app/` | Streamlit app |
 | `src/` | Detector, priority formula, duplicate finder |
-| `notebooks/` | Baseline, YOLO runs 14 to 21, E5 duplicates |
+| `notebooks/` | Baseline, YOLO runs 14–27, summary notebook 28, E5 duplicates |
 | `results/` | Metrics, tables and figures per run |
 | `docs/` | Model choice, threshold, E3, country/error reports |
 | `scripts/data/` | Conversion, country split and sampling scripts |
