@@ -1,4 +1,4 @@
-"""Municipality: control dashboard (3-Eye brand). Every number comes from the stored reports."""
+"""Home: the 3-Eye control dashboard (brand look). Every number comes from the stored reports."""
 import html
 
 import folium
@@ -8,6 +8,7 @@ from streamlit_folium import st_folium
 
 from i18n import OPEN_STATUSES, STATUS_COLOR, lang, ref, status_label, t
 from reports import all_reports, as_data_uri, get_report, thumb_path
+from utils import brand_logo_uri
 
 ar = lang() == "ar"
 NAVY, PANEL, LINE, TEAL, AMBER, RED, GREEN, MIST, PAPER = (
@@ -56,14 +57,41 @@ st.markdown(f"""
 df = all_reports()
 
 # ---------- header + KPI cards ----------
-st.markdown(f"""<div class="dash-hello"><h1>{"مرحباً بك" if ar else "Welcome"}</h1>
-    <p>{"مراقبة حالة الطرق باستخدام الذكاء الاصطناعي من أجل مدن أكثر أماناً." if ar else
-        "Road-condition monitoring with AI for safer cities."}</p></div>""",
+def how_it_works():
+    st.markdown(f'<div class="panel-title" style="margin:1rem 0 .5rem">'
+                f'{"كيف يعمل؟" if ar else "How it works"}</div>', unsafe_allow_html=True)
+    s1, s2, s3 = st.columns(3)
+    s1.info(("**١. صوّر**\n\nصورة واضحة للضرر من الرصيف، والموقع مفعّل في الكاميرا." if ar else
+             "**1. Photograph**\n\nA clear photo from the pavement, with location on."))
+    s2.warning(("**٢. التحليل**\n\nنموذجنا يحدد نوع الضرر من 4 أنواع: D00 و D10 و D20 و D40، "
+                "ويحسب الأولوية من 0 إلى 100، ويتأكد إن البلاغ مو مكرر." if ar else
+                "**2. Analysis**\n\nOur model finds the damage type (D00-D40), scores priority "
+                "0-100 and checks for duplicates."))
+    s3.success(("**٣. المتابعة**\n\nتتابع حالة بلاغك: جديد ← مراجعة ← مجدول ← تم الإصلاح." if ar
+                else "**3. Follow-up**\n\nTrack your report: new → review → scheduled → repaired."))
+    st.caption(("لا تصوّر أثناء القيادة. تُغبَّش الوجوه واللوحات تلقائياً. " if ar else
+                "Never photograph while driving. Faces and plates are blurred automatically. ")
+               + t("ai_note"))
+
+
+hello, logo = st.columns([3, 1])
+with hello:
+    st.markdown(f"""<div class="dash-hello"><h1>{"مرحباً بك" if ar else "Welcome"}</h1>
+    <p>{"طرق أذكى، تنقّل أكثر أماناً. صوّر الضرر، ونحن نحدّد نوعه وأولويته ونرسله لفريق البلدية."
+        if ar else "Smarter roads, safer journeys. Photograph the damage; we detect it, score "
+        "its priority and send it to the municipal team."}</p></div>""", unsafe_allow_html=True)
+    b1, b2, _ = st.columns([1, 1, 2])
+    b1.page_link("views/c_report.py", label=t("p_report"), icon="📸")
+    b2.page_link("views/c_mine.py", label=t("p_mine"), icon="🧾")
+with logo:
+    st.markdown(f'<img src="{brand_logo_uri()}" style="width:100%;max-width:220px;'
+                f'border-radius:18px;display:block;margin-inline-start:auto">',
                 unsafe_allow_html=True)
 st.write("")
 
 if df.empty:
     st.info(t("no_reports"))
+    how_it_works()
     st.stop()
 
 open_ = df[df["status"].isin(OPEN_STATUSES)]
@@ -133,7 +161,7 @@ with b, st.container(border=True):
                     unsafe_allow_html=True)
     else:
         m = folium.Map(location=[geo["lat"].mean(), geo["lon"].mean()], zoom_start=12,
-                       tiles="CartoDB dark_matter", attributionControl=False)
+                       attributionControl=False)
         colors = {"Urgent": "red", "Schedule": "orange", "Monitor": "green"}
         for _, g in geo.iterrows():
             folium.Marker([g["lat"], g["lon"]], tooltip=f"{ref(g['id'])} · {g['priority']:.0f}",
@@ -142,7 +170,7 @@ with b, st.container(border=True):
         if len(geo) > 1:
             m.fit_bounds([[geo["lat"].min(), geo["lon"].min()], [geo["lat"].max(), geo["lon"].max()]])
         st_folium(m, height=420, key="dash_map", returned_objects=[])
-        st.markdown('<div class="panel-sub">Map data © OpenStreetMap contributors, © CARTO</div>',
+        st.markdown('<div class="panel-sub">Map data © OpenStreetMap contributors</div>',
                     unsafe_allow_html=True)
         st.page_link("views/m_map.py", label="عرض الكل" if ar else "View all", icon="🗺️")
 
@@ -185,4 +213,4 @@ else:
     if st.button("عرض التفاصيل" if ar else "View details"):
         st.session_state["detail_id"] = int(pick)
         st.switch_page("views/m_detail.py")
-st.caption(t("ai_note"))
+how_it_works()

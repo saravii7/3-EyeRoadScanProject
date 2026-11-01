@@ -16,12 +16,11 @@ st.set_page_config(page_title="3-Eye · Road Intelligence", page_icon=str(BRAND 
 
 pages = {
     t("sec_citizen"): [
-        st.Page("views/c_home.py", title=t("p_home"), icon="🏠", default=True),
+        st.Page("views/m_overview.py", title=t("p_home"), icon="🏠", default=True),
         st.Page("views/c_report.py", title=t("p_report"), icon="📸"),
         st.Page("views/c_mine.py", title=t("p_mine"), icon="🧾"),
     ],
     t("sec_city"): [
-        st.Page("views/m_overview.py", title=t("p_overview"), icon="🏛️"),
         st.Page("views/m_queue.py", title=t("p_queue"), icon="📋"),
         st.Page("views/m_detail.py", title=t("p_detail"), icon="🔎"),
         st.Page("views/m_map.py", title=t("p_map"), icon="🗺️"),

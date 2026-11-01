@@ -42,7 +42,32 @@ BANDS = [
 
 # ---------- Styling ----------
 NAVY, INK, MUTED, LINE, SOFT = "#082B36", "#111827", "#758199", "#E6EBF2", "#F5F7FB"
-PLOT = dict(paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)", font_color=INK)
+PAPER, MIST, PANEL = "#F4F6F5", "#A6BBC0", "#0E3440"
+PLOT = dict(paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)", font_color=PAPER)
+
+
+def _brand_maps():
+    """Every folium map in the app gets the 3-Eye dark look (OpenStreetMap tiles, darkened)."""
+    import folium
+    from branca.element import Element
+    if getattr(folium.Map, "_three_eye", False):
+        return
+
+    class BrandMap(folium.Map):
+        _three_eye = True
+
+        def __init__(self, *args, **kwargs):
+            kwargs.pop("tiles", None)
+            super().__init__(*args, **kwargs)
+            self.get_root().header.add_child(Element(
+                "<style>.leaflet-tile-pane{filter:invert(100%) hue-rotate(180deg) "
+                "brightness(92%) contrast(88%) saturate(55%);}"
+                ".leaflet-container{background:#082B36;}</style>"))
+
+    folium.Map = BrandMap
+
+
+_brand_maps()
 
 
 def apply_style(rtl=None):
@@ -80,15 +105,20 @@ def apply_style(rtl=None):
         .hero-brand p {{flex: 1; min-width: 220px; font-size: 1.25rem; color: #F4F6F5;}}
         [data-testid="stSidebarHeader"] img, [data-testid="stLogo"] {{height: 3.2rem;}}
         .hero p {{color: #A6BBC0; font-size: 1.1rem; margin-top: .4rem;}}
+        [data-testid="stMain"] {{background: {NAVY};}}
+        [data-testid="stMain"] [data-testid="stPageLink"] a {{background: {PANEL};
+            border: 1px solid #1EC7B6; border-radius: 12px; padding: .35rem .9rem;}}
         .card {{
-            background: white; border: 1px solid {LINE}; border-radius: 16px;
+            background: {PANEL}; border: 1px solid #1B4A57; border-radius: 16px;
             padding: 1.1rem 1.2rem; text-align: center; height: 100%;
-            box-shadow: 0 8px 24px rgba(19,36,65,.05);
+            box-shadow: 0 10px 28px rgba(0,0,0,.18);
         }}
         .card .value {{font-size: clamp(1.5rem, 2.4vw, 2.2rem); font-weight: 700;
                        white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}}
-        .card .label {{color: {MUTED}; font-size: .9rem;}}
-        .note {{color: {MUTED}; font-size: .85rem;}}
+        .card .label {{color: {MIST}; font-size: .9rem;}}
+        .note {{color: {MIST}; font-size: .85rem;}}
+        [data-testid="stMain"] [data-testid="stVerticalBlockBorderWrapper"] {{
+            border-color: #1B4A57 !important;}}
         .chip {{display: inline-block; padding: .15rem .7rem; border-radius: 999px;
                 font-size: .85rem; font-weight: 600; margin: 0 .15rem;}}
         .leaflet-control-attribution {{display: none !important;}}
@@ -359,12 +389,12 @@ def gauge(score, color):
     fig = go.Figure(go.Indicator(
         mode="gauge+number", value=score, number={"suffix": " / 100"},
         gauge={"axis": {"range": [0, 100]}, "bar": {"color": color},
-               "steps": [{"range": [0, 40], "color": "#E3F6EB"},
-                         {"range": [40, 70], "color": "#FFF2D8"},
-                         {"range": [70, 100], "color": "#FFEBE9"}]},
+               "steps": [{"range": [0, 40], "color": "#1E4D45"},
+                         {"range": [40, 70], "color": "#4D4126"},
+                         {"range": [70, 100], "color": "#4D2A2D"}]},
         title={"text": "Repair priority"}))
     fig.update_layout(height=260, margin=dict(t=50, b=10, l=30, r=30),
-                      paper_bgcolor="rgba(0,0,0,0)", font_color=INK)
+                      paper_bgcolor="rgba(0,0,0,0)", font_color=PAPER)
     return fig
 
 

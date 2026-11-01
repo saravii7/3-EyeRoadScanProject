@@ -45,7 +45,7 @@ fig.add_bar(name="Your weights", x=df["Example"], y=df["Your weights"], marker_c
 fig.add_hline(y=70, line_dash="dot", line_color="#D95B55", annotation_text="Urgent")
 fig.add_hline(y=40, line_dash="dot", line_color="#F3B548", annotation_text="Schedule")
 fig.update_layout(barmode="group", yaxis_range=[0, 105], paper_bgcolor="rgba(0,0,0,0)",
-                  plot_bgcolor="rgba(0,0,0,0)", font_color="#111827",
+                  plot_bgcolor="rgba(0,0,0,0)", font_color="#F4F6F5",
                   legend=dict(orientation="h", y=-0.15))
 st.plotly_chart(fig, width="stretch")
 st.dataframe(df, width="stretch", hide_index=True)

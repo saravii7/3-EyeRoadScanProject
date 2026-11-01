@@ -89,11 +89,11 @@ for r in results:
     for t, p in r["res"]["confusion"]:
         cm.loc[t, p] += 1
 fig = go.Figure(go.Heatmap(z=cm.values, x=[f"pred {c}" for c in labels_cm],
-                           y=[f"true {c}" for c in labels_cm], colorscale=[[0, "#F5F7FB"],
+                           y=[f"true {c}" for c in labels_cm], colorscale=[[0, "#0E3440"],
                                                                           [1, ACCENT]],
                            text=cm.values, texttemplate="%{text}", showscale=False))
 fig.update_layout(height=420, paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
-                  font_color="#111827", yaxis_autorange="reversed")
+                  font_color="#F4F6F5", yaxis_autorange="reversed")
 st.plotly_chart(fig, width="stretch")
 
 st.subheader("Error analysis")
