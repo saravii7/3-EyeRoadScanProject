@@ -42,7 +42,7 @@
 
 | Member | GitHub | Owns |
 |---|---|---|
-| Sara | [saravii7](https://github.com/saravii7) | Data preparation and splits, local photos, Streamlit app, repository, integration |
+| Sarah | [saravii7](https://github.com/saravii7) | Data preparation and splits, local photos, Streamlit app, repository, integration |
 | Rimas | rimas-al-abunasser | YOLO detector (runs 14 to 17), confidence threshold, E2 to E4 |
 | Fajer | fajer-alshahrani | ResNet-18 baseline (E1), priority score and sensitivity check, duplicate finder (E5) |
 
