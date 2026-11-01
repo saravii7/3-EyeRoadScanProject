@@ -177,11 +177,23 @@ Arabic-first Streamlit app, live at **https://3eye-roadscan.streamlit.app**.
 
 | # | Question (from the Brief) | What we did | Result | Status |
 |---|---|---|---|---|
-| **E1** | Baseline classifier vs detector: what does localisation add? | ResNet-18 multi-label classifier (sigmoid + BCE), v1 600 images and v2 8,999 images (`notebooks/baseline/`) | Classifier macro-F1: 0.482 → 0.496 (China), 0.466 → 0.362 (US). Detector comparison on the same images not done yet | **Pending** |
-| **E2** | Size or resolution (nano vs small, 640 vs 960): accuracy vs CPU speed? | Not run as a controlled study | n/a | **Pending** |
+| **E1** | Baseline classifier vs detector: what does localisation add? | ResNet-18 multi-label classifier (frozen backbone, sigmoid + BCE) vs YOLO run 17, scored the **same way** on the **same 1,977 China images**: image-level "is this damage type present?" F1 per class | Classifier macro-F1 **0.496** vs detector **0.962**. See table below | **Done** |
+| **E2** | Size or resolution (640 vs 960, small vs medium): accuracy vs speed? | Run 17 evaluated at 640 and 960; run 17 re-fine-tuned at 960 (run 24); YOLO11m at 640/960 (run 25) | 960 was **worse** than 640: run 17 mAP50-95 0.658 → 0.470; re-tuned at 960 0.496. YOLO11m (from COCO) 0.101 vs YOLO11s 0.087. CPU time per photo (same machine, 2 threads): **0.16 s at 640 vs 0.31 s at 960**, about 2× slower ([script](scripts/e2_cpu_latency.py), [result](results/e2/cpu_latency.json)). 960 is slower **and** less accurate, so we kept 640 | **Done** for resolution; nano vs small only in early pilots |
 | **E3** | Which augmentations help? | Mosaic / HSV / horizontal-flip ablation (run 20, one seed, 7 epochs per arm) | Removing mosaic −0.72 pp mAP50-95, flip −0.25 pp, HSV −0.05 pp; recipe kept. **Vertical flips are excluded**: they put the road upside down, which never happens in a forward-facing photo. [Report](docs/reports/E3_AUGMENTATION.md) | **Done** |
 | **E4** | Cross-country generalisation: how badly does domain shift hurt? | Trained on Japan, India, Czech; tested on China (development), US (held out) and our local photos | mAP50-95 65.79 % China → 49.73 % US; US pothole recall 31.85 % (43/135). Local photos: mAP50 0.262, recall 0.174, precision 0.500. [Report](docs/reports/COUNTRY_ERROR_ANALYSIS.md) | **Done** |
 | **E5** | Duplicate embeddings: pHash vs ImageNet ResNet vs DINOv2 | 10 tuning pairs, 9 held-out test pairs | See below | **Done** (small set) |
+
+**E1 detail (China validation, 1,977 images, image-level F1 per class)**
+
+| Class | ResNet-18 classifier | YOLO detector (run 17) | Always say "yes" (reference) |
+|---|---|---|---|
+| D00 longitudinal crack | 0.84 | 0.97 | 0.84 |
+| D10 transverse crack | 0.57 | 0.93 | 0.54 |
+| D20 alligator crack | 0.43 | 0.97 | 0.39 |
+| D40 pothole | 0.15 | 0.99 | 0.15 |
+| **Macro-F1** | **0.496** | **0.962** | |
+
+**Reading:** the classifier is barely better than always saying "yes", most of all for potholes (0.15). The detector looks at each damage in its own box, so it does far better, and it also gives the location and size that the priority score needs. Caveats: the classifier's thresholds were tuned on these images (optimistic for the classifier), the detector uses a fixed 0.5; and the detector started from a published checkpoint that may have seen China images, so the gap is likely overstated. On the US test set the classifier drops to 0.362.
 
 **E5 detail (no GPS, so only the embedding is compared)**
 
@@ -248,7 +260,7 @@ Measured with the frozen settings; nothing was tuned on these photos.
 
 | Item | Status |
 |---|---|
-| Baseline classifier and fine-tuned detector compared | ⏳ Baseline built; comparison pending (E1) |
+| Baseline classifier and fine-tuned detector compared | ✅ (E1) |
 | Per-class AP, precision, recall, justified confidence threshold | ✅ |
 | Local test set collected, labelled and reported separately | ✅ |
 | Cross-country generalisation experiment with interpretation | ✅ (E4) |
@@ -256,7 +268,7 @@ Measured with the frozen settings; nothing was tuned on these photos.
 | Duplicate finder evaluated on team-built pairs with three embedding methods | ✅ (E5) |
 | Working app on a panel-chosen photo, with CPU latency reported | ✅ |
 | Faces and plates blurred; GPS source stated | ✅ |
-| Detector size / resolution study | ⏳ Pending (E2) |
+| Detector size / resolution study with CPU speed | ✅ (E2, 640 vs 960) |
 
 ## Limitations and future work
 
