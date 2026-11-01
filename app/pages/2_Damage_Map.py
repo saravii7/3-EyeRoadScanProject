@@ -40,6 +40,7 @@ def scan(file_bytes, name, conf, _model):
         return None
     from PIL import ImageOps
     image = ImageOps.exif_transpose(image)  # phone photos are stored sideways
+    image.thumbnail((1600, 1600))  # keep memory low on the free cloud host
     rgb = image.convert("RGB")
     _, df, dets = detect(_model, rgb, conf)
     score = round(priority_score(dets, rgb.width, rgb.height), 1)

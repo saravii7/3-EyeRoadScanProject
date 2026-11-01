@@ -44,6 +44,7 @@ if not pairs:
 @st.cache_data(show_spinner=False)
 def run(name, img_bytes, label_text, conf, model_name):
     img = Image.open(io.BytesIO(img_bytes)).convert("RGB")
+    img.thumbnail((1600, 1600))  # labels are normalised, so resizing keeps them aligned
     t0 = time.perf_counter()
     _, _, preds = detect(model, img, conf)
     secs = time.perf_counter() - t0
