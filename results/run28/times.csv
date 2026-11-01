@@ -1,0 +1,29 @@
+run,event,seconds,time_basis
+3,pilot,812.0,Kaggle Save & Run All
+4,controlled pilot,12300.0,rounded Kaggle elapsed; failed/OOM
+5,evaluation recovery,720.0,rounded; no retraining
+5,v1 YOLO v2,5520.0,rounded Kaggle elapsed
+5,v4 YOLO v2,11520.0,rounded Kaggle elapsed
+6,quality/resolution,26340.0,rounded Kaggle elapsed
+7,diagnosis/evaluation,,unknown: Quick export does not measure execution
+8,diagnosis/evaluation,,unknown: Quick export does not measure execution
+9,diagnosis/evaluation,,unknown: Quick export does not measure execution
+10,diagnosis/evaluation,,unknown: Quick export does not measure execution
+11,diagnosis/evaluation,,unknown: Quick export does not measure execution
+12,diagnosis/evaluation,,unknown: Quick export does not measure execution
+13,diagnosis/evaluation,,unknown: Quick export does not measure execution
+14,team-v2,8400.0,rounded Kaggle elapsed
+15,published eval v4,126.0,successful version only
+16,fine-tuning,2356.0,Kaggle elapsed
+17,gentle fine-tuning,1063.1,Kaggle elapsed
+18,smoke v1,57.8,no training
+18,smoke v2,57.1,no training
+19,diagnosis/evaluation,,unknown: Quick export does not measure execution
+20,E3 four arms,4047.0,notebook elapsed incl evaluation
+21,countries,503.0,no training
+22,local evaluation,,unknown:11s Quick save is not execution time
+23,two-model comparison,11784.6,notebook elapsed
+24,960 continuation,4087.5,notebook elapsed
+25,YOLO11m960,23739.5,notebook elapsed
+26,input error,138.6,failed before scoring
+27,local23,211.0,no training

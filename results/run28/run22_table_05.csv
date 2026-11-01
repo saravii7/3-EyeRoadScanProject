@@ -1,0 +1,5 @@
+reason / cls,localization_or_label_extent,low_confidence_candidate,matched,no_same_class_overlap,other_class_overlap
+D00,18,13,19,96,9
+D10,9,11,4,56,11
+D20,5,11,17,5,0
+D40,13,6,18,12,0

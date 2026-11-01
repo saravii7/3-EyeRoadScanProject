@@ -1,0 +1,5 @@
+split,country,empty / count,empty / sum,D00 / count,D00 / sum,D10 / count,D10 / sum,D20 / count,D20 / sum,D40 / count,D40 / sum
+train,Czech,1499,427,1499,764,1499,300,1499,129,1499,154
+train,India,3500,500,3500,1012,3500,60,3500,1586,3500,1530
+train,Japan,4000,500,4000,989,4000,2240,4000,1741,4000,1390
+val,China,1977,43,1977,1419,1977,738,1977,486,1977,164

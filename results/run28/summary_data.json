@@ -1,0 +1,769 @@
+{
+  "as_of": "2026-11-01",
+  "adopted_run": 17,
+  "checkpoint": "run17_best_finetuned.pt",
+  "sha256": "25b412ff18c05e2607f4bc61b872f39826e8d53ffdc7647654c1f419e355d15f",
+  "confidence": 0.46,
+  "imgsz": 640,
+  "nms_iou": 0.7,
+  "max_det": 300,
+  "local_independent": false,
+  "v2": [
+    {
+      "run": "Run14",
+      "AP50": 0.22709511612951033,
+      "AP5095": 0.08732461846272412,
+      "P_curve": 0.2978121059947873,
+      "R_curve": 0.30414246734780614
+    },
+    {
+      "run": "Run15",
+      "AP50": 0.9619632619436428,
+      "AP5095": 0.6712533095450459,
+      "P_curve": 0.9242092286525201,
+      "R_curve": 0.9243685113882318
+    },
+    {
+      "run": "Run16",
+      "AP50": 0.7937601819357739,
+      "AP5095": 0.4467134595829971,
+      "P_curve": 0.749665355972831,
+      "R_curve": 0.6998771963393245
+    },
+    {
+      "run": "Run17",
+      "AP50": 0.9593002182315967,
+      "AP5095": 0.6578988230976404,
+      "P_curve": 0.9173665652792682,
+      "R_curve": 0.9255760963761883
+    }
+  ],
+  "e3": [
+    {
+      "arm": "all_on",
+      "epochs": 7,
+      "training_seconds": 925.2470244589999,
+      "checkpoint_sha256": "f545a04623a660315783e4a5ff496e76356027f88c75c4410e4aeee1023877a6",
+      "mAP50": 0.9585909477183958,
+      "mAP50_95": 0.6530270407651321,
+      "precision": 0.9180262600489292,
+      "recall": 0.9206208516479517,
+      "delta_vs_all_on_pp": 0.0
+    },
+    {
+      "arm": "no_mosaic",
+      "epochs": 7,
+      "training_seconds": 899.0262887979998,
+      "checkpoint_sha256": "4b3fb51e50856cb4a3dea5eedb5b1dc85aca1b216e82886a9b80a927c500d19f",
+      "mAP50": 0.9560690047266027,
+      "mAP50_95": 0.6458525859173626,
+      "precision": 0.9065134505372766,
+      "recall": 0.9226773552587162,
+      "delta_vs_all_on_pp": -0.7174454847769463
+    },
+    {
+      "arm": "no_hsv",
+      "epochs": 7,
+      "training_seconds": 900.013083673,
+      "checkpoint_sha256": "6401ec80732f5bfe609cf2520c00b58b5f49aba9743a6cf1df14dab6515e9ed9",
+      "mAP50": 0.9589209354760655,
+      "mAP50_95": 0.6525107900062246,
+      "precision": 0.9212396535371096,
+      "recall": 0.9222594196839771,
+      "delta_vs_all_on_pp": -0.05162507589074883
+    },
+    {
+      "arm": "no_horizontal_flip",
+      "epochs": 7,
+      "training_seconds": 903.4117692350001,
+      "checkpoint_sha256": "be5899af428301b23d94ac7645e01372af1cc892a14247dc8af7b622bbb616db",
+      "mAP50": 0.9569731515600903,
+      "mAP50_95": 0.650502316899536,
+      "precision": 0.9150082942862154,
+      "recall": 0.9212465101895023,
+      "delta_vs_all_on_pp": -0.25247238655961013
+    }
+  ],
+  "countries": [
+    {
+      "country": "China_MotorBike",
+      "cohort_role": "development reused",
+      "images": 1977,
+      "mAP50": 0.9593002182315967,
+      "mAP50_95": 0.6578988230976404,
+      "box_macro_f1_supported_classes": 0.8955620683655904,
+      "supported_classes": 4,
+      "micro_precision": 0.892905866302865,
+      "micro_recall": 0.844516129032258,
+      "micro_f1": 0.8680371352785146,
+      "TP": 3927,
+      "FP": 471,
+      "FN": 723,
+      "false_positives_per_100_images": 23.823975720789075,
+      "pothole_recall": 0.9659574468085106,
+      "ground_truth_boxes": 4650,
+      "evaluation_status": "Evaluable on supported classes only"
+    },
+    {
+      "country": "United_States",
+      "cohort_role": "country held out from team fine-tuning",
+      "images": 4804,
+      "mAP50": 0.7643569651022853,
+      "mAP50_95": 0.4972681613922478,
+      "box_macro_f1_supported_classes": 0.6818467731489589,
+      "supported_classes": 4,
+      "micro_precision": 0.8206395960446035,
+      "micro_recall": 0.7085376930063578,
+      "micro_f1": 0.760479625658023,
+      "TP": 7801,
+      "FP": 1705,
+      "FN": 3209,
+      "false_positives_per_100_images": 35.49125728559534,
+      "pothole_recall": 0.31851851851851853,
+      "ground_truth_boxes": 11010,
+      "evaluation_status": "Evaluable on supported classes only"
+    },
+    {
+      "country": "Japan",
+      "cohort_role": "image held out; country represented in fine-tuning",
+      "images": 500,
+      "mAP50": 0.8227839445168597,
+      "mAP50_95": 0.5052830724738768,
+      "box_macro_f1_supported_classes": 0.7116882951003933,
+      "supported_classes": 2,
+      "micro_precision": 0.8415300546448088,
+      "micro_recall": 0.6430062630480167,
+      "micro_f1": 0.7289940828402367,
+      "TP": 308,
+      "FP": 58,
+      "FN": 171,
+      "false_positives_per_100_images": 11.6,
+      "pothole_recall": null,
+      "ground_truth_boxes": 479,
+      "evaluation_status": "Evaluable on supported classes only"
+    },
+    {
+      "country": "India",
+      "cohort_role": "image held out; country represented in fine-tuning",
+      "images": 500,
+      "mAP50": 0.6202704788588458,
+      "mAP50_95": 0.402821799551391,
+      "box_macro_f1_supported_classes": 0.5881578947368421,
+      "supported_classes": 2,
+      "micro_precision": 0.575,
+      "micro_recall": 0.5476190476190477,
+      "micro_f1": 0.5609756097560976,
+      "TP": 23,
+      "FP": 17,
+      "FN": 19,
+      "false_positives_per_100_images": 3.4,
+      "pothole_recall": null,
+      "ground_truth_boxes": 42,
+      "evaluation_status": "Evaluable on supported classes only"
+    },
+    {
+      "country": "Czech",
+      "cohort_role": "annotation-empty diagnostic cohort from a represented country",
+      "images": 500,
+      "mAP50": null,
+      "mAP50_95": null,
+      "box_macro_f1_supported_classes": null,
+      "supported_classes": 0,
+      "micro_precision": 0.0,
+      "micro_recall": null,
+      "micro_f1": null,
+      "TP": 0,
+      "FP": 26,
+      "FN": 0,
+      "false_positives_per_100_images": 5.2,
+      "pothole_recall": null,
+      "ground_truth_boxes": 0,
+      "evaluation_status": "No labeled damage boxes: AP/recall/F1 not evaluable"
+    }
+  ],
+  "perclass": [
+    {
+      "cls": "D00",
+      "AP50": "0.940279",
+      "AP50_95": "0.662192"
+    },
+    {
+      "cls": "D10",
+      "AP50": "0.929384",
+      "AP50_95": "0.603965"
+    },
+    {
+      "cls": "D20",
+      "AP50": "0.981268",
+      "AP50_95": "0.733816"
+    },
+    {
+      "cls": "D40",
+      "AP50": "0.986269",
+      "AP50_95": "0.631623"
+    }
+  ],
+  "thresholds": [
+    {
+      "confidence": 0.25,
+      "macro_precision": 0.795483051262463,
+      "macro_recall": 0.9457947359516504,
+      "macro_f1": 0.8626608246552654,
+      "micro_precision": 0.752972027972028,
+      "micro_recall": 0.926236559139785,
+      "micro_f1": 0.8306653809064609,
+      "pothole_precision": 0.8769230769230769,
+      "pothole_recall": 0.9702127659574468,
+      "pothole_f1": 0.9212121212121213,
+      "false_positives": 1413,
+      "false_negatives": 343,
+      "false_positives_per_100_images": 71.47192716236722,
+      "per_class": [
+        {
+          "damage_code": "D00",
+          "TP": 2437,
+          "FP": 813,
+          "FN": 241,
+          "precision": 0.7498461538461538,
+          "recall": 0.9100074682598954,
+          "f1": 0.8221997300944669,
+          "support": 2678
+        },
+        {
+          "damage_code": "D10",
+          "TP": 1017,
+          "FP": 479,
+          "FN": 79,
+          "precision": 0.6798128342245989,
+          "recall": 0.9279197080291971,
+          "f1": 0.7847222222222222,
+          "support": 1096
+        },
+        {
+          "damage_code": "D20",
+          "TP": 625,
+          "FP": 89,
+          "FN": 16,
+          "precision": 0.8753501400560224,
+          "recall": 0.9750390015600624,
+          "f1": 0.922509225092251,
+          "support": 641
+        },
+        {
+          "damage_code": "D40",
+          "TP": 228,
+          "FP": 32,
+          "FN": 7,
+          "precision": 0.8769230769230769,
+          "recall": 0.9702127659574468,
+          "f1": 0.9212121212121213,
+          "support": 235
+        }
+      ]
+    },
+    {
+      "confidence": 0.46,
+      "macro_precision": 0.9059039172386201,
+      "macro_recall": 0.8867372204613508,
+      "macro_f1": 0.8955620683655904,
+      "micro_precision": 0.892905866302865,
+      "micro_recall": 0.844516129032258,
+      "micro_f1": 0.8680371352785146,
+      "pothole_precision": 0.941908713692946,
+      "pothole_recall": 0.9659574468085106,
+      "pothole_f1": 0.9537815126050421,
+      "false_positives": 471,
+      "false_negatives": 723,
+      "false_positives_per_100_images": 23.823975720789075,
+      "per_class": [
+        {
+          "damage_code": "D00",
+          "TP": 2215,
+          "FP": 270,
+          "FN": 463,
+          "precision": 0.8913480885311871,
+          "recall": 0.827109783420463,
+          "f1": 0.8580282781328685,
+          "support": 2678
+        },
+        {
+          "damage_code": "D10",
+          "TP": 869,
+          "FP": 140,
+          "FN": 227,
+          "precision": 0.8612487611496531,
+          "recall": 0.7928832116788321,
+          "f1": 0.8256532066508313,
+          "support": 1096
+        },
+        {
+          "damage_code": "D20",
+          "TP": 616,
+          "FP": 47,
+          "FN": 25,
+          "precision": 0.9291101055806938,
+          "recall": 0.9609984399375975,
+          "f1": 0.9447852760736196,
+          "support": 641
+        },
+        {
+          "damage_code": "D40",
+          "TP": 227,
+          "FP": 14,
+          "FN": 8,
+          "precision": 0.941908713692946,
+          "recall": 0.9659574468085106,
+          "f1": 0.9537815126050421,
+          "support": 235
+        }
+      ]
+    }
+  ],
+  "local": [
+    {
+      "model": "Run17",
+      "AP50": 0.2624511953497888,
+      "AP5095": 0.13148693083466007,
+      "P": 0.5,
+      "R": 0.17417417417417416,
+      "F1": 0.2583518930957684,
+      "TP": 58,
+      "FP": 58,
+      "FN": 275
+    },
+    {
+      "model": "Run14",
+      "AP50": 0.32096510562564323,
+      "AP5095": 0.13217164929068886,
+      "P": 0.6119402985074627,
+      "R": 0.12312312312312312,
+      "F1": 0.205,
+      "TP": 41,
+      "FP": 26,
+      "FN": 292
+    },
+    {
+      "model": "Run23",
+      "AP50": 0.24283155595723516,
+      "AP5095": 0.12250076945092925,
+      "P": 0.7111111111111111,
+      "R": 0.0960960960960961,
+      "F1": 0.16931216931216933,
+      "TP": 32,
+      "FP": 13,
+      "FN": 301
+    }
+  ],
+  "journey": [
+    {
+      "run": 3,
+      "work": "YOLOv8n / 600-image pilot",
+      "status": "Executed",
+      "interpretation": "China AP50 .0617 / AP5095 .0213; 30 epochs"
+    },
+    {
+      "run": 4,
+      "work": "Nano/Small and no-Mosaic pilot",
+      "status": "Partial / OOM",
+      "interpretation": "Old split; 3 arms before CUDA OOM; not the final E2 grid"
+    },
+    {
+      "run": 5,
+      "work": "YOLO v2 / evaluation recovery",
+      "status": "Executed + quick saves",
+      "interpretation": "Multiple saved versions are not independent trainings"
+    },
+    {
+      "run": 6,
+      "work": "YOLO26s 768 and 960 continuation",
+      "status": "Executed",
+      "interpretation": "Old eligible data/splits; architecture and data changed"
+    },
+    {
+      "run": 7,
+      "work": "Resolution audit preparation",
+      "status": "Cancelled + Quick save",
+      "interpretation": "No successful new training claimed"
+    },
+    {
+      "run": 8,
+      "work": "Resolution evaluation",
+      "status": "Executed; Quick export",
+      "interpretation": "640/768/960 on saved checkpoints"
+    },
+    {
+      "run": 9,
+      "work": "Data diagnosis",
+      "status": "Executed; Quick export",
+      "interpretation": "Backgrounds, class counts, country shift; no training"
+    },
+    {
+      "run": 10,
+      "work": "Freezing pilot",
+      "status": "Executed; Quick export",
+      "interpretation": "Head/last3/all layers; 4-epoch short study"
+    },
+    {
+      "run": 11,
+      "work": "Sampling / fixed crop",
+      "status": "Executed; Quick export",
+      "interpretation": "Random/balanced/unchanged and exploratory crop"
+    },
+    {
+      "run": 12,
+      "work": "Rescoring / matching audit",
+      "status": "Diagnostic",
+      "interpretation": "Merged/pooled/relaxed-IoU criteria are not official AP gains"
+    },
+    {
+      "run": 13,
+      "work": "Regularized recipe",
+      "status": "Executed; Quick export",
+      "interpretation": "Worse validation; not adopted"
+    },
+    {
+      "run": 14,
+      "work": "Team-v2 YOLO11s",
+      "status": "Executed",
+      "interpretation": "8999 train; 1977 China development; 64 epochs, best49"
+    },
+    {
+      "run": 15,
+      "work": "Published RDD YOLOv8s",
+      "status": "Executed after failed versions",
+      "interpretation": "No team training; unknown external pretraining overlap"
+    },
+    {
+      "run": 16,
+      "work": "RDD fine-tuning",
+      "status": "Executed",
+      "interpretation": "17 epochs; best2; conventional recipe regressed"
+    },
+    {
+      "run": 17,
+      "work": "Gentle fine-tuning",
+      "status": "ADOPTED",
+      "interpretation": "7 epochs; best2; team contribution, not better than published original"
+    },
+    {
+      "run": 18,
+      "work": "D-code inference helper",
+      "status": "Executed twice",
+      "interpretation": "15 RDD smoke images; original then fine-tuned17; not local accuracy"
+    },
+    {
+      "run": 19,
+      "work": "Confidence freeze",
+      "status": "Executed",
+      "interpretation": "0.46 selected on China development, not local"
+    },
+    {
+      "run": 20,
+      "work": "E3 augmentation",
+      "status": "Executed",
+      "interpretation": "4 arms ×7 epochs, one seed, final-epoch primary metric"
+    },
+    {
+      "run": 21,
+      "work": "Country / error audit",
+      "status": "Executed + reviewed",
+      "interpretation": "8281 images; limited support and upstream-overlap caveats"
+    },
+    {
+      "run": 22,
+      "work": "Run14/17 local evaluation",
+      "status": "Executed",
+      "interpretation": "190 images,333 boxes,56 healthy; inspected/reused cohort"
+    },
+    {
+      "run": 23,
+      "work": "Native attention/model comparison",
+      "status": "Executed",
+      "interpretation": "COCO11s vs v8s;1.5h each;45 vs47 epochs, not isolated attention"
+    },
+    {
+      "run": 24,
+      "work": "Run17 960 fine-tune",
+      "status": "Executed",
+      "interpretation": "10 epochs; new960 did not beat reference17@640"
+    },
+    {
+      "run": 25,
+      "work": "YOLO11m 960",
+      "status": "Executed",
+      "interpretation": "39 epochs; about6h training; old internal run24 names"
+    },
+    {
+      "run": 26,
+      "work": "Run17 USA tiling",
+      "status": "Failed before scoring",
+      "interpretation": "Missing RDD input / StopIteration; no tiling result"
+    },
+    {
+      "run": 27,
+      "work": "Run23 local evaluation",
+      "status": "Executed",
+      "interpretation": "Predeclared .001/.46; no local training/tuning; no replacement"
+    }
+  ],
+  "times": [
+    {
+      "run": 3,
+      "event": "pilot",
+      "seconds": 812,
+      "time_basis": "Kaggle Save & Run All"
+    },
+    {
+      "run": 4,
+      "event": "controlled pilot",
+      "seconds": 12300,
+      "time_basis": "rounded Kaggle elapsed; failed/OOM"
+    },
+    {
+      "run": 5,
+      "event": "evaluation recovery",
+      "seconds": 720,
+      "time_basis": "rounded; no retraining"
+    },
+    {
+      "run": 5,
+      "event": "v1 YOLO v2",
+      "seconds": 5520,
+      "time_basis": "rounded Kaggle elapsed"
+    },
+    {
+      "run": 5,
+      "event": "v4 YOLO v2",
+      "seconds": 11520,
+      "time_basis": "rounded Kaggle elapsed"
+    },
+    {
+      "run": 6,
+      "event": "quality/resolution",
+      "seconds": 26340,
+      "time_basis": "rounded Kaggle elapsed"
+    },
+    {
+      "run": 7,
+      "event": "diagnosis/evaluation",
+      "seconds": null,
+      "time_basis": "unknown: Quick export does not measure execution"
+    },
+    {
+      "run": 8,
+      "event": "diagnosis/evaluation",
+      "seconds": null,
+      "time_basis": "unknown: Quick export does not measure execution"
+    },
+    {
+      "run": 9,
+      "event": "diagnosis/evaluation",
+      "seconds": null,
+      "time_basis": "unknown: Quick export does not measure execution"
+    },
+    {
+      "run": 10,
+      "event": "diagnosis/evaluation",
+      "seconds": null,
+      "time_basis": "unknown: Quick export does not measure execution"
+    },
+    {
+      "run": 11,
+      "event": "diagnosis/evaluation",
+      "seconds": null,
+      "time_basis": "unknown: Quick export does not measure execution"
+    },
+    {
+      "run": 12,
+      "event": "diagnosis/evaluation",
+      "seconds": null,
+      "time_basis": "unknown: Quick export does not measure execution"
+    },
+    {
+      "run": 13,
+      "event": "diagnosis/evaluation",
+      "seconds": null,
+      "time_basis": "unknown: Quick export does not measure execution"
+    },
+    {
+      "run": 14,
+      "event": "team-v2",
+      "seconds": 8400,
+      "time_basis": "rounded Kaggle elapsed"
+    },
+    {
+      "run": 15,
+      "event": "published eval v4",
+      "seconds": 126,
+      "time_basis": "successful version only"
+    },
+    {
+      "run": 16,
+      "event": "fine-tuning",
+      "seconds": 2356,
+      "time_basis": "Kaggle elapsed"
+    },
+    {
+      "run": 17,
+      "event": "gentle fine-tuning",
+      "seconds": 1063.1,
+      "time_basis": "Kaggle elapsed"
+    },
+    {
+      "run": 18,
+      "event": "smoke v1",
+      "seconds": 57.8,
+      "time_basis": "no training"
+    },
+    {
+      "run": 18,
+      "event": "smoke v2",
+      "seconds": 57.1,
+      "time_basis": "no training"
+    },
+    {
+      "run": 19,
+      "event": "diagnosis/evaluation",
+      "seconds": null,
+      "time_basis": "unknown: Quick export does not measure execution"
+    },
+    {
+      "run": 20,
+      "event": "E3 four arms",
+      "seconds": 4047,
+      "time_basis": "notebook elapsed incl evaluation"
+    },
+    {
+      "run": 21,
+      "event": "countries",
+      "seconds": 503,
+      "time_basis": "no training"
+    },
+    {
+      "run": 22,
+      "event": "local evaluation",
+      "seconds": null,
+      "time_basis": "unknown:11s Quick save is not execution time"
+    },
+    {
+      "run": 23,
+      "event": "two-model comparison",
+      "seconds": 11784.6,
+      "time_basis": "notebook elapsed"
+    },
+    {
+      "run": 24,
+      "event": "960 continuation",
+      "seconds": 4087.5,
+      "time_basis": "notebook elapsed"
+    },
+    {
+      "run": 25,
+      "event": "YOLO11m960",
+      "seconds": 23739.5,
+      "time_basis": "notebook elapsed"
+    },
+    {
+      "run": 26,
+      "event": "input error",
+      "seconds": 138.6,
+      "time_basis": "failed before scoring"
+    },
+    {
+      "run": 27,
+      "event": "local23",
+      "seconds": 211,
+      "time_basis": "no training"
+    }
+  ],
+  "new23": [
+    {
+      "model": "new11s",
+      "AP50": 0.227326,
+      "AP5095": 0.0885386,
+      "epochs": 45,
+      "training_seconds": 5479.239877518
+    },
+    {
+      "model": "newv8s",
+      "AP50": 0.194063,
+      "AP5095": 0.0706751,
+      "epochs": 47,
+      "training_seconds": 5438.461557528
+    }
+  ],
+  "resolution": [
+    {
+      "model": "Run17",
+      "size": 640,
+      "AP5095": 0.6578987935
+    },
+    {
+      "model": "Run17",
+      "size": 960,
+      "AP5095": 0.4695991445
+    },
+    {
+      "model": "Run14",
+      "size": 640,
+      "AP5095": 0.0873246095
+    },
+    {
+      "model": "Run14",
+      "size": 960,
+      "AP5095": 0.0403363089
+    },
+    {
+      "model": "Run24new",
+      "size": 640,
+      "AP5095": 0.6444970631
+    },
+    {
+      "model": "Run24new",
+      "size": 960,
+      "AP5095": 0.495590661
+    },
+    {
+      "model": "Run25new11m",
+      "size": 640,
+      "AP5095": 0.1014720366
+    },
+    {
+      "model": "Run25new11m",
+      "size": 960,
+      "AP5095": 0.0791073931
+    }
+  ],
+  "local27_thresholds": [
+    {
+      "confidence": 0.001,
+      "P": 0.00876361913784936,
+      "R": 0.4444444444444444,
+      "F1": 0.01718831659020963,
+      "TP": 148,
+      "FP": 16740,
+      "FN": 185,
+      "healthy_alarms": 56,
+      "healthy_false_boxes": 2015
+    },
+    {
+      "confidence": 0.46,
+      "P": 0.7111111111111111,
+      "R": 0.0960960960960961,
+      "F1": 0.16931216931216933,
+      "TP": 32,
+      "FP": 13,
+      "FN": 301,
+      "healthy_alarms": 1,
+      "healthy_false_boxes": 1
+    }
+  ],
+  "notes": [
+    "Metrics in fractions; plots in percent",
+    "China repeatedly reused for development",
+    "Published RDD upstream overlap unknown",
+    "190 local images AI-assisted/team-reviewed and inspected/reused; not a fresh holdout",
+    "Quick save time is not training time",
+    "No model execution or retraining in summary"
+  ]
+}
