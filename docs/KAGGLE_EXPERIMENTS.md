@@ -82,3 +82,22 @@ To reproduce run 17, attach run 14 Version 1 outputs (361531048), enable GPU and
 [Executed run 21, Version 1](https://www.kaggle.com/code/rimasabunasser/21-roadscan-country-error-analysis?scriptVersionId=363199933) completed successfully in 8m 23s using adopted run17_best_finetuned.pt at frozen confidence 0.46, resolution 640 and NMS IoU 0.7. Evaluated 8,281 images after excluding one exact duplicate: China 1,977; US 4,804; Japan/India/Czech 500 each. No training or threshold tuning. China development mAP50-95 0.657899 vs US 0.497268. US pothole recall is 43/135 = 31.85%, an unresolved generalization weakness.
 
 **Post-run review:** the selected Czech complement contains no annotated damage boxes: AP/recall/F1 are N/A, not zero-performance estimates. Japan has two supported classes; India has only 42 labeled boxes. These complements are depleted of positives because the team training sample was enriched for damage. They do not represent country-wide prevalence or directly comparable four-class performance. External pretraining overlap and near-duplicates remain unresolved. Original outputs and raw JSON are retained, with an explicit post-run review appended to the exported notebook. Use [COUNTRY_ERROR_ANALYSIS.md](reports/COUNTRY_ERROR_ANALYSIS.md), country_error_reviewed.json and country_comparison.csv for conclusions. Country/per-class tables, error categories and five galleries are archived. Local independent evaluation is still pending; this does not complete the local part of E4 or all project experiments.
+
+
+## YOLO closeout — 2026-11-01
+
+Run17 fine-tuned remains adopted at confidence 0.46 /640. This update supersedes earlier pending-local notes, without rewriting historical results.
+
+| Run | Work and outcome | Kaggle elapsed |
+| --- | --- | --- |
+| 22 | 190 local images /333 boxes /56 healthy; Run17 AP50 .262451 / AP50–95 .131487; P .5000 / R .174174 / F1 .258352 at .46. Run14: AP50 .320965 / AP50–95 .132172; P .611940 / R .123123. | Actual execution unknown;11s Quick save is not runtime |
+| 23 | COCO YOLO11s native C2PSA vs YOLOv8s; China AP50–95 .088539 vs .070675. 45vs47 epochs;1.5h budget each. New11s selected only within new candidates, not over Run17. | 3h16m25s; training arms91.32/90.64min |
+| 24 | Run17 960 continuation,10epochs; new960 AP50–95 .495591 vs reference17@640 .657899. final_weights.pt is copied reference17. | 1h8m7s; training about29.1min |
+| 25 | Actual YOLO11m960 despite internal run24 names;39epochs; AP50–95 .101472@640 / .079107@960. No replacement. | 6h35m39s; training6.015h |
+| 26 | USA tiling failed before scoring: missing RDD input / StopIteration. No tiling metrics. | 2m19s failed |
+| 27 | Run23 on same local cohort: AP50 .242832 / AP50–95 .122501; at .46 P .711111 / R .096096 / F1 .169312. At predeclared .001:16740 FP and alarms on all56 healthy images. No training/tuning. | 3m31s |
+| 28 | Executed Python journey covering03–27;18 charts, comparisons, runtimes and done/partial/failed register. Aggregate-only, no model execution. | Not a training experiment |
+
+[Visual journey notebook](../notebooks/yolo/28-roadscan-yolo-journey-summary.ipynb) · [Closeout report](reports/YOLO_CLOSEOUT.md) · [Data, tables and figures](../results/run28/README.md). Source notebooks22–27 are under notebooks/yolo; Run22 personal-photo image outputs are omitted.
+
+The190 local images were AI-assisted annotated, team-reviewed and already inspected/reused. These are diagnostic comparisons, not a fresh independent final holdout; new initialization does not erase prior exposure. External RDD training overlap remains unknown. E2 is partial, E3 is complete, attention is not causally isolated, Run26 failed, and WBF improvement has no completed saved result. E1/E5 and application checks have separate team evidence. Frozen Run17 settings remain unchanged.
