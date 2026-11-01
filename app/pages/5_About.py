@@ -8,7 +8,7 @@ st.write("AIEP bootcamp capstone, Olo Academy, Track A: RoadScan.")
 
 st.subheader("Team")
 c1, c2, c3 = st.columns(3)
-for col, name in zip((c1, c2, c3), ("Sara Albahesh", "Rimas Al-Abunasser", "Fajer Alshahrani")):
+for col, name in zip((c1, c2, c3), ("Sarah Albahesh", "Rimas Al-Abunasser", "Fajer Alshahrani")):
     col.markdown(f'<div class="card"><div class="value" style="font-size:1.3rem">{name}</div>'
                  "</div>", unsafe_allow_html=True)
 
