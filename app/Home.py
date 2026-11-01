@@ -48,4 +48,27 @@ st.sidebar.caption(t("app_tag"))
 language_switch()
 technical = nav.url_path in {p.url_path for p in pages[t("sec_tech")]}
 apply_style(rtl=(lang() == "ar" and not technical))
+
+# Municipality pages need a simple staff code (demo). A real deployment would use the
+# municipality's own sign-in.
+CITY_CODE = "1234"
+city = nav.url_path in {p.url_path for p in pages[t("sec_city")]}
+ar = lang() == "ar"
+if city and not st.session_state.get("city_ok"):
+    st.markdown(f"## 🔐 {'دخول موظفي البلدية' if ar else 'Municipality staff sign-in'}")
+    st.caption("صفحات البلدية لموظفي الصيانة فقط. أدخل رمز الدخول للمتابعة." if ar else
+               "Municipality pages are for maintenance staff. Enter the access code to continue.")
+    with st.form("city_login"):
+        code = st.text_input("رمز الدخول" if ar else "Access code", type="password")
+        if st.form_submit_button("دخول" if ar else "Sign in", type="primary"):
+            if code.strip() == CITY_CODE:
+                st.session_state["city_ok"] = True
+                st.rerun()
+            st.error("الرمز غير صحيح." if ar else "Wrong code.")
+    st.stop()
+if st.session_state.get("city_ok"):
+    if st.sidebar.button("🔓 " + ("خروج البلدية" if ar else "Sign out (municipality)"),
+                         width="stretch"):
+        st.session_state["city_ok"] = False
+        st.rerun()
 nav.run()
