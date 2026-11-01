@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 260">
+<g transform="translate(0 20) scale(0.75)">
+  <path d="M24 150 C92 64 202 20 300 20 C398 20 508 64 576 150 C508 236 398 280 300 280 C202 280 92 236 24 150Z" fill="none" stroke="#F4F6F5" stroke-width="20" stroke-linejoin="round"/>
+  <path d="M300 30 L222 252 C248 262 274 268 300 268 C326 268 352 262 378 252Z" fill="#1EC7B6"/>
+  <path d="M300 44 L300 250" stroke="#082B36" stroke-width="10" stroke-dasharray="22 16"/>
+  <ellipse cx="300" cy="212" rx="40" ry="18" fill="#F3B548"/>
+  <ellipse cx="300" cy="212" rx="20" ry="8" fill="#082B36"/>
+</g>
+<text x="490" y="150" font-family="IBM Plex Sans Arabic, Noto Sans, Arial, sans-serif" font-size="130" font-weight="700" fill="#1EC7B6">3</text><text x="568" y="150" font-family="IBM Plex Sans Arabic, Noto Sans, Arial, sans-serif" font-size="130" font-weight="700" fill="#F4F6F5">-Eye</text>
+<text x="494" y="208" font-family="IBM Plex Sans Arabic, Noto Sans, Arial, sans-serif" font-size="30" letter-spacing="8" fill="#A6BBC0">ROAD INTELLIGENCE</text>
+</svg>

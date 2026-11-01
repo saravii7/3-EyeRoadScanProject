@@ -3,13 +3,13 @@ import streamlit as st
 
 from i18n import lang, t
 from reports import all_reports
-from utils import metric_card
+from utils import brand_logo_uri, metric_card
 
 ar = lang() == "ar"
 st.markdown(
     f"""
-    <div class="hero">
-      <h1><span dir="ltr">👁️ 3-Eye</span></h1>
+    <div class="hero hero-brand">
+      <img src="{brand_logo_uri()}" alt="3-Eye · Road Intelligence">
       <p>{"طرق أذكى، تنقّل أكثر أماناً. صوّر الضرر، ونحن نحدّد نوعه وأولويته ونرسله لفريق البلدية."
           if ar else "Smarter roads, safer journeys. Photograph the damage; we detect it, score "
           "its priority and send it to the municipal team."}</p>
@@ -33,7 +33,7 @@ with k2:
 with k3:
     metric_card("قيد المعالجة" if ar else "In progress",
                 int(df["status"].isin(["review", "scheduled", "in_progress"]).sum()) if len(df) else 0,
-                "#E7A83F")
+                "#F3B548")
 
 st.subheader("كيف يعمل؟" if ar else "How it works")
 s1, s2, s3 = st.columns(3)
