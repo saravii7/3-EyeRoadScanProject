@@ -27,7 +27,7 @@ with k2:
                 f"{(df['status'] == 'repaired').mean() * 100:.0f}%", "#43A878")
 with k3:
     metric_card("زمن الإصلاح (ساعة)" if ar else "Time to repair (h)",
-                f"{fix_hours.median():.1f}" if len(fix_hours) else "—", "#E7A83F")
+                f"{fix_hours.median():.1f}" if len(fix_hours) else "—", "#F3B548")
 with k4:
     secs = pd.to_numeric(df["seconds"], errors="coerce").dropna()
     metric_card("زمن التحليل (ث)" if ar else "Analysis time (s)",
@@ -38,7 +38,7 @@ with a:
     st.subheader("البلاغات يومياً" if ar else "Reports per day")
     per_day = df.groupby(df["added_dt"].dt.date).size().reset_index(name="n")
     per_day.columns = ["day", "n"]
-    fig = px.bar(per_day, x="day", y="n", color_discrete_sequence=["#19B8A6"])
+    fig = px.bar(per_day, x="day", y="n", color_discrete_sequence=["#1EC7B6"])
     fig.update_layout(height=300, xaxis_title="", yaxis_title="", **PLOT)
     st.plotly_chart(fig, width="stretch")
 with b:
@@ -57,7 +57,7 @@ with c:
     cls = df["classes"].str.split(", ").explode().value_counts().reset_index()
     cls.columns = ["code", "n"]
     cls["label"] = cls["code"].map(lambda x: f"{x} · {t(x)}")
-    fig = px.bar(cls, x="label", y="n", color_discrete_sequence=["#0D1B33"])
+    fig = px.bar(cls, x="label", y="n", color_discrete_sequence=["#082B36"])
     fig.update_layout(height=300, xaxis_title="", yaxis_title="", **PLOT)
     st.plotly_chart(fig, width="stretch")
 with d:
@@ -66,7 +66,7 @@ with d:
     dec.columns = ["decision", "n"]
     dec["label"] = dec["decision"].map(t)
     fig = px.bar(dec, x="label", y="n", color="decision",
-                 color_discrete_map={"Urgent": "#DE6D64", "Schedule": "#E7A83F",
+                 color_discrete_map={"Urgent": "#D95B55", "Schedule": "#F3B548",
                                      "Monitor": "#43A878"})
     fig.update_layout(height=300, showlegend=False, xaxis_title="", yaxis_title="", **PLOT)
     st.plotly_chart(fig, width="stretch")

@@ -78,9 +78,9 @@ with c2:
     metric_card("Total damages", sum(p["damages"] for p in points))
 with c3:
     urgent = sum(p["decision"] == "Urgent" for p in points)
-    metric_card("Urgent", urgent, "#E74C3C")
+    metric_card("Urgent", urgent, "#D95B55")
 with c4:
-    metric_card("Possible duplicates", len(dups), "#F1C40F")
+    metric_card("Possible duplicates", len(dups), "#F3B548")
 
 m = folium.Map(location=[sum(p["lat"] for p in points) / len(points),
                          sum(p["lon"] for p in points) / len(points)], zoom_start=17,
@@ -98,7 +98,7 @@ for p in points:
     ).add_to(m)
 for d in dups:
     a, b = points[d["i"]], points[d["j"]]
-    folium.PolyLine([[a["lat"], a["lon"]], [b["lat"], b["lon"]]], color="#F1C40F",
+    folium.PolyLine([[a["lat"], a["lon"]], [b["lat"], b["lon"]]], color="#F3B548",
                     weight=3, dash_array="6", tooltip="Possible duplicate").add_to(m)
 folium.LayerControl().add_to(m)
 st_folium(m, use_container_width=True, height=540, returned_objects=[])

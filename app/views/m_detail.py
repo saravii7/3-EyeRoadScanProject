@@ -24,8 +24,8 @@ r = get_report(rid)
 status = r.get("status", "new")
 
 st.markdown(f"## {ref(rid)} " + chip(status_label(status), STATUS_COLOR[status]) +
-            chip(t(r.get("decision") or "Monitor"), "#DE6D64" if r.get("decision") == "Urgent"
-                 else "#E7A83F" if r.get("decision") == "Schedule" else "#43A878"),
+            chip(t(r.get("decision") or "Monitor"), "#D95B55" if r.get("decision") == "Urgent"
+                 else "#F3B548" if r.get("decision") == "Schedule" else "#43A878"),
             unsafe_allow_html=True)
 
 k1, k2, k3, k4 = st.columns(4)
@@ -36,7 +36,7 @@ with k2:
 with k3:
     metric_card(t("reported_times"), r.get("times_reported", 1), "#8E7BD1")
 with k4:
-    metric_card(t("team"), r.get("team") or "—", "#17233B")
+    metric_card(t("team"), r.get("team") or "—", "#111827")
 
 left, right = st.columns([3, 2])
 with left:
