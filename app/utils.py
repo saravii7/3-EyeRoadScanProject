@@ -355,16 +355,24 @@ def find_similar_duplicates(points, radius_m=30, threshold=None):
 PHOTO_TYPES = ["jpg", "jpeg", "png", "dng", "heic", "heif"]
 
 
+MAX_SIDE = 1600  # longest side kept for analysis, display and thumbnails
+
+
 def open_photo(file):
     """Open an uploaded photo. iPhone .DNG exports that are really JPEG/MPO open fine;
     true RAW files do not, so we show a clear message instead of a crash."""
     try:
         file.seek(0)
         img = Image.open(file)
+        # Decode big phone photos at reduced size straight away (JPEG draft mode): a 12 MP
+        # photo otherwise needs ~150 MB per copy and the free cloud host runs out of memory.
+        img.draft("RGB", (MAX_SIDE, MAX_SIDE))
         img.load()
         # Phones store photos sideways plus an "orientation" tag; turn them upright so the
         # model, the boxes and the saved thumbnails see the road the right way up.
-        return ImageOps.exif_transpose(img)
+        img = ImageOps.exif_transpose(img).convert("RGB")
+        img.thumbnail((MAX_SIDE, MAX_SIDE))  # the detector works at 640 px anyway
+        return img
     except Exception:
         st.error(f"Can't open **{file.name}**. Please upload a JPG or PNG photo "
                  "(export RAW/HEIC photos as JPG first, keeping the location).")
