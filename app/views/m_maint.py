@@ -30,7 +30,7 @@ def _done(rid):
                   repaired_at=dt.datetime.now().strftime("%Y-%m-%d %H:%M"))
 
 
-teams = TEAMS + ["—"]
+teams = TEAMS  # only real teams (no "Unassigned" column)
 cols = st.columns(len(teams))
 for col, team in zip(cols, teams):
     with col:
