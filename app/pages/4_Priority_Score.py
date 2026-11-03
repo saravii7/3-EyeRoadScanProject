@@ -101,7 +101,7 @@ if files:
                 w = dict(WEIGHTS, **{k: WEIGHTS[k] * f})
                 new = pd.Series([priority_score(d, ww, hh, w) for _, d, ww, hh in reports])
                 moved = sum(band(x)[0] != b for x, b in zip(new, base_bands))
-                rho = base_scores.corr(new, method="spearman")
+                rho = base_scores.rank().corr(new.rank())  # Spearman = Pearson on ranks (no scipy needed)
                 rows.append({"Weight": k, "Change": f"{round((f - 1) * 100):+d}%",
                              "Rank correlation (Spearman)": round(rho, 3) if rho == rho else 1.0,
                              "Photos that change band": f"{moved} of {len(reports)}",
